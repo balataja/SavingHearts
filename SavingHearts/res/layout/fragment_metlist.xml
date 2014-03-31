@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_metslistfragment"
+    tools:context=".METListFragment" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Selected Activities:"
+        />
+    <ListView
+        android:id="@+id/lstvw_metlistfragment_extralistview"
+        android:layout_width="match_parent"
+        android:layout_height="135dip"
+        />
+
+    <Button
+        android:id="@+id/btn_metlistfragment_savebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Selected Activities" />
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Available Activities:" />
+    
+    <ListView
+        android:id="@+id/lstvw_metlistfragment_loadedmets"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        />
+    
+
+</LinearLayout>

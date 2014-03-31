@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_temp"
+    android:padding="15dp" >
+    
+    
+    <Button
+        android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:text="@string/connect_to_device"
+    	android:background="@drawable/connect_button"
+    	style="@style/button_text"
+    	android:gravity="center"
+        android:onClick="sendMessage" />
+        
+
+</LinearLayout>

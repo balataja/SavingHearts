@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_facts_array">
+        <item>@string/random_facts_0</item>
+        <item>@string/random_facts_1</item>
+        <item>@string/random_facts_2</item>
+        <item>@string/random_facts_3</item>
+        <item>@string/random_facts_4</item>
+        <item>@string/random_facts_5</item>
+        <item>@string/random_facts_6</item>
+        <item>@string/random_facts_7</item>
+        <item>@string/random_facts_8</item>
+        <item>@string/random_facts_9</item>
+        <item>@string/random_facts_10</item>
+        <item>@string/random_facts_11</item>
+        <item>@string/random_facts_12</item>
+        <item>@string/random_facts_13</item>
+        <item>@string/random_facts_14</item>
+    </string-array>
+</resources>

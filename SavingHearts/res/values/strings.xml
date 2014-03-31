@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_settings">Settings</string>
+        <string name="menu_reset">Reset Connection</string>
+    <string name="menu_about">About</string>
+    <string name="start_workout">Start Worktout</string>
+    <string name="title_activity_about_fragment">AboutFragment</string>
+    <string name="pref_age_key">whh_user_age</string>
+    <string name="pref_age_title">Your Age:</string>
+    <string name="pref_age_summary">Please enter in your age in years.</string>
+    <string name="pref_birthdate_key">whh_user_birthdate</string>
+    <string name="pref_weight_key">whh_user_weight</string>
+    <string name="pref_weight_title">Your Weight:</string>
+    <string name="pref_weight_summary">Please enter in your weight in years.</string>
+    <string name="pref_isinitialrun_key">whh_isinitialrun</string>
+    <string name="mets_logged">Highest MET Achievent Per Day</string>
+    <string name="cals_logged">Calories Logged This Week</string>
+    <string name="target_hr">Target Heart Rates</string>
+    <string name="weeks_totals">This Week\'s Totals</string>
+    <string name="app_name">SavingHearts</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Log</string>
+    <string name="title_section3">Monitor</string>
+    <string name="version">Version: 0.1</string>
+    <string name="desc">Splash Screen</string>
+    <string name="about_fragment_image_description">About fragment image</string>
+    <string name="connect_to_device">Connect To Device</string>
+    <string name="random_facts_title">The More You Know</string>
+    <string name="random_facts_0">Heart Disease is the number one killer of men and women.</string>
+    <string name="random_facts_1">Did you know that if you quit smoking today, your risk of heart disease decreases to that of a non-smoker in just 3 years?</string>
+    <string name="random_facts_2">Gum disease increases your risk of a heart attack and stroke by 50%.</string>
+    <string name="random_facts_3">Laugh every day!  Each time you laugh, the blood flow to your heart increases for up to 45 minutes!</string>
+    <string name="random_facts_4">7-8 hours of sleep a night is the optimal amount to reduce the risk of a heart attack</string>
+    <string name="random_facts_5">30 minutes a day (even three 10-minute intervals) will reduce the risk of a heart attack.</string>
+    <string name="random_facts_6">Consuming less than 1500 mg of salt a day will lower your blood pressure and your risk of heart disease and stroke!</string>
+    <string name="random_facts_7">Normal blood pressure is under 120/80 mmHg.  Is yours controlled?</string>
+    <string name="random_facts_8">1 in 2 men will die from Heart Disease.  1 in 3 women will die from Heart Disease (this is actually 1 in 2 if you are African American).</string>
+    <string name="random_facts_9">Two-thirds of adults and one-third of children are overweight or obese. </string>
+	<string name="random_facts_10">Every minute, one American will die from a heart attack.</string>    
+	<string name="random_facts_11">Every 25 seconds, one American will have a heart attack.</string>    
+	<string name="random_facts_12">Stress increases the risk of a heart attack.</string>    
+	<string name="random_facts_13">Secondhand smoke increases your risk of a heart attack.</string>    
+	<string name="random_facts_14">Every year, stroke kills twice as many women as breast cancer.  Learn the signs and call 911 if you believe someone is having a stroke!</string>    
+	
+    
+
+</resources>

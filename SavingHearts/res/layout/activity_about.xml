@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/aboutActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".AboutActivity" >
+
+    <LinearLayout
+        android:id="@+id/about_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="6"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/about_fragment_image_description"
+                android:fitsSystemWindows="false"
+                android:src="@drawable/heartmonitor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:text="@string/version" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtvw_about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="15dp"
+            android:text="@string/about_fragment" />
+        
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/about_card"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="@drawable/dropshadow"
+        android:id="@+id/graphCardDropshadow"
+        />
+
+</LinearLayout>
