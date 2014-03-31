@@ -15,22 +15,28 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>20</x>
+      <x>10</x>
       <y>30</y>
       <w>420</w>
-      <h>200</h>
+      <h>300</h>
     </coordinates>
     <panel_attributes>activity
 --
 id 			INTEGER PRIMARY KEY AUTOINCREMENT
-max_HR		INTEGER NOT NULL
+duration	 	INTEGER NOT NULL
+max_HR	 	INTEGER NOT NULL
 min_HR	 	INTEGER NOT NULL
 ave_HR 		INTEGER NOT NULL
-
-mets 			DOUBLE NOT NULL
+mets 			REAL NOT NULL
+max_zones 	INTEGER NOT NULL
+hard_zones 	INTEGER NOT NULL
+moderate_zones INTEGER NOT NULL
+light_zones 	INTEGER NOT NULL
+monitor	 	INTEGER NOT NULL
 date 			TEXT 	NOT NULL
 month			TEXT NOT NULL
 year	 		TEXT NOT NULL
+
 </panel_attributes>
     <additional_attributes/>
   </element>
