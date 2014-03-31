@@ -1,10 +1,13 @@
-package com.example.savinghearts;
+package com.example.savinghearts.activities;
+import com.example.savinghearts.*;
+import com.example.savinghearts.activities.*;
+import com.example.savinghearts.fragments.*;
+import com.example.savinghearts.heartrate.*;
+import com.example.savinghearts.helpers.*;
 
 import com.example.savinghearts.heartrate.WorkoutScreen;
 import com.example.savinghearts.helpers.METSCSVHelper;
 import com.example.savinghearts.helpers.SQLDatabaseHelper;
-import com.example.savinghearts.GeneralMetActivity;
-import com.example.savinghearts.MetActivity;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -7,7 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.example.savinghearts.CSVReader;
-import com.example.savinghearts.GeneralMetActivity;
+import com.example.savinghearts.*;
+import com.example.savinghearts.activities.*;
+import com.example.savinghearts.fragments.*;
+import com.example.savinghearts.heartrate.*;
+import com.example.savinghearts.helpers.*;
 
 import android.content.Context;
 
