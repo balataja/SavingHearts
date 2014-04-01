@@ -34,8 +34,18 @@ public class SavingHeartsDataSource {
 	*/
 	//fields for the activity table
 	private String[] activityColumns = {MySQLiteHelper.ACTIVITY_COLUMN_ID, 
-			MySQLiteHelper.ACTIVITY_COLUMN_HEART_RATE,
+			MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME,
+			MySQLiteHelper.ACTIVITY_COLUMN_DURATION,
+			MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE,
+			MySQLiteHelper.ACTIVITY_COLUMN_MIN_HEART_RATE,
+			MySQLiteHelper.ACTIVITY_COLUMN_AVE_HEART_RATE,
 			MySQLiteHelper.ACTIVITY_COLUMN_METS,
+			MySQLiteHelper.ACTIVITY_COLUMN_CALORIES,
+			MySQLiteHelper.ACTIVITY_COLUMN_MAX_ZONES,
+			MySQLiteHelper.ACTIVITY_COLUMN_HARD_ZONES,
+			MySQLiteHelper.ACTIVITY_COLUMN_MODERATE_ZONES,
+			MySQLiteHelper.ACTIVITY_COLUMN_LIGHT_ZONES,
+			MySQLiteHelper.ACTIVITY_COLUMN_MONITOR,
 			MySQLiteHelper.ACTIVITY_COLUMN_DATE,
 			MySQLiteHelper.ACTIVITY_COLUMN_MONTH,
 			MySQLiteHelper.ACTIVITY_COLUMN_YEAR};
@@ -70,173 +80,6 @@ public class SavingHeartsDataSource {
 	public void resetDatabase(){
 		dbHelper.onUpgrade(database, 0, 0);
 	}
-	/*
-	 *
-	 * methods for interacting with month table
-	 *
-	//insert monthData
-	public void insertMonth(MonthData month){
-		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.MONTH_COLUMN_MONTH_CALENDAR, month.getMonth());
-		//insert it into the table and set the insert id
-		long insertId = database.insert(MySQLiteHelper.TABLE_MONTH,  null,  values);
-		month.setId(insertId);
-	}
-	//update monthData
-	public void updateMonth(MonthData month){
-		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.MONTH_COLUMN_MONTH_CALENDAR, month.getMonth());
-		long id = month.getId();
-		database.update(MySQLiteHelper.TABLE_MONTH, values,  MySQLiteHelper.MONTH_COLUMN_ID + " = " + id, null);
-	}
-	
-	//get month data based on month's Id
-	public MonthData getMonth(long Id){
-		String where = MySQLiteHelper.MONTH_COLUMN_ID + " = " + Id;
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_MONTH, monthColumns, where, null, null, null,null);
-		MonthData foundMonth = new MonthData();
-		if(cursor.getCount() == 0){
-			foundMonth = null;
-		} else {
-			cursor.moveToFirst();
-			foundMonth.setId(cursor.getLong(0));
-			foundMonth.setMonth(cursor.getString(1));
-		}
-		return foundMonth;
-	}
-	
-	//get month data based on month's calendar
-	public MonthData getMonth(String month_calendar){
-		String where = MySQLiteHelper.MONTH_COLUMN_MONTH_CALENDAR + " = '" + month_calendar + "'";
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_MONTH, monthColumns, where, null, null, null,null);
-		MonthData foundMonth = new MonthData();
-		if(cursor.getCount() == 0){
-			foundMonth = null;
-		} else {
-			cursor.moveToFirst();
-			foundMonth.setId(cursor.getLong(0));
-			foundMonth.setMonth(cursor.getString(1));
-		}
-		return foundMonth;
-	}
-	
-	//get all monthDatas
-	public List<MonthData> getAllMonths(){
-		List <MonthData> monthList = new ArrayList<MonthData>();
-		//Select all query
-		String selectQuery = "SELECT * FROM " + MySQLiteHelper.TABLE_MONTH;
-		Cursor cursor = database.rawQuery(selectQuery, null);
-		//looping through all rows and adding to list
-		if(cursor.moveToFirst()){
-			do{
-				MonthData monthData = new MonthData();
-				monthData.setId(cursor.getLong(0));
-				monthData.setMonth(cursor.getString(1));
-				monthList.add(monthData);
-				
-			}while(cursor.moveToNext());
-		}
-		cursor.close();
-		return monthList;
-	}
-	
-	/*
-	 * methods for interacting with date table
-	 
-	//insert DateData
-	public void insertDate(DateData date){
-		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.DATE_COLUMN_MONTH_ID, date.getMonthId());
-		values.put(MySQLiteHelper.DATE_COLUMN_DATE_CALENDAR, date.getDate());
-		//insert it into the table and set the insert id
-		long insertId = database.insert(MySQLiteHelper.TABLE_DATE,  null,  values);
-		date.setId(insertId);
-	}
-	
-	//updating DateData
-	public void updateDate(DateData date){
-		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.DATE_COLUMN_MONTH_ID, date.getMonthId());
-		values.put(MySQLiteHelper.DATE_COLUMN_DATE_CALENDAR, date.getDate());
-		long id = date.getId();
-		database.update(MySQLiteHelper.TABLE_DATE, values,  MySQLiteHelper.DATE_COLUMN_ID + " = " + id, null);
-	}
-	
-	//get date according to date's id
-	public DateData getDate(long Id){
-		String where = MySQLiteHelper.DATE_COLUMN_ID + " = " +Id;
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_DATE, dateColumns, where, null, null, null,null);
-		DateData foundDate = new DateData();
-		if(cursor.getCount() == 0){
-			foundDate = null;
-		} else {
-			cursor.moveToFirst();
-			foundDate.setId(cursor.getLong(0));
-			foundDate.setMonthId(cursor.getLong(1));
-			foundDate.setDate(Integer.parseInt(cursor.getString(2)));
-		}
-		return foundDate;
-	}
-	
-	//get date according to month data and date calendar
-	public DateData getDate(int date, MonthData month){
-		String where = MySQLiteHelper.DATE_COLUMN_DATE_CALENDAR + " = " + date +
-				" AND " + MySQLiteHelper.DATE_COLUMN_MONTH_ID + " = " + month.getId();
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_DATE, dateColumns, where, null, null, null,null);
-		DateData foundDate = new DateData();
-		if(cursor.getCount() == 0){
-			foundDate = null;
-		} else {
-			cursor.moveToFirst();
-			foundDate.setId(cursor.getLong(0));
-			foundDate.setMonthId(cursor.getLong(1));
-			foundDate.setDate(Integer.parseInt(cursor.getString(2)));
-		}
-		return foundDate;
-	}
-	
-	//get All Dates according to month
-	public List<DateData> getAllDates(MonthData month){
-		List <DateData> dateList = new ArrayList<DateData>();
-		//Select all query
-		String where = MySQLiteHelper.DATE_COLUMN_MONTH_ID + " = " + month.getId();
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_DATE, dateColumns, where, null, null, null, null);
-		//looping through all rows and adding to list
-		if(cursor.moveToFirst()){
-			do{
-				DateData dateData = new DateData();
-				dateData.setId(cursor.getLong(0));
-				dateData.setMonthId(cursor.getLong(1));
-				dateData.setDate(Integer.parseInt(cursor.getString(2)));
-				dateList.add(dateData);
-			
-			}while(cursor.moveToNext());
-		}
-		cursor.close();
-		return dateList;
-	}
-	
-	//get All DateDatas
-	public List<DateData> getAllDates(){
-		List <DateData> dateList = new ArrayList<DateData>();
-		//Select all query
-		String selectQuery = "SELECT * FROM " + MySQLiteHelper.TABLE_DATE;
-		Cursor cursor = database.rawQuery(selectQuery, null);
-		//looping through all rows and adding to list
-		if(cursor.moveToFirst()){
-			do{
-				DateData dateData = new DateData();
-				dateData.setId(cursor.getLong(0));
-				dateData.setMonthId(cursor.getLong(1));
-				dateData.setDate(Integer.parseInt(cursor.getString(2)));
-				dateList.add(dateData);
-				
-			}while(cursor.moveToNext());
-		}
-		cursor.close();
-		return dateList;
-	}
-	*/
 	
 	/*
 	 * methods for interacting with activity table
@@ -244,7 +87,7 @@ public class SavingHeartsDataSource {
 	//insert activity
 	public void insertActivity(ActivityData activity){
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.ACTIVITY_COLUMN_HEART_RATE, activity.getHeartRate());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE, activity.getMaxHR());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_METS, activity.getMets());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, getCurrentDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, getCurrentMonth());
@@ -260,7 +103,7 @@ public class SavingHeartsDataSource {
 	//update activity
 	public void updateActivity(ActivityData activity){
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.ACTIVITY_COLUMN_HEART_RATE, activity.getHeartRate());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE, activity.getMaxHR());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_METS, activity.getMets());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, activity.getDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, activity.getMonth());
@@ -279,7 +122,7 @@ public class SavingHeartsDataSource {
 		} else {
 			cursor.moveToFirst();
 			foundActivity.setId(cursor.getLong(0));
-			foundActivity.setHeartRate(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
 			foundActivity.setMets(cursor.getDouble(2));
 			foundActivity.setDate(cursor.getString(3));
 			foundActivity.setMonth(cursor.getString(4));
@@ -418,7 +261,7 @@ public class SavingHeartsDataSource {
 		List <ActivityData> activityList = getAllActivitiesInOneDate(date);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
-			heartRateList.add(activityList.remove(0).getHeartRate());
+			heartRateList.add(activityList.remove(0).getMaxHR());
 		}
 		
 		return heartRateList;
@@ -429,7 +272,7 @@ public class SavingHeartsDataSource {
 		List <ActivityData> activityList = getAllActivitiesInOneMonth(month);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
-			heartRateList.add(activityList.remove(0).getHeartRate());
+			heartRateList.add(activityList.remove(0).getMaxHR());
 		}
 		
 		return heartRateList;
@@ -440,7 +283,7 @@ public class SavingHeartsDataSource {
 		List <ActivityData> activityList = getAllActivitiesInOneMonth(year);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
-			heartRateList.add(activityList.remove(0).getHeartRate());
+			heartRateList.add(activityList.remove(0).getMaxHR());
 		}
 		
 		return heartRateList;
@@ -492,7 +335,7 @@ public class SavingHeartsDataSource {
 			do{
 				ActivityData activityData = new ActivityData();
 				activityData.setId(cursor.getLong(0));
-				activityData.setHeartRate(Integer.parseInt(cursor.getString(1)));
+				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
 				activityData.setMets(cursor.getDouble(2));
 				activityData.setDate(cursor.getString(3));
 				activityData.setMonth(cursor.getString(4));
@@ -517,7 +360,7 @@ public class SavingHeartsDataSource {
 			do{
 				ActivityData activityData = new ActivityData();
 				activityData.setId(cursor.getLong(0));
-				activityData.setHeartRate(Integer.parseInt(cursor.getString(1)));
+				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
 				activityData.setMets(cursor.getDouble(2));
 				activityData.setDate(cursor.getString(3));
 				activityData.setMonth(cursor.getString(4));
@@ -541,7 +384,7 @@ public class SavingHeartsDataSource {
 			do{
 				ActivityData activityData = new ActivityData();
 				activityData.setId(cursor.getLong(0));
-				activityData.setHeartRate(Integer.parseInt(cursor.getString(1)));
+				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
 				activityData.setMets(cursor.getDouble(2));
 				activityData.setDate(cursor.getString(3));
 				activityData.setMonth(cursor.getString(4));
@@ -567,7 +410,7 @@ public class SavingHeartsDataSource {
 			do{
 				ActivityData activityData = new ActivityData();
 				activityData.setId(cursor.getLong(0));
-				activityData.setHeartRate(Integer.parseInt(cursor.getString(1)));
+				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
 				activityData.setMets(cursor.getDouble(2));
 				activityData.setDate(cursor.getString(3));
 				activityData.setMonth(cursor.getString(4));

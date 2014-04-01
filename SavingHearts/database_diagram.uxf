@@ -23,11 +23,13 @@
     <panel_attributes>activity
 --
 id 			INTEGER PRIMARY KEY AUTOINCREMENT
+activity_name 	TEXT NOT NULL
 duration	 	INTEGER NOT NULL
 max_HR	 	INTEGER NOT NULL
 min_HR	 	INTEGER NOT NULL
 ave_HR 		INTEGER NOT NULL
 mets 			REAL NOT NULL
+calories	 	REAL NOT NULL
 max_zones 	INTEGER NOT NULL
 hard_zones 	INTEGER NOT NULL
 moderate_zones INTEGER NOT NULL

@@ -7,42 +7,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class MySQLiteHelper extends SQLiteOpenHelper{
-	/*
-	//month columns
-	public static final String TABLE_MONTH = "month";
-	public static final String MONTH_COLUMN_ID = "id";
-	public static final String MONTH_COLUMN_MONTH_CALENDAR= "month_calendar";
-	
-	//Statement to create month table
-	public static final String MONTH_CREATE = "CREATE TABLE " 
-			+ TABLE_MONTH + "(" 
-			+ MONTH_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ MONTH_COLUMN_MONTH_CALENDAR + " TEXT NOT NULL)";
-	
-	
-	//date columns
-	public static final String TABLE_DATE = "date";
-	public static final String DATE_COLUMN_ID = "id";
-	public static final String DATE_COLUMN_MONTH_ID = "month_id";
-	public static final String DATE_COLUMN_DATE_CALENDAR = "date_calendar";
-	
-	//Statement to create date table
-	public static final String DATE_CREATE = "CREATE TABLE " 
-			+ TABLE_DATE + "(" 
-			+ DATE_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ DATE_COLUMN_MONTH_ID + " INTEGER NOT NULL, " 
-			+ DATE_COLUMN_DATE_CALENDAR + " INTEGER NOT NULL," 
-			+ " FOREIGN KEY" + " ( " + DATE_COLUMN_MONTH_ID + " ) " + "REFERENCES " + TABLE_MONTH + " ( " + MONTH_COLUMN_ID + " )"
-			+ ")";
-					
-	*/
 	
 	//activity columns
 	public static final String TABLE_ACTIVITY = "activity";
 	public static final String ACTIVITY_COLUMN_ID = "id";
-	//public static final String ACTIVITY_COLUMN_DATE_ID = "date_id";
-	public static final String ACTIVITY_COLUMN_HEART_RATE = "max_HR";
-	public static final String ACTIVITY_COLUMN_METS = "max_METS";
+	public static final String ACTIVITY_COLUMN_ACTIVITY_NAME = "activity_name";
+	public static final String ACTIVITY_COLUMN_DURATION = "duration";
+	public static final String ACTIVITY_COLUMN_MAX_HEART_RATE = "max_HR";
+	public static final String ACTIVITY_COLUMN_MIN_HEART_RATE = "min_HR";
+	public static final String ACTIVITY_COLUMN_AVE_HEART_RATE = "ave_HR";
+	public static final String ACTIVITY_COLUMN_METS = "mets";
+	public static final String ACTIVITY_COLUMN_CALORIES = "calories";
+	public static final String ACTIVITY_COLUMN_MAX_ZONES = "max_zones";
+	public static final String ACTIVITY_COLUMN_HARD_ZONES = "hard_zones";
+	public static final String ACTIVITY_COLUMN_MODERATE_ZONES = "moderate_zones";
+	public static final String ACTIVITY_COLUMN_LIGHT_ZONES = "light_zones";
+	public static final String ACTIVITY_COLUMN_MONITOR = "monitor";
 	public static final String ACTIVITY_COLUMN_DATE = "date";
 	public static final String ACTIVITY_COLUMN_MONTH = "month";
 	public static final String ACTIVITY_COLUMN_YEAR = "year";
@@ -51,8 +31,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 	public static final String ACTIVITY_CREATE = "CREATE TABLE " 
 			+ TABLE_ACTIVITY + "(" 
 			+ ACTIVITY_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "		
-			+ ACTIVITY_COLUMN_HEART_RATE + " INTEGER NOT NULL, "
+			+ ACTIVITY_COLUMN_ACTIVITY_NAME + " TEXT NOT NULL, "
+			+ ACTIVITY_COLUMN_DURATION + " INTEGER NOT NULL, "
+			+ ACTIVITY_COLUMN_MAX_HEART_RATE + " INTEGER NOT NULL, "
+			+ ACTIVITY_COLUMN_MIN_HEART_RATE + " INTEGER NOT NULL, "
+			+ ACTIVITY_COLUMN_AVE_HEART_RATE + " INTEGER NOT NULL, "	
 			+ ACTIVITY_COLUMN_METS + " REAL NOT NULL,"
+			+ ACTIVITY_COLUMN_CALORIES + " REAL NOT NULL,"
+			+ ACTIVITY_COLUMN_MAX_ZONES + " INTEGER NOT NULL,"
+			+ ACTIVITY_COLUMN_HARD_ZONES + " INTEGER NOT NULL,"
+			+ ACTIVITY_COLUMN_MODERATE_ZONES + " INTEGER NOT NULL,"
+			+ ACTIVITY_COLUMN_LIGHT_ZONES + " INTEGER NOT NULL,"
+			+ ACTIVITY_COLUMN_MONITOR + " INTEGER NOT NULL,"
 			+ ACTIVITY_COLUMN_DATE + " TEXT NOT NULL,"
 			+ ACTIVITY_COLUMN_MONTH + " TEXT NOT NULL," 
 			+ ACTIVITY_COLUMN_YEAR + " TEXT NOT NULL)";
@@ -71,9 +61,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		Log.i("SQLSetup", "Creating databases");
-		//executes query as long as the query isn't a select or if the query doesn't return any data
-		//db.execSQL(MONTH_CREATE);
-		//db.execSQL(DATE_CREATE);
 		db.execSQL(ACTIVITY_CREATE);
 		
 	}
@@ -84,12 +71,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.i("SQLUpgrade", "Upgrading databases");
-		//String DROP_MONTH= "DROP TABLE IF EXISTS " + TABLE_MONTH;
-		//String DROP_DATE= "DROP TABLE IF EXISTS " + TABLE_DATE;
 		String DROP_ACTIVITY= "DROP TABLE IF EXISTS " + TABLE_ACTIVITY;
-		
-		//db.execSQL(DROP_MONTH);
-		//db.execSQL(DROP_DATE);
 		db.execSQL(DROP_ACTIVITY);
 		
 		onCreate(db);
