@@ -1,5 +1,11 @@
 package com.example.savinghearts.activities;
 import com.example.savinghearts.*;
+import com.example.savinghearts.R.drawable;
+import com.example.savinghearts.R.id;
+import com.example.savinghearts.R.layout;
+import com.example.savinghearts.R.menu;
+import com.example.savinghearts.R.string;
+import com.example.savinghearts.R.style;
 import com.example.savinghearts.activities.*;
 import com.example.savinghearts.fragments.*;
 import com.example.savinghearts.heartrate.*;
