@@ -135,21 +135,21 @@ public class SavingHeartsDataSource {
 		} else {
 			cursor.moveToFirst();
 			foundActivity.setId(cursor.getLong(0));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
-			foundActivity.setMets(cursor.getDouble(2));
-			foundActivity.setDate(cursor.getString(3));
-			foundActivity.setMonth(cursor.getString(4));
-			foundActivity.setYear(cursor.getString(5));
+			foundActivity.setActivityName(cursor.getString(1));
+			foundActivity.setDuration(cursor.getLong(2));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(3)));
+			foundActivity.setMinHR(Integer.parseInt(cursor.getString(4)));
+			foundActivity.setAveHR(Integer.parseInt(cursor.getString(5)));
+			foundActivity.setMets(cursor.getDouble(6));
+			foundActivity.setCalories(cursor.getDouble(7));
+			foundActivity.setMaxZones(Integer.parseInt(cursor.getString(8)));
+			foundActivity.setHardZones(Integer.parseInt(cursor.getString(9)));
+			foundActivity.setModerateZones(Integer.parseInt(cursor.getString(10)));
+			foundActivity.setLightZones(Integer.parseInt(cursor.getString(11)));
+			foundActivity.setMonitor(Integer.parseInt(cursor.getString(12)));
+			foundActivity.setDate(cursor.getString(13));
+			foundActivity.setMonth(cursor.getString(14));
+			foundActivity.setYear(cursor.getString(15));
 			
 		}
 		return foundActivity;
@@ -178,110 +178,11 @@ public class SavingHeartsDataSource {
         Date date = new Date();
         return dateFormat.format(date);
 	}
-	
-	//get max heart rate in one date (dd)
-	public int getMaxHeartRateInOneDate(String date){		
-		List <Integer> heartRateList = getAllHeartRatesInOneDate(date);
-		//compare each heart rate
-		Integer max = 0;
-		if(heartRateList.size() != 0){
-			max = heartRateList.get(0);
-			for(int i =1; i < heartRateList.size() ; i++){
-				if(max < heartRateList.get(i)){
-					max = heartRateList.get(i);
-				}
-			}
-		}
+
+	//get all max heart rates in one date (dd), month (MM), year (yyyy)
+	public List<Integer> getAllMaxHRInOneDate(String date, String month, String year){
 		
-		return max;
-	}
-	//get max heart rate in one month (MM-dd)
-	public int getMaxHeartRateInOneMonth(String month){		
-		List <Integer> heartRateList = getAllHeartRatesInOneMonth(month);
-		//compare each heart rate
-		Integer max = 0;
-		if(heartRateList.size() != 0){
-			max = heartRateList.get(0);
-			for(int i =1; i < heartRateList.size() ; i++){
-				if(max < heartRateList.get(i)){
-					max = heartRateList.get(i);
-				}
-			}
-		}
-		
-		return max;
-	}
-	//get max heart rate in one year (yyyy-MM-dd)
-	public int getMaxHeartRateInOneYear(String year){		
-		List <Integer> heartRateList = getAllHeartRatesInOneYear(year);
-		//compare each heart rate
-		Integer max = 0;
-		if(heartRateList.size() != 0){
-			max = heartRateList.get(0);
-			for(int i =1; i < heartRateList.size() ; i++){
-				if(max < heartRateList.get(i)){
-					max = heartRateList.get(i);
-				}
-			}
-		}
-		
-		
-		return max;
-	}
-	
-	//get max mets in one date (yyyy-MM-dd)
-	public Double getMaxMetsInOneDate(String date){		
-		List <Double> metsList = getAllMetsInOneDate(date);
-		//compare each heart rate
-		Double max = 0.0;
-		if(metsList.size() != 0){
-			max = metsList.get(0);
-			for(int i =1; i < metsList.size() ; i++){
-				if(max < metsList.get(i)){
-					max = metsList.get(i);
-				}
-			}
-		}
-		
-		return max;
-	}
-	//get max mets in one month (yyyy-MM)
-	public Double getMaxMetsInOneMonth(String month){		
-		List <Double> metsList = getAllMetsInOneMonth(month);
-		//compare each heart rate
-		Double max = 0.0;
-		if(metsList.size() != 0){
-			max = metsList.get(0);
-			for(int i =1; i < metsList.size() ; i++){
-				if(max < metsList.get(i)){
-					max = metsList.get(i);
-				}
-			}
-		}
-		
-		return max;
-	}
-	//get max mets in one year (yyyy)
-	public Double getMaxMetsInOneYear(String year){		
-		List <Double> metsList = getAllMetsInOneDate(year);
-		//compare each heart rate
-		Double max = 0.0;
-		if(metsList.size() != 0){
-			max = metsList.get(0);
-			for(int i =1; i < metsList.size() ; i++){
-				if(max < metsList.get(i)){
-					max = metsList.get(i);
-				}
-			}
-		}
-		
-		return max;
-	}
-	
-	//get all heart rates in one date (yyyy-MM-dd)
-	public List<Integer> getAllHeartRatesInOneDate(String date){
-		
-		List <ActivityData> activityList = getAllActivitiesInOneDate(date);
+		List <ActivityData> activityList = getAllActivitiesInOneDate(date, month, year);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
 			heartRateList.add(activityList.remove(0).getMaxHR());
@@ -289,10 +190,10 @@ public class SavingHeartsDataSource {
 		
 		return heartRateList;
 	}
-	//get all heart rates in one month (yyyy-MM)
-	public List<Integer> getAllHeartRatesInOneMonth(String month){
+	//get all  max heart rates in one month (MM), year (yyyy)
+	public List<Integer> getAllMaxHRInOneMonth(String month, String year){
 		
-		List <ActivityData> activityList = getAllActivitiesInOneMonth(month);
+		List <ActivityData> activityList = getAllActivitiesInOneMonth(month, year);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
 			heartRateList.add(activityList.remove(0).getMaxHR());
@@ -300,10 +201,10 @@ public class SavingHeartsDataSource {
 		
 		return heartRateList;
 	}
-	//get all heart rates in one year (yyyy)
-	public List<Integer> getAllHeartRatesInOneYear(String year){
+	//get all max heart rates in one year (yyyy)
+	public List<Integer> getAllMaxHRInOneYear(String year){
 		
-		List <ActivityData> activityList = getAllActivitiesInOneMonth(year);
+		List <ActivityData> activityList = getAllActivitiesInOneYear(year);
 		List <Integer> heartRateList = new ArrayList<Integer>();
 		while(activityList.size() != 0){
 			heartRateList.add(activityList.remove(0).getMaxHR());
@@ -312,10 +213,10 @@ public class SavingHeartsDataSource {
 		return heartRateList;
 	}
 	
-	//get all mets in one date (yyyy-MM-dddd)
-		public List<Double> getAllMetsInOneDate(String date){
+	//get all mets in one date (dd), month (MM), year (yyyy)
+		public List<Double> getAllMetsInOneDate(String date, String month, String year){
 			
-			List <ActivityData> activityList = getAllActivitiesInOneDate(date);
+			List <ActivityData> activityList = getAllActivitiesInOneDate(date, month, year);
 			List <Double> heartRateList = new ArrayList<Double>();
 			while(activityList.size() != 0){
 				heartRateList.add(activityList.remove(0).getMets());
@@ -323,10 +224,10 @@ public class SavingHeartsDataSource {
 			
 			return heartRateList;
 		}
-		//get all mets in one month (yyyy-MM)
-		public List<Double> getAllMetsInOneMonth(String month){
+		//get all mets in one month (MM), year (yyyy)
+		public List<Double> getAllMetsInOneMonth(String month, String year){
 			
-			List <ActivityData> activityList = getAllActivitiesInOneMonth(month);
+			List <ActivityData> activityList = getAllActivitiesInOneMonth(month, year);
 			List <Double> heartRateList = new ArrayList<Double>();
 			while(activityList.size() != 0){
 				heartRateList.add(activityList.remove(0).getMets());
@@ -334,10 +235,11 @@ public class SavingHeartsDataSource {
 			
 			return heartRateList;
 		}
+		
 		//get all mets in one year (yyyy)
 		public List<Double> getAllMetsInOneYear(String year){
 			
-			List <ActivityData> activityList = getAllActivitiesInOneMonth(year);
+			List <ActivityData> activityList = getAllActivitiesInOneYear(year);
 			List <Double> heartRateList = new ArrayList<Double>();
 			while(activityList.size() != 0){
 				heartRateList.add(activityList.remove(0).getMets());
@@ -347,22 +249,19 @@ public class SavingHeartsDataSource {
 		}
 	
 	//get all activities according to activity's date
-	//must be in the yyyy-MM-dd format
-	public List<ActivityData> getAllActivitiesInOneDate(String date){
+	//must be in the dd, MM, and yyyy format
+	public List<ActivityData> getAllActivitiesInOneDate(String date, String month, String year){
 		List <ActivityData> activityList = new ArrayList<ActivityData>();
 		//where clause
-		String where = MySQLiteHelper.ACTIVITY_COLUMN_DATE + " = " + "'" + date + "'";
+		String where = MySQLiteHelper.ACTIVITY_COLUMN_DATE + " = " + "'" + date + "'" + " AND "
+				+ MySQLiteHelper.ACTIVITY_COLUMN_MONTH + " = '" + month + "'" + " AND " 
+				+ MySQLiteHelper.ACTIVITY_COLUMN_YEAR + " = '" + year + "'";
+				
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_ACTIVITY, activityColumns, where, null, null, null, null);
 		//looping through all rows and adding to list
 		if(cursor.moveToFirst()){
 			do{
-				ActivityData activityData = new ActivityData();
-				activityData.setId(cursor.getLong(0));
-				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
-				activityData.setMets(cursor.getDouble(2));
-				activityData.setDate(cursor.getString(3));
-				activityData.setMonth(cursor.getString(4));
-				activityData.setYear(cursor.getString(5));
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
 				activityList.add(activityData);
 				
 			}while(cursor.moveToNext());
@@ -372,22 +271,17 @@ public class SavingHeartsDataSource {
 	}
 	
 	//get all activities according to activity's month
-	//must be in yyyy-MM format
-	public List<ActivityData> getAllActivitiesInOneMonth(String month){
+	//must be in yyyy and MM format
+	public List<ActivityData> getAllActivitiesInOneMonth(String month, String year){
 		List <ActivityData> activityList = new ArrayList<ActivityData>();
 		//where clause
-		String where = MySQLiteHelper.ACTIVITY_COLUMN_MONTH + " = " + "'" + month + "'";
+		String where = MySQLiteHelper.ACTIVITY_COLUMN_MONTH + " = " + "'" + month + "'" + " AND "
+						+ MySQLiteHelper.ACTIVITY_COLUMN_YEAR + " = '" + year + "'";
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_ACTIVITY, activityColumns, where, null, null, null, null);
 		//looping through all rows and adding to list
 		if(cursor.moveToFirst()){
 			do{
-				ActivityData activityData = new ActivityData();
-				activityData.setId(cursor.getLong(0));
-				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
-				activityData.setMets(cursor.getDouble(2));
-				activityData.setDate(cursor.getString(3));
-				activityData.setMonth(cursor.getString(4));
-				activityData.setYear(cursor.getString(5));
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
 				activityList.add(activityData);
 					
 			}while(cursor.moveToNext());
@@ -405,13 +299,7 @@ public class SavingHeartsDataSource {
 		//looping through all rows and adding to list
 		if(cursor.moveToFirst()){
 			do{
-				ActivityData activityData = new ActivityData();
-				activityData.setId(cursor.getLong(0));
-				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
-				activityData.setMets(cursor.getDouble(2));
-				activityData.setDate(cursor.getString(3));
-				activityData.setMonth(cursor.getString(4));
-				activityData.setYear(cursor.getString(5));
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
 				activityList.add(activityData);
 						
 			}while(cursor.moveToNext());
@@ -431,13 +319,7 @@ public class SavingHeartsDataSource {
 		//looping through all rows and adding to list
 		if(cursor.moveToFirst()){
 			do{
-				ActivityData activityData = new ActivityData();
-				activityData.setId(cursor.getLong(0));
-				activityData.setMaxHR(Integer.parseInt(cursor.getString(1)));
-				activityData.setMets(cursor.getDouble(2));
-				activityData.setDate(cursor.getString(3));
-				activityData.setMonth(cursor.getString(4));
-				activityData.setYear(cursor.getString(5));
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
 				activityList.add(activityData);
 				
 			}while(cursor.moveToNext());
