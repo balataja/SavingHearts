@@ -18,8 +18,8 @@ import android.util.Log;
 
 public class SavingHeartsDataSource {
 	/*
-	 * 3/31/2014 9:01PM
-	 * Note to James: I haven't updates this class yet. I am going to stop now. Probably going to work more tomorrow,
+	 * 4/1/2014 2:23PM
+	 * Note to James: working on this class now
 	 */
 	//Database helper
 	private SQLiteDatabase database;
@@ -80,8 +80,18 @@ public class SavingHeartsDataSource {
 	//insert activity
 	public void insertActivity(ActivityData activity){
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME, activity.getActivityName());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DURATION, activity.getDuration());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE, activity.getMaxHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MIN_HEART_RATE, activity.getMinHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_AVE_HEART_RATE, activity.getAveHR());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_METS, activity.getMets());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_CALORIES, activity.getCalories());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_ZONES, activity.getMaxZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_HARD_ZONES, activity.getHardZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MODERATE_ZONES, activity.getModerateZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_LIGHT_ZONES, activity.getLightZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONITOR, activity.getMonitor());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, getCurrentDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, getCurrentMonth());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_YEAR, getCurrentYear());
@@ -96,8 +106,18 @@ public class SavingHeartsDataSource {
 	//update activity
 	public void updateActivity(ActivityData activity){
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME, activity.getActivityName());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DURATION, activity.getDuration());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE, activity.getMaxHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MIN_HEART_RATE, activity.getMinHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_AVE_HEART_RATE, activity.getAveHR());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_METS, activity.getMets());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_CALORIES, activity.getCalories());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_ZONES, activity.getMaxZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_HARD_ZONES, activity.getHardZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MODERATE_ZONES, activity.getModerateZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_LIGHT_ZONES, activity.getLightZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONITOR, activity.getMonitor());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, activity.getDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, activity.getMonth());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_YEAR, activity.getYear());
@@ -115,6 +135,16 @@ public class SavingHeartsDataSource {
 		} else {
 			cursor.moveToFirst();
 			foundActivity.setId(cursor.getLong(0));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
+			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
 			foundActivity.setMaxHR(Integer.parseInt(cursor.getString(1)));
 			foundActivity.setMets(cursor.getDouble(2));
 			foundActivity.setDate(cursor.getString(3));
