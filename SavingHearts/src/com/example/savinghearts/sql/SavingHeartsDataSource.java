@@ -17,21 +17,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class SavingHeartsDataSource {
-	
+	/*
+	 * 3/31/2014 9:01PM
+	 * Note to James: I haven't updates this class yet. I am going to stop now. Probably going to work more tomorrow,
+	 */
 	//Database helper
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
 	
-	/*
-	//The fields in the month table
-	private String[] monthColumns = { MySQLiteHelper.MONTH_COLUMN_ID, 
-			MySQLiteHelper.MONTH_COLUMN_MONTH_CALENDAR};
-	
-	//the fields in the date table
-	private String[] dateColumns = { MySQLiteHelper.DATE_COLUMN_ID, 
-			MySQLiteHelper.DATE_COLUMN_MONTH_ID, 
-			MySQLiteHelper.DATE_COLUMN_DATE_CALENDAR};
-	*/
 	//fields for the activity table
 	private String[] activityColumns = {MySQLiteHelper.ACTIVITY_COLUMN_ID, 
 			MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME,
