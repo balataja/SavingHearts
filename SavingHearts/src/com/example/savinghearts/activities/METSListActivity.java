@@ -23,6 +23,8 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 	SQLDatabaseHelper mSQLDbHelper;
 	
 	private ArrayAdapter<GeneralMetActivity> loadedMetsListAdapter;
+	public static String name = null;
+	public static double mets = 0.0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,9 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		//metActivity gives the names of the exercise selected
 		final GeneralMetActivity metActivity = loadedMetsListAdapter.getItem(position);
-
+		name = GeneralMetActivity.getName();
+		mets = GeneralMetActivity.getMetsvalue();
+		
 		Intent intent = new Intent(this, WorkoutScreen.class);
 		startActivity(intent);
 	}

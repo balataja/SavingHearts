@@ -37,21 +37,18 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc.IHeartRateDataReceiver;
-import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc.IHeartRateDataTimestampReceiver;
-import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc.IPage4AddtDataReceiver;
 import com.dsi.ant.plugins.antplus.pcc.defines.DeviceState;
 import com.dsi.ant.plugins.antplus.pcc.defines.EventFlag;
 import com.dsi.ant.plugins.antplus.pcc.defines.RequestAccessResult;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
-import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc.IManufacturerAndSerialReceiver;
-import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc.IVersionAndModelReceiver;
 import com.example.savinghearts.R;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
+import com.example.savinghearts.activities.METSListActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
 
 import java.math.BigDecimal;
@@ -63,13 +60,43 @@ import java.util.EnumSet;
 public abstract class Activity_HeartRateDisplayBase extends Activity implements SensorEventListener
 {
     protected abstract void requestAccessToPcc();
-
+    
+    //Sensor Variables
     AntPlusHeartRatePcc hrPcc = null;
-
     TextView tv_status;
-
     TextView tv_computedHeartRate;
-    //TextView tv_heartBeatCounter;
+    private static final int HISTORY_SIZE = 300;            // number of points to plot in history
+    private SensorManager sensorMgr = null;
+    private Sensor orSensor = null;
+ 
+    //Plot Variables
+    private XYPlot aprHistoryPlot = null;
+    private SimpleXYSeries azimuthHistorySeries = null;
+    private int HeartRatePoint = 50;
+
+	//Timer variables
+	private Button startButton;
+	private Button pauseButton;
+	private TextView timerValue;	
+	private long startTime = 0L;	
+	private Handler customHandler = new Handler();	
+	long timeInMilliseconds = 0L;
+	long timeSwapBuff = 0L;
+	long updatedTime = 0L;
+	
+	//Database variables
+	private int maxHeartRate = 0;
+	private String activityName = null;
+	private double mets = 0.0;
+	private int aveHeartRate;
+	private double calories;
+	private int maxZones = 0;
+	private int hardZones = 0;
+	private int moderateZones = 0;
+	private int lightZones = 0;
+	private int totalUpdates = 0;
+	private double pounds = 0.0;
+	private double kilos = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,6 +104,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         super.onCreate(savedInstanceState);
 
         handleReset();
+        activityName = METSListActivity.name;
+        mets = METSListActivity.mets;
+        System.out.println(activityName + "........." + mets);
     }
 
     /**
@@ -93,28 +123,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
         requestAccessToPcc();
     }
-    
-    private static final int HISTORY_SIZE = 100;            // number of points to plot in history
-    private SensorManager sensorMgr = null;
-    private Sensor orSensor = null;
- 
-    private XYPlot aprHistoryPlot = null;
- 
-    private SimpleXYSeries azimuthHistorySeries = null;
-    private int HeartRatePoint = 50;
-    
-	private Button startButton;
-	private Button pauseButton;
-	
-	private TextView timerValue;
-	
-	private long startTime = 0L;
-	
-	private Handler customHandler = new Handler();
-	
-	long timeInMilliseconds = 0L;
-	long timeSwapBuff = 0L;
-	long updatedTime = 0L;
 
     protected void showDataDisplay(String status)
     {
@@ -131,7 +139,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         azimuthHistorySeries = new SimpleXYSeries("Heart Rate");
         azimuthHistorySeries.useImplicitXVals();
         aprHistoryPlot.setRangeBoundaries(50, 150, BoundaryMode.FIXED);
-        aprHistoryPlot.setDomainBoundaries(0, 100, BoundaryMode.FIXED);
+        aprHistoryPlot.setDomainBoundaries(0, 300, BoundaryMode.FIXED);
         aprHistoryPlot.addSeries(azimuthHistorySeries, new LineAndPointFormatter(Color.rgb(200, 100, 100), Color.RED, null, null));
         aprHistoryPlot.setDomainStepValue(5);
         aprHistoryPlot.setTicksPerRangeLabel(3);
@@ -199,6 +207,15 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         azimuthHistorySeries.addLast(null, HeartRatePoint);
         // redraw the Plots:
         aprHistoryPlot.redraw();
+        
+        //Workout variable updates
+        if(HeartRatePoint > maxHeartRate)
+        {
+        	maxHeartRate = HeartRatePoint;
+        }
+        totalUpdates++;
+        aveHeartRate = aveHeartRate*(totalUpdates-1)/totalUpdates + HeartRatePoint/totalUpdates;
+        
     }
 
 	@Override
