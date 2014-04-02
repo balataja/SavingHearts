@@ -121,30 +121,21 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         setContentView(R.layout.activity_heart_rate_test);
 
         tv_status = (TextView)findViewById(R.id.textView_Status);
-
         tv_computedHeartRate = (TextView)findViewById(R.id.textView_ComputedHeartRate);
-        //tv_heartBeatCounter = (TextView)findViewById(R.id.textView_HeartBeatCounter);
-
         //Reset the text display
         tv_status.setText(status);
 
         tv_computedHeartRate.setText("---");
-        //tv_heartBeatCounter.setText("---");
-
         // setup the APR History plot:
         aprHistoryPlot = (XYPlot) findViewById(R.id.aprHistoryPlot);
- 
         azimuthHistorySeries = new SimpleXYSeries("Heart Rate");
         azimuthHistorySeries.useImplicitXVals();
- 
         aprHistoryPlot.setRangeBoundaries(50, 150, BoundaryMode.FIXED);
         aprHistoryPlot.setDomainBoundaries(0, 100, BoundaryMode.FIXED);
         aprHistoryPlot.addSeries(azimuthHistorySeries, new LineAndPointFormatter(Color.rgb(200, 100, 100), Color.RED, null, null));
         aprHistoryPlot.setDomainStepValue(5);
         aprHistoryPlot.setTicksPerRangeLabel(3);
-        //aprHistoryPlot.getDomainLabelWidget().pack();
         aprHistoryPlot.setRangeLabel("Heart Rate (BPM)");
-        //aprHistoryPlot.getRangeLabelWidget().pack();
  
         // register for orientation sensor events:
         sensorMgr = (SensorManager) getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
