@@ -5,6 +5,9 @@ import com.example.savinghearts.fragments.*;
 import com.example.savinghearts.heartrate.*;
 import com.example.savinghearts.helpers.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 
 import com.example.savinghearts.R;
@@ -176,5 +179,21 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			break;
 		 
 		}
+	}
+	
+	public int getMyAge(){
+		Bundle bundle = this.getArguments();
+		String birthDate = bundle.getString("birthDate");
+				
+		Calendar timestamp = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());	
+		String currentDate = dateFormat.format(timestamp.getTime());
+		
+		String[] birthDateAr = birthDate.split("/");
+		String monthOfBirth = birthDateAr[0];
+		String dayOfBirth = birthDateAr[1];
+		String yearBirth = birthDateAr[2];
+	
+		return 0;
 	}
 }

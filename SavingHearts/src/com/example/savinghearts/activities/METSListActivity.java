@@ -19,20 +19,20 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class METSListActivity extends Activity implements OnItemClickListener{
-	
+
 	SQLDatabaseHelper mSQLDbHelper;
-	
+
 	private ArrayAdapter<GeneralMetActivity> loadedMetsListAdapter;
 	public static String name = null;
 	public static double mets = 0.0;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mSQLDbHelper = new SQLDatabaseHelper(this);
 		setContentView(R.layout.activity_metlist);		
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -47,11 +47,11 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 		final GeneralMetActivity metActivity = loadedMetsListAdapter.getItem(position);
 		name = GeneralMetActivity.getName();
 		mets = GeneralMetActivity.getMetsvalue();
-		
+
 		Intent intent = new Intent(this, WorkoutScreen.class);
 		startActivity(intent);
 	}
-	
+
 	/**
 	 * Builds METs list
 	 */
@@ -65,19 +65,19 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 		loadedMetsListView.setAdapter(loadedMetsListAdapter);
 		loadedMetsListView.setOnItemClickListener(this);
 	}
-	
+
 	/**
 	 * Refreshes Available METs list
 	 */
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		updateAvailableMetsList();
 	}
 
 	private void updateAvailableMetsList() {
-		
+
 		loadedMetsListAdapter.clear();
 		for (GeneralMetActivity activity : METSCSVHelper.getAllAvailableMetActivities(this)) {
 			loadedMetsListAdapter.add(activity);

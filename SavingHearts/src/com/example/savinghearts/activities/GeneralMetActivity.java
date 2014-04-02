@@ -9,7 +9,7 @@ public class GeneralMetActivity {
 
 	private static String mName;
 	private static double mMetValue;
-	
+
 	/**
 	 * Instatiates new GeneralMetActivity
 	 * @param name String name of the activity
@@ -52,7 +52,7 @@ public class GeneralMetActivity {
 	public String toString() {
 		return mName + " " + mMetValue;
 	}
-	
-	
-	
+
+
+
 }

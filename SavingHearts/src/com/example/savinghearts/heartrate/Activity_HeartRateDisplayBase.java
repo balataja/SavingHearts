@@ -83,7 +83,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	long timeInMilliseconds = 0L;
 	long timeSwapBuff = 0L;
 	long updatedTime = 0L;
-	
+
 	//Database variables
 	private int maxHeartRate = 0;
 	private String activityName = null;
@@ -164,9 +164,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 		timerValue = (TextView) findViewById(R.id.timerValue);
 
 		startButton = (Button) findViewById(R.id.startButton);
-		
+
 		startButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			public void onClick(View view) {
 				startTime = SystemClock.uptimeMillis();
 				customHandler.postDelayed(updateTimerThread, 0);
@@ -175,11 +175,11 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 		});
 
 		pauseButton = (Button) findViewById(R.id.pauseButton);
-		
+
 		pauseButton.setOnClickListener(new View.OnClickListener() {
-		
+
 			public void onClick(View view) {
-			
+
 				timeSwapBuff += timeInMilliseconds;
 				customHandler.removeCallbacks(updateTimerThread);
 
@@ -221,7 +221,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
     /**

@@ -165,6 +165,10 @@ public class SettingsActivity extends Activity implements OnClickListener,
 		dateBuilder.append(date + "/" + year);
 		
 		mBirthDateTextView.setText(dateBuilder.toString());
+		Bundle bundle = new Bundle();
+		bundle.putString("birthDate", dateBuilder.toString());
+		HomeFragment hm = new HomeFragment();
+		hm.setArguments(bundle);
 
 		
 		// weight
