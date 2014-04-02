@@ -119,20 +119,29 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				R.id.targertHeartRatesTextView);
 		targetHR.setTypeface(typeface);
 		
-		TextView BPM1 = (TextView) this.getActivity().findViewById(R.id.BPM1);
-		int bpm50 = com.example.savinghearts.helpers.CalculationsHelper.getTargetHeartRateFromAge(myAge,
-				com.example.savinghearts.helpers.CalculationsHelper.TARGET_50_PERCENT);
-		BPM1.setText(bpm50 + " BPM: 50% MHR");
-		
-		TextView BPM2 = (TextView) this.getActivity().findViewById(R.id.BPM2);
-		int bpm85 = CalculationsHelper.getTargetHeartRateFromAge(myAge,
-				CalculationsHelper.TARGET_85_PERCENT);
-		BPM2.setText(bpm85 + " BPM: 85% MHR");
-		
-		TextView BPM3 = (TextView) this.getActivity().findViewById(R.id.BPM3);
+		int bpm60 = com.example.savinghearts.helpers.CalculationsHelper.getTargetHeartRateFromAge(myAge,
+				com.example.savinghearts.helpers.CalculationsHelper.TARGET_60_PERCENT);
+		int bpm70 = CalculationsHelper.getTargetHeartRateFromAge(myAge,
+				CalculationsHelper.TARGET_70_PERCENT);
+		int bpm80 = CalculationsHelper.getTargetHeartRateFromAge(myAge,
+				CalculationsHelper.TARGET_80_PERCENT);
+		int bpm90 = CalculationsHelper.getTargetHeartRateFromAge(myAge,
+				CalculationsHelper.TARGET_90_PERCENT);
 		int bpm100 = CalculationsHelper.getTargetHeartRateFromAge(myAge,
 				CalculationsHelper.TARGET_MAX);
-		BPM3.setText(bpm100 + " BPM: 100% MHR");
+		
+		TextView BPM1 = (TextView) this.getActivity().findViewById(R.id.BPM1);		
+		BPM1.setText(bpm60+ " - " +bpm70+ " BPM: 60% - 70% MHR -Fatburn");
+		
+		TextView BPM2 = (TextView) this.getActivity().findViewById(R.id.BPM2);
+		BPM2.setText(bpm70+ " - " +bpm80+ " BPM: 70% - 80% MHR -Aerobic");
+		
+		TextView BPM3 = (TextView) this.getActivity().findViewById(R.id.BPM3);		
+		BPM3.setText(bpm80+ " - " +bpm90+ " BPM: 80% - 90% MHR -Anaerobic");
+		
+		TextView BPM4 = (TextView) this.getActivity().findViewById(R.id.BPM4);	
+		BPM4.setText(bpm90+ " - " +bpm100+ " BPM: 90% - 100% MHR -Maximal");
+		
 		
 		// random facts
 		Random rand = new Random();

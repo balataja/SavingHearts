@@ -3,8 +3,10 @@ package com.example.savinghearts.helpers;
 public class CalculationsHelper {
 
 	public static final double TARGET_MAX = 1.0;
-	public static final double TARGET_85_PERCENT = 0.85;
-	public static final double TARGET_50_PERCENT = 0.5;
+	public static final double TARGET_90_PERCENT = 0.9;
+	public static final double TARGET_80_PERCENT = 0.8;
+	public static final double TARGET_70_PERCENT = 0.7;
+	public static final double TARGET_60_PERCENT = 0.6;
 	
 	/**
 	 * Returns the Heart Rates at various target levels based on Doctor Gulati's research
@@ -25,15 +27,24 @@ public class CalculationsHelper {
 			
 			return (int)(1.0 * maxHR);
 			
-		} else if (hrTarget == TARGET_85_PERCENT) {
+		} else if (hrTarget == TARGET_90_PERCENT) {
 			
-			return (int)(0.85 * maxHR);
+			return (int)(0.9 * maxHR);
 		
-		} else if (hrTarget == TARGET_50_PERCENT) {
+		} else if (hrTarget == TARGET_80_PERCENT) {
 		
-			return (int)(0.5 * maxHR);
+			return (int)(0.8 * maxHR);
 		
-		} else {
+		} else if (hrTarget == TARGET_70_PERCENT) {
+		
+			return (int)(0.7 * maxHR);
+		
+		} else if (hrTarget == TARGET_60_PERCENT) {
+		
+			return (int)(0.6 * maxHR);
+		
+		}
+		else {
 			
 			return 0;
 		}		
@@ -58,15 +69,23 @@ public class CalculationsHelper {
 			
 			return (1.0 * maxHR);
 			
-		} else if (targetLevel == TARGET_85_PERCENT) {
+		} else if (targetLevel == TARGET_90_PERCENT) {
 			
-			return (0.85 * maxHR);
+			return (0.9 * maxHR);
 			
-		} else if (targetLevel == TARGET_50_PERCENT) {
+		} else if (targetLevel == TARGET_80_PERCENT) {
 			
-			return (0.50 * maxHR);
+			return (0.8 * maxHR);
 			
-		} else {
+		} else if (targetLevel == TARGET_70_PERCENT) {
+			
+			return (0.70 * maxHR);
+			
+		} else if (targetLevel == TARGET_60_PERCENT) {
+			
+			return (0.60 * maxHR);
+			
+		}else {
 			
 			return 0.0;
 		}

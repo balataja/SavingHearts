@@ -123,7 +123,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         // setup the APR History plot:
         aprHistoryPlot = (XYPlot) findViewById(R.id.aprHistoryPlot);
  
-        azimuthHistorySeries = new SimpleXYSeries("Azimuth");
+        azimuthHistorySeries = new SimpleXYSeries("Heart Rate");
         azimuthHistorySeries.useImplicitXVals();
  
         aprHistoryPlot.setRangeBoundaries(50, 150, BoundaryMode.FIXED);
@@ -132,7 +132,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         aprHistoryPlot.setDomainStepValue(5);
         aprHistoryPlot.setTicksPerRangeLabel(3);
         //aprHistoryPlot.getDomainLabelWidget().pack();
-        aprHistoryPlot.setRangeLabel("Heart Beat (BPM)");
+        aprHistoryPlot.setRangeLabel("Heart Rate (BPM)");
         //aprHistoryPlot.getRangeLabelWidget().pack();
  
         // register for orientation sensor events:
