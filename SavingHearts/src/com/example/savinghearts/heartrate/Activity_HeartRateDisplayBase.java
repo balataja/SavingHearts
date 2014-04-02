@@ -22,8 +22,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +44,6 @@ import com.dsi.ant.plugins.antplus.pcc.defines.EventFlag;
 import com.dsi.ant.plugins.antplus.pcc.defines.RequestAccessResult;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
-import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc.ICumulativeOperatingTimeReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc.IManufacturerAndSerialReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPlusLegacyCommonPcc.IVersionAndModelReceiver;
 import com.example.savinghearts.R;
@@ -67,8 +70,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
     TextView tv_computedHeartRate;
     //TextView tv_heartBeatCounter;
-
-    TextView tv_cumulativeOperatingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -101,6 +102,19 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
  
     private SimpleXYSeries azimuthHistorySeries = null;
     private int HeartRatePoint = 50;
+    
+	private Button startButton;
+	private Button pauseButton;
+	
+	private TextView timerValue;
+	
+	private long startTime = 0L;
+	
+	private Handler customHandler = new Handler();
+	
+	long timeInMilliseconds = 0L;
+	long timeSwapBuff = 0L;
+	long updatedTime = 0L;
 
     protected void showDataDisplay(String status)
     {
@@ -111,15 +125,12 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         tv_computedHeartRate = (TextView)findViewById(R.id.textView_ComputedHeartRate);
         //tv_heartBeatCounter = (TextView)findViewById(R.id.textView_HeartBeatCounter);
 
-        tv_cumulativeOperatingTime = (TextView)findViewById(R.id.textView_CumulativeOperatingTime);
-
         //Reset the text display
         tv_status.setText(status);
 
         tv_computedHeartRate.setText("---");
         //tv_heartBeatCounter.setText("---");
 
-        tv_cumulativeOperatingTime.setText("---");
         // setup the APR History plot:
         aprHistoryPlot = (XYPlot) findViewById(R.id.aprHistoryPlot);
  
@@ -151,6 +162,30 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
  
         sensorMgr.registerListener(this, orSensor, SensorManager.SENSOR_DELAY_UI);
  
+		timerValue = (TextView) findViewById(R.id.timerValue);
+
+		startButton = (Button) findViewById(R.id.startButton);
+		
+		startButton.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View view) {
+				startTime = SystemClock.uptimeMillis();
+				customHandler.postDelayed(updateTimerThread, 0);
+
+			}
+		});
+
+		pauseButton = (Button) findViewById(R.id.pauseButton);
+		
+		pauseButton.setOnClickListener(new View.OnClickListener() {
+		
+			public void onClick(View view) {
+			
+				timeSwapBuff += timeInMilliseconds;
+				customHandler.removeCallbacks(updateTimerThread);
+
+			}
+		});
     }
     
     private void cleanup() {
@@ -201,24 +236,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                         tv_computedHeartRate.setText(String.valueOf(computedHeartRate));
                         //tv_heartBeatCounter.setText(String.valueOf(heartBeatCounter));
                         HeartRatePoint = Integer.parseInt(String.valueOf(computedHeartRate));
-                    }
-                });
-            }
-        });
-
-        hrPcc.subscribeCumulativeOperatingTimeEvent(new ICumulativeOperatingTimeReceiver()
-        {
-            @Override
-            public void onNewCumulativeOperatingTime(final long estTimestamp, final EnumSet<EventFlag> eventFlags, final long cumulativeOperatingTime)
-            {
-                runOnUiThread(new Runnable()
-                {                                            
-                    @Override
-                    public void run()
-                    {
-                        //tv_estTimestamp.setText(String.valueOf(estTimestamp));
-
-                        tv_cumulativeOperatingTime.setText(String.valueOf(cumulativeOperatingTime));
                     }
                 });
             }
@@ -349,4 +366,24 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                     return super.onOptionsItemSelected(item);                
             }
         }
+        
+    	private Runnable updateTimerThread = new Runnable() {
+
+    		public void run() {
+    			
+    			timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+    			
+    			updatedTime = timeSwapBuff + timeInMilliseconds;
+
+    			int secs = (int) (updatedTime / 1000);
+    			int mins = secs / 60;
+    			secs = secs % 60;
+    			int milliseconds = (int) (updatedTime % 1000);
+    			timerValue.setText("" + mins + ":"
+    					+ String.format("%02d", secs) + ":"
+    					+ String.format("%03d", milliseconds));
+    			customHandler.postDelayed(this, 0);
+    		}
+
+    	};
 }

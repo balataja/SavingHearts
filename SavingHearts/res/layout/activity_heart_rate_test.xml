@@ -51,7 +51,7 @@
              android:textSize="32dp"
              android:text="Time:" />
         <TextView
-             android:id="@+id/textView_CumulativeOperatingTime"
+             android:id="@+id/timerValue"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_alignParentRight="true"
@@ -62,13 +62,13 @@
              android:text="0.00" />
         
 		<Button
-		    android:id="@+id/Button1"
+		    android:id="@+id/startButton"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="Start" />
 		
 		<Button
-		    android:id="@+id/Button02"
+		    android:id="@+id/pauseButton"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentRight="true"
