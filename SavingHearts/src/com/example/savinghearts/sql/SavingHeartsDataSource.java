@@ -19,8 +19,8 @@ import android.util.Log;
 
 public class SavingHeartsDataSource {
 	/*
-	 * 4/1/2014 2:23PM
-	 * Note to James: working on this class now
+	 * 4/1/2014 11:55PM
+	 * Note to James: I am finish with this class
 	 */
 	//Database helper
 	private SQLiteDatabase database;
@@ -262,6 +262,24 @@ public class SavingHeartsDataSource {
 			
 			return heartRateList;
 		}
+		
+	//get all activities based on the activity type or name
+	public List<ActivityData> getAllActivities(String activityName){
+		List <ActivityData> activityList = new ArrayList<ActivityData>();
+		//where clause
+		String where = MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME + " = " + "'" + activityName + "'";
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_ACTIVITY, activityColumns, where, null, null, null, null);
+		//looping through all rows and adding to list
+		if(cursor.moveToFirst()){
+			do{
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
+				activityList.add(activityData);
+							
+			}while(cursor.moveToNext());
+		}
+		cursor.close();
+		return activityList;
+	}
 	
 	//get all activities in the past 7 days
 	public List<ActivityData> getAllActivitiesInPast7Days(){
@@ -281,6 +299,30 @@ public class SavingHeartsDataSource {
 				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
 				activityList.add(activityData);
 				
+			}while(cursor.moveToNext());
+		}
+		cursor.close();
+		return activityList;
+	}
+	
+	//get all activities in the past 30 days
+	public List<ActivityData> getAllActivitiesInPast30Days(){
+		List <ActivityData> activityList = new ArrayList<ActivityData>();
+		//get current timestamp
+		String current = getCurrentTimestamp();
+		//get timestamp 7 days ago
+		Calendar theStart = Calendar.getInstance();
+		theStart.add(Calendar.DAY_OF_MONTH, -30);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+		String start = dateFormat.format(theStart.getTime());
+
+		Cursor cursor = database.rawQuery("SELECT * FROM activity WHERE timestamp BETWEEN "+start+" AND "+current, null);
+		//looping through all rows and adding to list
+		if(cursor.moveToFirst()){
+			do{
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
+				activityList.add(activityData);
+					
 			}while(cursor.moveToNext());
 		}
 		cursor.close();
