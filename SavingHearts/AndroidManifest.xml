@@ -35,12 +35,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="SettingsActivity"></activity>
-        <activity android:name="AboutActivity"></activity>
-        <activity android:name="TargetHRInformationActivity"></activity>
-        <activity android:name="METSListActivity"></activity>
-        <activity android:name="AllMetsPrintedActivity"></activity>
-        <activity android:name="MetsInformationActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.SettingsActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.AboutActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.TargetHRInformationActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.METSListActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.AllMetsPrintedActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.MetsInformationActivity"></activity>
         <activity android:name=".heartrate.WorkoutScreen"></activity>
         <activity android:name=".heartrate.Activity_SearchUiHeartRateSampler"></activity>
     </application>

@@ -186,7 +186,7 @@ public class SavingHeartsDataSource {
         return dateFormat.format(date);
 	}
 	
-	//get activity's current year
+	//get activity's current timestamp (yyyy-MM-dd)
 	public String getCurrentTimestamp() {
 		Calendar timestamp = Calendar.getInstance();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());	
