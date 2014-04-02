@@ -118,6 +118,10 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		TextView targetHR = (TextView) this.getActivity().findViewById(
 				R.id.targertHeartRatesTextView);
 		targetHR.setTypeface(typeface);
+		//title Saving Hearts
+		TextView titleSavingHearts = (TextView) this.getActivity().findViewById(
+				R.id.TitleSavingHearts);
+		titleSavingHearts.setTypeface(typeface);
 		
 		int bpm60 = com.example.savinghearts.helpers.CalculationsHelper.getTargetHeartRateFromAge(myAge,
 				com.example.savinghearts.helpers.CalculationsHelper.TARGET_60_PERCENT);
@@ -141,6 +145,13 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		
 		TextView BPM4 = (TextView) this.getActivity().findViewById(R.id.BPM4);	
 		BPM4.setText(bpm90+ " - " +bpm100+ " BPM: 90% - 100% MHR -Maximal");
+		
+		//for the first box showing max HR and max Mets
+		TextView targetMaxHR = (TextView) this.getActivity().findViewById(R.id.TargetMaxHR);	
+		targetMaxHR.setText("Max Heart Rate :  " + bpm100);
+		
+		TextView targetMaxMets = (TextView) this.getActivity().findViewById(R.id.TargetMaxMets);	
+		targetMaxMets.setText("Max MET Level :  " + CalculationsHelper.getMaxMETLevel(myAge));
 		
 		
 		// random facts

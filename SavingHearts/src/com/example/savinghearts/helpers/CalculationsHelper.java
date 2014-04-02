@@ -109,6 +109,11 @@ public class CalculationsHelper {
 		return getCaloriesFromMetHours(weight, hours);
 	}
 	
+	public static double getMaxMETLevel(int age) {
+		double MaxMET = 14.7- (0.13*age);
+		return MaxMET;
+	}
+	
 	
 	
 }
