@@ -158,7 +158,7 @@ public class SavingHeartsDataSource {
 	//get activity's current date
 	public String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd", Locale.getDefault());
+                "dd", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
 	}
@@ -166,7 +166,7 @@ public class SavingHeartsDataSource {
 	//get activity's current month
 	public String getCurrentMonth() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM", Locale.getDefault());
+                "MM", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
 	}

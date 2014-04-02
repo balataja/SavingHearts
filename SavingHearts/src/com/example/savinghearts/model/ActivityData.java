@@ -14,8 +14,8 @@ public class ActivityData {
 	private long moderate_zones; //in seconds
 	private long light_zones; //in seconds
 	private int monitor; //boolean 0 for false (manual), 1 for true (monitor)
-	private String date; //format:  yyyy-MM-dd
-	private String month; //format: yyyy-MM
+	private String date; //format:  dd
+	private String month; //format: MM
 	private String year; //format:  yyyy
 	
 	public long getId(){
