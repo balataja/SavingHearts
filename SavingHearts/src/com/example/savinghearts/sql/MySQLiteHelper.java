@@ -26,10 +26,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 	public static final String ACTIVITY_COLUMN_DATE = "date";
 	public static final String ACTIVITY_COLUMN_MONTH = "month";
 	public static final String ACTIVITY_COLUMN_YEAR = "year";
+	public static final String ACTIVITY_COLUMN_TIMESTAMP = "timestamp";
 	
 	//Statement to create activity table
 	public static final String ACTIVITY_CREATE = "CREATE TABLE " 
-			+ TABLE_ACTIVITY + "(" 
+			+ TABLE_ACTIVITY + " (" 
 			+ ACTIVITY_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "		
 			+ ACTIVITY_COLUMN_ACTIVITY_NAME + " TEXT NOT NULL, "
 			+ ACTIVITY_COLUMN_DURATION + " INTEGER NOT NULL, "
@@ -45,7 +46,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 			+ ACTIVITY_COLUMN_MONITOR + " INTEGER NOT NULL,"
 			+ ACTIVITY_COLUMN_DATE + " TEXT NOT NULL,"
 			+ ACTIVITY_COLUMN_MONTH + " TEXT NOT NULL," 
-			+ ACTIVITY_COLUMN_YEAR + " TEXT NOT NULL)";
+			+ ACTIVITY_COLUMN_YEAR + " TEXT NOT NULL," 
+			+ ACTIVITY_COLUMN_TIMESTAMP + " TEXT NOT NULL)";
 	
 	
 	public static final String DATABASE_NAME = "SavingHearts.db";

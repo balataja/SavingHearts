@@ -17,6 +17,7 @@ public class ActivityData {
 	private String date; //format:  dd
 	private String month; //format: MM
 	private String year; //format:  yyyy
+	private String timestamp; //format: yyyy-MM-dd
 	
 	public long getId(){
 		return this.id;
@@ -143,6 +144,14 @@ public class ActivityData {
 	
 	public void setYear(String year){
 		this.year = year;
+	}
+	
+	public String getTimestamp(){
+		return this.timestamp;
+	}
+	
+	public void setTimestamp(String timestamp){
+		this.timestamp = timestamp;
 	}
 
 }

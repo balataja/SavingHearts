@@ -16,9 +16,9 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>10</x>
-      <y>30</y>
+      <y>10</y>
       <w>420</w>
-      <h>300</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>activity
 --
@@ -38,6 +38,7 @@ monitor	 	INTEGER NOT NULL
 date 			TEXT 	NOT NULL
 month			TEXT NOT NULL
 year	 		TEXT NOT NULL
+timestamp 	TEXT NOT NULL
 
 </panel_attributes>
     <additional_attributes/>

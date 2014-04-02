@@ -2,6 +2,7 @@ package com.example.savinghearts.sql;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -41,7 +42,8 @@ public class SavingHeartsDataSource {
 			MySQLiteHelper.ACTIVITY_COLUMN_MONITOR,
 			MySQLiteHelper.ACTIVITY_COLUMN_DATE,
 			MySQLiteHelper.ACTIVITY_COLUMN_MONTH,
-			MySQLiteHelper.ACTIVITY_COLUMN_YEAR};
+			MySQLiteHelper.ACTIVITY_COLUMN_YEAR,
+			MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP};
 	
 	//make it a singleton
 	private static SavingHeartsDataSource instance;
@@ -95,12 +97,14 @@ public class SavingHeartsDataSource {
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, getCurrentDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, getCurrentMonth());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_YEAR, getCurrentYear());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP, getCurrentTimestamp());
 		//insert it into the table and set the insert id
 		long insertId = database.insert(MySQLiteHelper.TABLE_ACTIVITY,  null,  values);
 		activity.setId(insertId);
 		activity.setDate(getCurrentDate());
 		activity.setMonth(getCurrentMonth());
 		activity.setYear(getCurrentYear());
+		activity.setYear(getCurrentTimestamp());
 	}
 	
 	//update activity
@@ -121,6 +125,7 @@ public class SavingHeartsDataSource {
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, activity.getDate());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, activity.getMonth());
 		values.put(MySQLiteHelper.ACTIVITY_COLUMN_YEAR, activity.getYear());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP, activity.getTimestamp());
 		long id = activity.getId();
 		database.update(MySQLiteHelper.TABLE_ACTIVITY, values,  MySQLiteHelper.ACTIVITY_COLUMN_ID + " = " + id, null);
 	}
@@ -150,6 +155,8 @@ public class SavingHeartsDataSource {
 			foundActivity.setDate(cursor.getString(13));
 			foundActivity.setMonth(cursor.getString(14));
 			foundActivity.setYear(cursor.getString(15));
+			foundActivity.setTimestamp(cursor.getString(16));
+			
 			
 		}
 		return foundActivity;
@@ -178,6 +185,14 @@ public class SavingHeartsDataSource {
         Date date = new Date();
         return dateFormat.format(date);
 	}
+	
+	//get activity's current year
+	public String getCurrentTimestamp() {
+		Calendar timestamp = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());	
+	    return dateFormat.format(timestamp.getTime());
+	}
+	//get
 
 	//get all max heart rates in one date (dd), month (MM), year (yyyy)
 	public List<Integer> getAllMaxHRInOneDate(String date, String month, String year){
@@ -248,6 +263,30 @@ public class SavingHeartsDataSource {
 			return heartRateList;
 		}
 	
+	//get all activities in the past 7 days
+	public List<ActivityData> getAllActivitiesInPast7Days(){
+		List <ActivityData> activityList = new ArrayList<ActivityData>();
+		//get current timestamp
+		String current = getCurrentTimestamp();
+		//get timestamp 7 days ago
+		Calendar theStart = Calendar.getInstance();
+		theStart.add(Calendar.DAY_OF_MONTH, -7);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+		String start = dateFormat.format(theStart.getTime());
+
+		Cursor cursor = database.rawQuery("SELECT * FROM activity WHERE timestamp BETWEEN "+start+" AND "+current, null);
+		//looping through all rows and adding to list
+		if(cursor.moveToFirst()){
+			do{
+				ActivityData activityData = getActivity(Integer.parseInt(cursor.getString(0)));
+				activityList.add(activityData);
+				
+			}while(cursor.moveToNext());
+		}
+		cursor.close();
+		return activityList;
+	}
+		
 	//get all activities according to activity's date
 	//must be in the dd, MM, and yyyy format
 	public List<ActivityData> getAllActivitiesInOneDate(String date, String month, String year){
