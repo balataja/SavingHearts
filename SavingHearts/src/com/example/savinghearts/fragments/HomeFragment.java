@@ -13,6 +13,8 @@ import java.util.Random;
 import com.example.savinghearts.R;
 import com.example.savinghearts.helpers.CalculationsHelper;
 import com.example.savinghearts.helpers.SettingsHelper;
+import com.example.savinghearts.model.AgeData;
+import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -32,13 +34,35 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment implements OnClickListener{
 
 	public static final String ARG_SECTION_NUMBER = "section_number";
+	public SavingHeartsDataSource database;
+	public int age;
+	public AgeData ageData;
+	
+	//If you need to manually reset the database and build it from scratch 
+	//when the activity starts set this to true.
+	private boolean DEV_resetDatabase = false;
 	
 	public HomeFragment(){}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		//database
+		database = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
+		if(DEV_resetDatabase)
+		{
+			database.resetDatabase();
+			database.close();
+			database.open();
+		}
+		ageData = new AgeData();
+		ageData.setAge(20);
+		if(database.getAgeDataCount() < 1){
+			database.insertAgeData(ageData);
+		}
+	
 		return inflater.inflate(R.layout.fragment_home, container, false);
+		
 	}
 
 	@Override
@@ -49,7 +73,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onStart() {
 		super.onStart();
-		
+	//	database = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
 		// Target HR Card
 		LinearLayout targetHRCard = (LinearLayout) this.getActivity().findViewById(R.id.target_hr_card);
 		targetHRCard.setOnClickListener(this);
@@ -113,7 +137,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	 */
 	private void updateUIValues() {
 
-		int myAge = com.example.savinghearts.helpers.SettingsHelper.getAge(this.getActivity());
+		int myAge = getMyAge();
 		Typeface typeface = Typeface.createFromAsset(getActivity()
 				.getAssets(), "font/roboto.ttf");
 		
@@ -182,18 +206,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	}
 	
 	public int getMyAge(){
-		Bundle bundle = this.getArguments();
-		String birthDate = bundle.getString("birthDate");
-				
-		Calendar timestamp = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());	
-		String currentDate = dateFormat.format(timestamp.getTime());
-		
-		String[] birthDateAr = birthDate.split("/");
-		String monthOfBirth = birthDateAr[0];
-		String dayOfBirth = birthDateAr[1];
-		String yearBirth = birthDateAr[2];
-	
-		return 0;
+		age = database.getAgeFromDB(1).getAge();
+		return age;
 	}
 }

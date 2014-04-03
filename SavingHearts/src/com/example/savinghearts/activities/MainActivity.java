@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import com.example.savinghearts.heartrate.Activity_SearchUiHeartRateSampler;
 import com.example.savinghearts.helpers.SettingsHelper;
+import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.app.ActionBar;
 import android.app.Dialog;

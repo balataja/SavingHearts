@@ -18,10 +18,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class SavingHeartsDataSource {
-	/*
-	 * 4/1/2014 11:55PM
-	 * Note to James: I am finish with this class
-	 */
+	
+	//make it a singleton
+		private static SavingHeartsDataSource instance;
+		private SavingHeartsDataSource(Context context)
+		{
+			dbHelper = new MySQLiteHelper(context);
+		}
+			
+		public static SavingHeartsDataSource getInstance(Context context)
+		{
+			if(instance == null)
+			{
+				instance = new SavingHeartsDataSource(context);
+				instance.open();
+			}
+			return instance;
+		}
 	//Database helper
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
@@ -45,22 +58,10 @@ public class SavingHeartsDataSource {
 			MySQLiteHelper.ACTIVITY_COLUMN_YEAR,
 			MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP};
 	
-	//make it a singleton
-	private static SavingHeartsDataSource instance;
-	private SavingHeartsDataSource(Context context)
-	{
-		dbHelper = new MySQLiteHelper(context, MySQLiteHelper.DATABASE_NAME, null, MySQLiteHelper.DATABASE_VERSION);
-	}
-		
-	public static SavingHeartsDataSource getInstance(Context context)
-	{
-		if(instance == null)
-		{
-			instance = new SavingHeartsDataSource(context);
-			instance.open();
-		}
-		return instance;
-	}
+	//fields for the birthofdate table
+		private String[] ageColumns = {MySQLiteHelper.AGE_COLUMN_ID, MySQLiteHelper.AGE_COLUMN_AGE};
+	
+	
 	
 	public void open() throws SQLException {
 		Log.i("SQLSetup", "Calling getWritableDatabase");
@@ -107,6 +108,17 @@ public class SavingHeartsDataSource {
 		activity.setYear(getCurrentTimestamp());
 	}
 	
+	//insert activity
+	public void insertAgeData(AgeData ageData){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.AGE_COLUMN_AGE, ageData.getAge());
+		
+		//insert it into the table and set the insert id
+		long insertId = database.insert(MySQLiteHelper.TABLE_AGE,  null,  values);
+		ageData.setId(insertId);
+		
+	}
+	
 	//update activity
 	public void updateActivity(ActivityData activity){
 		ContentValues values = new ContentValues();
@@ -130,6 +142,42 @@ public class SavingHeartsDataSource {
 		database.update(MySQLiteHelper.TABLE_ACTIVITY, values,  MySQLiteHelper.ACTIVITY_COLUMN_ID + " = " + id, null);
 	}
 	
+	//update age
+	public void updateAgeData(AgeData ageData){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.AGE_COLUMN_AGE, ageData.getAge());
+			
+		long id = ageData.getId();
+		database.update(MySQLiteHelper.TABLE_AGE, values,  MySQLiteHelper.AGE_COLUMN_ID + " = " + id, null);
+	}
+	
+	 public int getAgeDataCount() {
+		 	int count = 0;
+	        String countQuery = "SELECT  * FROM " + MySQLiteHelper.TABLE_AGE;
+	        Cursor cursor = database.rawQuery(countQuery, null);
+	        if(cursor != null && !cursor.isClosed()){
+	            count = cursor.getCount();
+	            cursor.close();
+	        } 
+	        // return count
+	        return count;
+	    }
+	
+	//get birthofdate
+	public AgeData getAgeFromDB(long Id){
+		String where = MySQLiteHelper.AGE_COLUMN_ID + " = " + Id;
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_AGE, ageColumns, where, null, null, null,null);
+		AgeData ageData = new AgeData();
+		if(cursor.getCount() == 0){
+			ageData = null;
+		} else {
+			cursor.moveToFirst();
+			ageData.setAge(Integer.parseInt(cursor.getString(1)));
+				
+		}
+		cursor.close();
+		return ageData;
+	}
 	//get activity according to activity's id
 	public ActivityData getActivity(long Id){
 		String where = MySQLiteHelper.ACTIVITY_COLUMN_ID + " = " + Id;

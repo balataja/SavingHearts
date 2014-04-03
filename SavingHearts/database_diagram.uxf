@@ -4,7 +4,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>750</x>
+      <x>740</x>
       <y>90</y>
       <w>210</w>
       <h>50</h>
@@ -15,7 +15,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>10</x>
+      <x>0</x>
       <y>10</y>
       <w>420</w>
       <h>320</h>
@@ -41,6 +41,20 @@ year	 		TEXT NOT NULL
 timestamp 	TEXT NOT NULL
 
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>450</x>
+      <y>30</y>
+      <w>320</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>AgeData
+--
+id 	INTEGER PRIMARY KEY AUTOINCREMENT
+age 	INTEGER NOT NULL</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -1,11 +1,12 @@
 package com.example.savinghearts;
 
-import com.example.savinghearts.R;
 import com.example.savinghearts.*;
 import com.example.savinghearts.activities.*;
 import com.example.savinghearts.fragments.*;
 import com.example.savinghearts.heartrate.*;
 import com.example.savinghearts.helpers.*;
+import com.example.savinghearts.model.AgeData;
+import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,7 +22,7 @@ import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
 	protected boolean active = true;
-	protected int splashTime = 5000;
+	protected int splashTime = 2000;
 	protected int timeIncrement = 100;
 	protected int sleepTime = 100;
 
