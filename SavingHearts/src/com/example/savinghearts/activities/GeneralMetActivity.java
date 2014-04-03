@@ -7,8 +7,8 @@ import com.example.savinghearts.helpers.*;
 
 public class GeneralMetActivity {
 
-	private static String mName;
-	private static double mMetValue;
+	private String mName;
+	private double mMetValue;
 
 	/**
 	 * Instatiates new GeneralMetActivity
@@ -23,7 +23,7 @@ public class GeneralMetActivity {
 	/**
 	 * @return the name
 	 */
-	public static String getName() {
+	public String getName() {
 		return mName;
 	}
 
@@ -37,7 +37,7 @@ public class GeneralMetActivity {
 	/**
 	 * @return the metsvalue
 	 */
-	public static double getMetsvalue() {
+	public double getMetsvalue() {
 		return mMetValue;
 	}
 

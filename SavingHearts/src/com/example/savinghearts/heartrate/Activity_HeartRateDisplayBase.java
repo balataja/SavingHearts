@@ -104,8 +104,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         super.onCreate(savedInstanceState);
 
         handleReset();
-        activityName = METSListActivity.name;
-        mets = METSListActivity.mets;
+        Bundle b = getIntent().getExtras();
+        activityName = b.getString("activity");
+        mets = b.getDouble("mets");
         System.out.println(activityName + "........." + mets);
     }
 

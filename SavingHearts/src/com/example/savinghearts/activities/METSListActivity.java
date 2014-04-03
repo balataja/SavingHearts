@@ -45,10 +45,14 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		//metActivity gives the names of the exercise selected
 		final GeneralMetActivity metActivity = loadedMetsListAdapter.getItem(position);
-		name = GeneralMetActivity.getName();
-		mets = GeneralMetActivity.getMetsvalue();
-
+		name = metActivity.getName();
+		mets = metActivity.getMetsvalue();
+		
 		Intent intent = new Intent(this, WorkoutScreen.class);
+		Bundle b = new Bundle();
+		b.putString("activity", name);
+		b.putDouble("mets", mets);
+		intent.putExtras(b);
 		startActivity(intent);
 	}
 
