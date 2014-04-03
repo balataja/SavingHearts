@@ -146,6 +146,8 @@ public class SettingsActivity extends Activity implements OnClickListener,
 					SettingsHelper.setWeight(SettingsActivity.this,
 							weight);
 					updateUI();
+					
+					SettingsHelper.weights = weight;
 				}
 			});
 			

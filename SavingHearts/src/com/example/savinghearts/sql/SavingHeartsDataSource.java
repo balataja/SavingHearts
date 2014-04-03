@@ -456,6 +456,11 @@ public class SavingHeartsDataSource {
 		cursor.close();
 		return activityList;
 	}
+
+	public int getNextID() {
+		
+		return 0;
+	}
 	
 	
 }

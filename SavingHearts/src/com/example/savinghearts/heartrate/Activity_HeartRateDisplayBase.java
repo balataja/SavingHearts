@@ -43,15 +43,12 @@ import com.dsi.ant.plugins.antplus.pcc.defines.RequestAccessResult;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
 import com.example.savinghearts.R;
-import com.androidplot.xy.BoundaryMode;
-import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYPlot;
-import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
-import com.example.savinghearts.activities.METSListActivity;
+import com.example.savinghearts.activities.WorkoutResultsActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
+import com.example.savinghearts.helpers.SettingsHelper;
+import com.example.savinghearts.model.ActivityData;
+import com.example.savinghearts.sql.SavingHeartsDataSource;
 
-import java.math.BigDecimal;
 import java.util.EnumSet;
 
 /**
@@ -97,6 +94,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int totalUpdates = 0;
 	private double pounds = 0.0;
 	private double kilos = 0.0;
+	private long minutes = 0;
+	private Button finishButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -108,6 +107,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         activityName = b.getString("activity");
         mets = b.getDouble("mets");
         System.out.println(activityName + "........." + mets);
+        
+        pounds = SettingsHelper.weights;
+        kilos = pounds/2.20462;
     }
 
     /**
@@ -186,6 +188,19 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
 			}
 		});
+		
+		finishButton = (Button) findViewById(R.id.finishButton);
+
+		finishButton.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View view) {
+
+				saveWorkoutButton();
+				Intent i = new Intent(Activity_HeartRateDisplayBase.this, WorkoutResultsActivity.class);
+				startActivity(i);
+
+			}
+		});
     }
     
     private void cleanup() {
@@ -243,7 +258,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                     {
 
                         tv_computedHeartRate.setText(String.valueOf(computedHeartRate));
-                        //tv_heartBeatCounter.setText(String.valueOf(heartBeatCounter));
                         HeartRatePoint = Integer.parseInt(String.valueOf(computedHeartRate));
                     }
                 });
@@ -395,4 +409,31 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		}
 
     	};
+    	
+    	public void saveWorkoutButton()
+    	{
+    		minutes = timeInMilliseconds/(1000*60);
+    		calories = kilos*3.5*mets/(200*minutes);
+    		
+    		SavingHeartsDataSource db = SavingHeartsDataSource.getInstance(getApplicationContext());
+
+    		ActivityData activity = new ActivityData();
+    		activity.setActivityName(activityName);
+    		activity.setAveHR(aveHeartRate);
+    		activity.setCalories(calories);
+    		activity.setDuration(minutes);
+    		activity.setMaxHR(maxHeartRate);
+    		activity.setMets(mets);
+    		activity.setTimestamp(db.getCurrentTimestamp());
+    		activity.setYear(db.getCurrentYear());
+    		activity.setMonth(db.getCurrentMonth());
+    		activity.setHardZones(hardZones);
+    		activity.setLightZones(lightZones);
+    		activity.setMaxZones(maxZones);
+    		activity.setModerateZones(moderateZones);
+    		activity.setMinHR(0);
+    		activity.setId(0);
+    		
+    		db.insertActivity(activity);
+    	}
 }

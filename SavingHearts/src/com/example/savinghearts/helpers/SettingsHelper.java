@@ -10,6 +10,7 @@ import android.content.SharedPreferences.Editor;
 public class SettingsHelper {
 
 	public final static String PREF_NAME = "womenshearthealth_preferences";
+	public static int weights = 0;
 	
 	/**
 	 * Returns the age
