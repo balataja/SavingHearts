@@ -85,7 +85,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int maxHeartRate = 0;
 	private String activityName = null;
 	private double mets = 0.0;
-	private int aveHeartRate;
+	private double aveHeartRate;
 	private double calories;
 	private int maxZones = 0;
 	private int hardZones = 0;
@@ -419,7 +419,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
     		ActivityData activity = new ActivityData();
     		activity.setActivityName(activityName);
-    		activity.setAveHR(aveHeartRate);
+    		activity.setAveHR((int) aveHeartRate);
     		activity.setCalories(calories);
     		activity.setDuration(minutes);
     		activity.setMaxHR(maxHeartRate);
@@ -435,5 +435,20 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		activity.setId(0);
     		
     		db.insertActivity(activity);
+    		
+    		Intent i = new Intent(this, WorkoutResultsActivity.class);
+    		Bundle b = new Bundle();
+    		b.putString("activity", activityName);
+    		b.putDouble("mets", mets);
+    		b.putDouble("aveHR", aveHeartRate);
+    		b.putDouble("calories", calories);
+    		b.putLong("minutes", minutes);
+    		b.putInt("maxHR", maxHeartRate);
+    		b.putDouble("lightZone", lightZones);
+    		b.putDouble("hardZone", hardZones);
+    		b.putDouble("maxZone", maxZones);
+    		b.putDouble("moderateZone", moderateZones);
+    		i.putExtras(b);
+    		startActivity(i);
     	}
 }
