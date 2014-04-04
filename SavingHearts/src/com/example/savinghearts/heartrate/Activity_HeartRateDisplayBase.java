@@ -195,6 +195,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
 			public void onClick(View view) {
 
+				System.out.println();
 				saveWorkoutButton();
 				Intent i = new Intent(Activity_HeartRateDisplayBase.this, WorkoutResultsActivity.class);
 				startActivity(i);

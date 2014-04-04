@@ -1,7 +1,11 @@
 package com.example.savinghearts.activities;
 
+import com.example.savinghearts.R;
+import com.example.savinghearts.activities.*;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class WorkoutResultsActivity extends Activity{
 
@@ -32,6 +36,20 @@ public class WorkoutResultsActivity extends Activity{
 		hardZones = (int) b.getDouble("hardZone");
 		maxZones = (int) b.getDouble("maxZone");
 		moderateZones = (int) b.getDouble("moderateZone");
+		
+		setContentView(R.layout.workout_results_screen);
+		
+		TextView temp_time = (TextView)findViewById(R.id.results_timer);
+        TextView temp_heartrate= (TextView)findViewById(R.id.results_heartrate);
+        TextView temp_calories= (TextView)findViewById(R.id.results_calories);
+        TextView temp_avehr= (TextView)findViewById(R.id.results_aveheartrate);
+
+        //Reset the text display
+        temp_time.setText(Long.toString(minutes));
+        temp_heartrate.setText(maxHeartRate);
+        temp_calories.setText(Double.toString(calories));
+        temp_avehr.setText(aveHeartRate);
+
         
 	}
 }
