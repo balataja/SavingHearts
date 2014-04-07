@@ -24,7 +24,7 @@ public class WorkoutResultsActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-		
+		System.out.println("starting workoutresults page");
         Bundle b = getIntent().getExtras();
 		activityName = b.getString("activity");
 		mets = b.getDouble("mets");
@@ -38,7 +38,6 @@ public class WorkoutResultsActivity extends Activity{
 		moderateZones = (int) b.getDouble("moderateZone");
 		
 		setContentView(R.layout.workout_results_screen);
-		
 		TextView temp_time = (TextView)findViewById(R.id.results_timer);
         TextView temp_heartrate= (TextView)findViewById(R.id.results_heartrate);
         TextView temp_calories= (TextView)findViewById(R.id.results_calories);
@@ -46,10 +45,8 @@ public class WorkoutResultsActivity extends Activity{
 
         //Reset the text display
         temp_time.setText(Long.toString(minutes));
-        temp_heartrate.setText(maxHeartRate);
+        temp_heartrate.setText(Integer.toString(maxHeartRate));
         temp_calories.setText(Double.toString(calories));
-        temp_avehr.setText(aveHeartRate);
-
-        
+        temp_avehr.setText(Integer.toString(aveHeartRate));
 	}
 }

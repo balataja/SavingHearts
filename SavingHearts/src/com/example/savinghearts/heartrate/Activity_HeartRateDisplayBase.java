@@ -195,11 +195,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
 			public void onClick(View view) {
 
-				System.out.println();
 				saveWorkoutButton();
-				Intent i = new Intent(Activity_HeartRateDisplayBase.this, WorkoutResultsActivity.class);
-				startActivity(i);
-
 			}
 		});
     }
@@ -414,7 +410,13 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     	public void saveWorkoutButton()
     	{
     		minutes = timeInMilliseconds/(1000*60);
+    		if(minutes < 1)
+    		{
+    			minutes = 1;
+    		}
     		calories = kilos*3.5*mets/(200*minutes);
+    		System.out.println("kilos: " + kilos + "  mets: " + mets + "  minutes: " +minutes);
+    		System.out.println("calories:  " + calories);
     		
     		SavingHeartsDataSource db = SavingHeartsDataSource.getInstance(getApplicationContext());
 
@@ -436,7 +438,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		activity.setId(0);
     		
     		db.insertActivity(activity);
-    		
     		Intent i = new Intent(this, WorkoutResultsActivity.class);
     		Bundle b = new Bundle();
     		b.putString("activity", activityName);
