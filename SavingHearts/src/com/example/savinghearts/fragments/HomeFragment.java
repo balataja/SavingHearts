@@ -5,6 +5,8 @@ import com.example.savinghearts.fragments.*;
 import com.example.savinghearts.heartrate.*;
 import com.example.savinghearts.helpers.*;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -178,7 +180,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		targetMaxHR.setText("Max Heart Rate :  " + bpm100);
 		
 		TextView targetMaxMets = (TextView) this.getActivity().findViewById(R.id.TargetMaxMets);	
-		targetMaxMets.setText("Max MET Level :  " + CalculationsHelper.getMaxMETLevel(myAge));
+		
+		NumberFormat formatter = new DecimalFormat("#0.00");     
+		targetMaxMets.setText("Max MET Level :  " + formatter.format(CalculationsHelper.getMaxMETLevel(myAge)));
 		
 		
 		// random facts
