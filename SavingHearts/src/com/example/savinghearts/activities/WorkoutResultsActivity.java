@@ -46,10 +46,10 @@ public class WorkoutResultsActivity extends Activity{
         
 
         //Reset the text display
-        temp_time.setText(Long.toString(minutes));
-        temp_maxHR.setText(Integer.toString(maxHeartRate));
-        temp_calories.setText(Double.toString(calories));
-        temp_aveHR.setText(Integer.toString(aveHeartRate));
+        temp_time.setText(Long.toString(minutes) + " min");
+        temp_maxHR.setText(Integer.toString(maxHeartRate) + " bpm");
+        temp_calories.setText(Double.toString(calories)+ " cal" );
+        temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
         temp_mets.setText(Double.toString(mets));
 	}
 }

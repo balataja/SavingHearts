@@ -71,6 +71,7 @@
          			android:layout_width="match_parent"
            			android:layout_height="wrap_content"
               		android:ems="10"
+              		android:textSize="17sp"
            			android:gravity="left"
      				android:textAppearance="?android:attr/textAppearanceSmall"
            			android:textColor="@color/googleNowGray" />
@@ -84,6 +85,7 @@
                  	android:id="@+id/TargetMaxMets"
          			android:layout_width="match_parent"
            			android:layout_height="wrap_content"
+           			android:textSize="17sp"
               		android:ems="10"
            			android:gravity="left"
      				android:textAppearance="?android:attr/textAppearanceSmall"
@@ -262,7 +264,7 @@
                         android:layout_marginBottom="10dp"
                         android:ems="10"
                         android:gravity="center"
-                        android:text="Healthy MET Level"
+                        android:text="MET Levels"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/googleNowGray" />
                  <LinearLayout
@@ -270,14 +272,51 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical" >
                     
-                      <TextView
-                         android:id="@+id/metInfo"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:ems="10"
-                         android:gravity="left"
-                         android:textAppearance="?android:attr/textAppearanceSmall"
-                         android:textColor="@color/googleNowGray" />
+                       <TextView
+                 	android:id="@+id/MET85"
+         			android:layout_width="match_parent"
+           			android:layout_height="wrap_content"
+              		android:ems="10"
+              		android:textSize="17sp"
+           			android:gravity="center"
+     				android:textAppearance="?android:attr/textAppearanceSmall"
+           			android:textColor="@color/googleNowGray" />
+                        <TextView
+                 	android:id="@+id/MET85Explain"
+         			android:layout_width="match_parent"
+           			android:layout_height="wrap_content"
+              		android:ems="10"
+              		android:textSize="14sp"
+              		android:text="Healthy MET Level (85%)"
+           			android:gravity="center"
+     				android:textAppearance="?android:attr/textAppearanceSmall"
+           			android:textColor="@color/googleNowGray" />
+                        <TextView
+                 	android:id="@+id/MET100"
+         			android:layout_width="match_parent"
+           			android:layout_height="wrap_content"
+           			android:layout_marginTop="10dp"
+              		android:ems="10"
+              		android:textSize="17sp"
+           			android:gravity="center"
+     				android:textAppearance="?android:attr/textAppearanceSmall"
+           			android:textColor="@color/googleNowGray" />
+                        <TextView
+                 	android:id="@+id/MET100Explain"
+         			android:layout_width="match_parent"
+           			android:layout_height="wrap_content"
+           			
+              		android:ems="10"
+              		android:textSize="14sp"
+              		android:text="Max MET Level (100%)"
+           			android:gravity="center"
+     				android:textAppearance="?android:attr/textAppearanceSmall"
+           			android:textColor="@color/googleNowGray" />
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                               />
                     </LinearLayout>
                 
 			     </LinearLayout>
@@ -344,6 +383,11 @@
                             android:gravity="left"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/googleNowGray" />
+                        <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                               />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

@@ -88,7 +88,11 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		LinearLayout randomFactsCard = (LinearLayout) this.getActivity().findViewById(R.id.random_facts_card);
 		randomFactsCard.setOnClickListener(this);
 		randomFactsCard.setVisibility(8);
-		
+		/*
+		//Healthy 85% MET Level
+		LinearLayout metFact = (LinearLayout) this.getActivity().findViewById(R.id.met_fact);
+		metFact.setVisibility(8);
+		*/
 		View randomFactsCardDropshadow = (View) this.getActivity().findViewById(R.id.factsCardDropshadow);
 		randomFactsCardDropshadow.setVisibility(8);
 	}
@@ -192,6 +196,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		
 		TextView randomFactsTextView = (TextView) this.getActivity().findViewById(R.id.randomFact);
 		randomFactsTextView.setText(randomFacts[rand.nextInt(randomFacts.length)]);
+	
+		//met 85% healthy fact
+		TextView targetMET85 = (TextView) this.getActivity().findViewById(R.id.MET85);	
+		double met85result = 0.85 * CalculationsHelper.getMaxMETLevel(myAge);
+		targetMET85.setText(formatter.format(met85result)+" METs");
+		
+		TextView MET100 = (TextView) this.getActivity().findViewById(R.id.MET100);	
+		MET100.setText(formatter.format(CalculationsHelper.getMaxMETLevel(myAge))+" METs");
 
 	}
 	
