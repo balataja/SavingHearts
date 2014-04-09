@@ -49,6 +49,7 @@ import com.example.savinghearts.helpers.SettingsHelper;
 import com.example.savinghearts.model.ActivityData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
+import java.text.DecimalFormat;
 import java.util.EnumSet;
 
 /**
@@ -62,6 +63,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     AntPlusHeartRatePcc hrPcc = null;
     TextView tv_status;
     TextView tv_computedHeartRate;
+    TextView tv_computedCalories;
+
     private static final int HISTORY_SIZE = 300;            // number of points to plot in history
     private SensorManager sensorMgr = null;
     private Sensor orSensor = null;
@@ -94,8 +97,11 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private double totalUpdates = 0.0;
 	private double pounds = 0.0;
 	private double kilos = 0.0;
-	private long minutes = 0;
+	private double minutes = 0;
 	private Button finishButton;
+	private double cals1;
+	private int secs;
+	private DecimalFormat oneDigit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,6 +116,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         
         pounds = SettingsHelper.weights;
         kilos = pounds/2.20462;
+        cals1 = kilos*3.5*mets/200;
+        oneDigit = new DecimalFormat("#,##0.0");
     }
 
     /**
@@ -133,6 +141,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
         tv_status = (TextView)findViewById(R.id.textView_Status);
         tv_computedHeartRate = (TextView)findViewById(R.id.textView_ComputedHeartRate);
+        tv_computedCalories = (TextView)findViewById(R.id.caloriesValue);
         //Reset the text display
         tv_status.setText(status);
 
@@ -228,7 +237,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         }
         totalUpdates++;
         aveHeartRate = aveHeartRate*(totalUpdates-1)/totalUpdates + HeartRatePoint/totalUpdates;
-        
+		minutes = (double)secs/60;
+		calories = cals1*minutes;
     }
 
 	@Override
@@ -256,6 +266,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
                         tv_computedHeartRate.setText(String.valueOf(computedHeartRate));
                         HeartRatePoint = Integer.parseInt(String.valueOf(computedHeartRate));
+                        tv_computedCalories.setText(oneDigit.format(calories));
                     }
                 });
             }
@@ -395,7 +406,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     			
     			updatedTime = timeSwapBuff + timeInMilliseconds;
 
-    			int secs = (int) (updatedTime / 1000);
+    			secs = (int) (updatedTime / 1000);
     			int mins = secs / 60;
     			secs = secs % 60;
     			int milliseconds = (int) (updatedTime % 1000);
@@ -409,14 +420,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     	
     	public void saveWorkoutButton()
     	{
-    		minutes = timeInMilliseconds/(1000*60);
-    		if(minutes < 1)
-    		{
-    			minutes = 1;
-    		}
-    		calories = kilos*3.5*mets/200*minutes;
-    		System.out.println("kilos: " + kilos + "  mets: " + mets + "  minutes: " +minutes);
-    		System.out.println("calories:  " + calories);
+    		cleanup();
+    		onDestroy();
     		
     		SavingHeartsDataSource db = SavingHeartsDataSource.getInstance(getApplicationContext());
 
@@ -424,7 +429,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		activity.setActivityName(activityName);
     		activity.setAveHR((int) aveHeartRate);
     		activity.setCalories(calories);
-    		activity.setDuration(minutes);
+    		activity.setDuration((long) minutes);
     		activity.setMaxHR(maxHeartRate);
     		activity.setMets(mets);
     		activity.setTimestamp(db.getCurrentTimestamp());
@@ -444,7 +449,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		b.putDouble("mets", mets);
     		b.putDouble("aveHR", aveHeartRate);
     		b.putDouble("calories", calories);
-    		b.putLong("minutes", minutes);
+    		b.putLong("minutes", (long) minutes);
     		b.putInt("maxHR", maxHeartRate);
     		b.putDouble("lightZone", lightZones);
     		b.putDouble("hardZone", hardZones);
