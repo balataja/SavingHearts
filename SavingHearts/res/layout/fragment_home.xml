@@ -281,6 +281,13 @@
            			android:gravity="center"
      				android:textAppearance="?android:attr/textAppearanceSmall"
            			android:textColor="@color/googleNowGray" />
+                     <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"              
+                        android:src="@drawable/progress85" />
+                       
                         <TextView
                  	android:id="@+id/MET85Explain"
          			android:layout_width="match_parent"
@@ -301,11 +308,16 @@
            			android:gravity="center"
      				android:textAppearance="?android:attr/textAppearanceSmall"
            			android:textColor="@color/googleNowGray" />
-                        <TextView
+                        <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"              
+                        android:src="@drawable/progress100" />
+                  <TextView
                  	android:id="@+id/MET100Explain"
          			android:layout_width="match_parent"
            			android:layout_height="wrap_content"
-           			
               		android:ems="10"
               		android:textSize="14sp"
               		android:text="Max MET Level (100%)"

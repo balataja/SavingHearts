@@ -46,40 +46,20 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_alignParentLeft="true"
-             android:layout_marginTop="75dp"
+             android:layout_marginTop="85dp"
              android:textStyle="bold"
-             android:textSize="25dp"
+             android:textSize="32dp"
              android:text="Time:" />
         <TextView
              android:id="@+id/timerValue"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_alignParentRight="true"
-             android:layout_marginTop="75dp"
+             android:layout_marginTop="85dp"
              android:layout_centerHorizontal="true"
              android:textStyle="bold"
-             android:textSize="25dp"
+             android:textSize="40dp"
              android:text="0.00" />
-        
-        <!-- Calories -->
-        <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:layout_marginTop="110dp"
-             android:textStyle="bold"
-             android:textSize="25dp"
-             android:text="Calories:" />
-        <TextView
-             android:id="@+id/caloriesValue"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_marginTop="110dp"
-             android:layout_centerHorizontal="true"
-             android:textStyle="bold"
-             android:textSize="25dp"
-             android:text="0.0" />
         
 		<Button
 		    android:id="@+id/startButton"

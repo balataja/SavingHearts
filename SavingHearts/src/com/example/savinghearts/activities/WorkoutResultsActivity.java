@@ -1,7 +1,5 @@
 package com.example.savinghearts.activities;
 
-import java.text.DecimalFormat;
-
 import com.example.savinghearts.R;
 import com.example.savinghearts.activities.*;
 
@@ -21,7 +19,6 @@ public class WorkoutResultsActivity extends Activity{
 	private int moderateZones = 0;
 	private int lightZones = 0;
 	private long minutes = 0;
-	private DecimalFormat oneDigit;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,8 +46,7 @@ public class WorkoutResultsActivity extends Activity{
         
 
         //Reset the text display
-        oneDigit = new DecimalFormat("#,##0.0");
-        temp_time.setText(oneDigit.format(calories) + " min");
+        temp_time.setText(Long.toString(minutes) + " min");
         temp_maxHR.setText(Integer.toString(maxHeartRate) + " bpm");
         temp_calories.setText(Double.toString(calories)+ " cal" );
         temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
