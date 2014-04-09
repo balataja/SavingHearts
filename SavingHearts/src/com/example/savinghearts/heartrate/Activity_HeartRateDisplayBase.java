@@ -91,7 +91,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int hardZones = 0;
 	private int moderateZones = 0;
 	private int lightZones = 0;
-	private int totalUpdates = 0;
+	private double totalUpdates = 0.0;
 	private double pounds = 0.0;
 	private double kilos = 0.0;
 	private long minutes = 0;
@@ -414,7 +414,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		{
     			minutes = 1;
     		}
-    		calories = kilos*3.5*mets/(200*minutes);
+    		calories = kilos*3.5*mets/200*minutes;
     		System.out.println("kilos: " + kilos + "  mets: " + mets + "  minutes: " +minutes);
     		System.out.println("calories:  " + calories);
     		
