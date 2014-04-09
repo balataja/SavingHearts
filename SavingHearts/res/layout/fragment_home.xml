@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/back"
                 android:orientation="vertical"
-                 android:gravity="center" >
+                android:gravity="center" >
+             
                 
                   <TextView
                     android:id="@+id/TitleSavingHearts"
@@ -44,13 +45,33 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/googleNowGray" 	
                     android:text="@string/title_saving_hearts" />
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:src="@drawable/target" />
+                    
+                    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:gravity="right" >
                   
                   <TextView
                  	android:id="@+id/TargetMaxHR"
          			android:layout_width="match_parent"
            			android:layout_height="wrap_content"
               		android:ems="10"
-           			android:gravity="center"
+           			android:gravity="left"
      				android:textAppearance="?android:attr/textAppearanceSmall"
            			android:textColor="@color/googleNowGray" />
                   
@@ -64,7 +85,7 @@
          			android:layout_width="match_parent"
            			android:layout_height="wrap_content"
               		android:ems="10"
-           			android:gravity="center"
+           			android:gravity="left"
      				android:textAppearance="?android:attr/textAppearanceSmall"
            			android:textColor="@color/googleNowGray" />
                   
@@ -72,8 +93,9 @@
                     android:id="@+id/textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+             </LinearLayout>
      
-                 
+                 </LinearLayout>
               </LinearLayout>
               
               <LinearLayout
@@ -213,6 +235,62 @@
             <!-- End Heart Rate card -->
             
             <LinearLayout
+                android:id="@+id/randomlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+			</LinearLayout>
+			<!-- 85% MET Fact -->
+			 <LinearLayout
+                android:id="@+id/met_fact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back"
+                android:orientation="vertical" >
+                 <TextView
+                        android:id="@+id/METTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="10dp"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:text="Healthy MET Level"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/googleNowGray" />
+                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+                    
+                      <TextView
+                         android:id="@+id/metInfo"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:ems="10"
+                         android:gravity="left"
+                         android:textAppearance="?android:attr/textAppearanceSmall"
+                         android:textColor="@color/googleNowGray" />
+                    </LinearLayout>
+                
+			     </LinearLayout>
+			     
+			  <View
+                android:id="@+id/METFactDropshadow"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@drawable/dropshadow" />
+			
+			<!-- End 85% MET Fact -->
+			
+			 <LinearLayout
                 android:id="@+id/randomlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

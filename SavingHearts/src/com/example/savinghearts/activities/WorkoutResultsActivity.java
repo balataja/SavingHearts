@@ -38,15 +38,18 @@ public class WorkoutResultsActivity extends Activity{
 		moderateZones = (int) b.getDouble("moderateZone");
 		
 		setContentView(R.layout.workout_results_screen);
-		TextView temp_time = (TextView)findViewById(R.id.results_timer);
-        TextView temp_heartrate= (TextView)findViewById(R.id.results_heartrate);
+		TextView temp_time = (TextView)findViewById(R.id.results_duration);
+        TextView temp_maxHR= (TextView)findViewById(R.id.results_maxHR);
+        TextView temp_aveHR= (TextView)findViewById(R.id.results_aveHR);
+        TextView temp_mets= (TextView)findViewById(R.id.results_mets);
         TextView temp_calories= (TextView)findViewById(R.id.results_calories);
-        TextView temp_avehr= (TextView)findViewById(R.id.results_aveheartrate);
+        
 
         //Reset the text display
         temp_time.setText(Long.toString(minutes));
-        temp_heartrate.setText(Integer.toString(maxHeartRate));
+        temp_maxHR.setText(Integer.toString(maxHeartRate));
         temp_calories.setText(Double.toString(calories));
-        temp_avehr.setText(Integer.toString(aveHeartRate));
+        temp_aveHR.setText(Integer.toString(aveHeartRate));
+        temp_mets.setText(Double.toString(mets));
 	}
 }

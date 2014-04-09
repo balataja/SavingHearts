@@ -8,8 +8,12 @@
     
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Available Activities:" />
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:background="#a93434"
+        android:textColor="#fcfafa"
+        android:text="Select Activity:" />
     
     <ListView
         android:id="@+id/lstvw_metlistfragment_loadedmets"

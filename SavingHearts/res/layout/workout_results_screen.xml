@@ -4,93 +4,129 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_temp"
     android:orientation="vertical" >
-    
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#a93434"
+        android:gravity="center"
+        android:text="Workout Summary"
+        android:textColor="#fcfafa"
+        android:textSize="30sp" />
+
     <RelativeLayout
-         android:id="@+id/results_layout"
-	     android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_marginLeft="20dp"
-	     android:layout_marginRight="20dp"
-	     android:layout_marginTop="20dp"
-	     android:background="@drawable/back">
-	     
-    	 <!-- time results -->
+        android:id="@+id/results_layout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/back" >
+
         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="Time:" />
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Duration:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:id="@+id/results_timer"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_centerHorizontal="true"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="0.00" />
-        
-        <!-- Heart Rate -->
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="50dp"
+            android:text="Max HR:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:layout_marginTop="50dp"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="Maximum Heart Rate:" />
+            android:id="@+id/results_maxHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:id="@+id/results_heartrate"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_marginTop="50dp"
-             android:layout_centerHorizontal="true"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="0.00" />
-        
-        <!-- Calories -->
-	    <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:layout_marginTop="95dp"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="Calories:" />
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="140dp"
+            android:text="METs:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:id="@+id/results_calories"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_marginTop="95dp"
-             android:layout_centerHorizontal="true"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="0.00" /> 
-             
-        <!-- Average Heart Rate -->
+            android:id="@+id/results_mets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentLeft="true"
-             android:layout_marginTop="140dp"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="Average Heart Rate:" />
+            android:id="@+id/results_aveHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
-             android:id="@+id/results_aveheartrate"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_marginTop="140dp"
-             android:layout_centerHorizontal="true"
-             android:textStyle="bold"
-             android:textSize="20dp"
-             android:text="0.00" />
-	 </RelativeLayout>
-    
+            android:id="@+id/results_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/results_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignParentRight="true"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="18dp"
+            android:text="Calories:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/results_aveHR"
+            android:layout_alignBottom="@+id/results_aveHR"
+            android:layout_alignParentLeft="true"
+            android:text="Average HR:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 </LinearLayout>
