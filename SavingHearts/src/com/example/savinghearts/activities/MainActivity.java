@@ -184,11 +184,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public void startButton (View view)
 	{
+		/*
 		if(SearchMonitor_Base.hrPcc != null)
         {
 			SearchMonitor_Base.hrPcc.releaseAccess();
 			SearchMonitor_Base.hrPcc = null;
         }
+       */
 		Bundle args = new Bundle();
 		Bundle fromMonitor = getIntent().getExtras();
 		int monitor=0;

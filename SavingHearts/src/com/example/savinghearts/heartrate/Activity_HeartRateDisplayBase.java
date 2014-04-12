@@ -43,6 +43,7 @@ import com.dsi.ant.plugins.antplus.pcc.defines.RequestAccessResult;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiver;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
 import com.example.savinghearts.R;
+import com.example.savinghearts.SearchMonitor_Base;
 import com.example.savinghearts.activities.WorkoutResultsActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
 import com.example.savinghearts.helpers.SettingsHelper;
@@ -125,14 +126,28 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
      */    
     protected void handleReset()
     {
+    	Bundle b = getIntent().getExtras();
+    	int monitor=0;
+		if (b != null) 
+		{
+		   monitor = b.getInt("monitor");
+		}
+		if(monitor == 0){
         //Release the old access if it exists
-        if(hrPcc != null)
-        {
-            hrPcc.releaseAccess();
-            hrPcc = null;
-        }
+			if(hrPcc != null)
+			{
+				hrPcc.releaseAccess();
+				hrPcc = null;
+			}
       
-			requestAccessToPcc();       
+			requestAccessToPcc();   
+		}
+		else{
+			showDataDisplay("Connecting..."); 
+			hrPcc = SearchMonitor_Base.hrPcc;
+			tv_status.setText(SearchMonitor_Base.hrPcc.getDeviceName() + ": " + "TRACKING");
+			subscribeToHrEvents();
+		}
     }
 
     protected void showDataDisplay(String status)

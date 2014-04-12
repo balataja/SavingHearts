@@ -96,7 +96,7 @@ public abstract class SearchMonitor_Base extends Activity
     protected void showDataDisplay(String status)
     {	  
     	intent = new Intent(this, MainActivity.class);
-	    startActivity(intent);
+	   startActivity(intent);
 	  
     }
 
@@ -114,11 +114,12 @@ public abstract class SearchMonitor_Base extends Activity
             switch(resultCode)
             {
                 case SUCCESS:
+                	hrPcc = result;
                 	bundle = new Bundle();
              		bundle.putInt("monitor", 1);
-             		intent.putExtras(bundle);
+             		intent.putExtras(bundle);            		            		
              		startActivity(intent);
-                    hrPcc = result;     
+                        
                     break;
                 case CHANNEL_NOT_AVAILABLE:
                     Toast.makeText(SearchMonitor_Base.this, "Channel Not Available", Toast.LENGTH_SHORT).show();               
