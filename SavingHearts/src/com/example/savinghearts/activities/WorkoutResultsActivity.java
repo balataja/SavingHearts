@@ -2,10 +2,16 @@ package com.example.savinghearts.activities;
 
 import java.text.DecimalFormat;
 
+import com.androidplot.pie.PieChart;
+import com.androidplot.pie.Segment;
+import com.androidplot.pie.SegmentFormatter;
 import com.example.savinghearts.R;
 import com.example.savinghearts.activities.*;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.EmbossMaskFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,6 +28,10 @@ public class WorkoutResultsActivity extends Activity{
 	private int lightZones = 0;
 	private long minutes = 0;
 	private DecimalFormat oneDigit;
+	
+    private PieChart belowPie;
+    private Segment s1, s2;
+    private Paint clear, red;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,5 +65,45 @@ public class WorkoutResultsActivity extends Activity{
         temp_calories.setText(Double.toString(calories)+ " cal" );
         temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
         temp_mets.setText(Double.toString(mets));
+        
+        //Reset the text display
+        oneDigit = new DecimalFormat("#,##0.0");
+        temp_time.setText(oneDigit.format(calories) + " min");
+        temp_maxHR.setText(Integer.toString(maxHeartRate) + " bpm");
+        temp_calories.setText(Double.toString(calories)+ " cal" );
+        temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
+        temp_mets.setText(Double.toString(mets));
+        
+        belowPie = (PieChart) findViewById(R.id.belowPieChart);
+        
+        EmbossMaskFilter emf = new EmbossMaskFilter(
+                new float[]{1, 1, 1}, 0.4f, 10, 8.2f);
+        
+        SegmentFormatter sf1 = new SegmentFormatter();
+        sf1.configure(getApplicationContext(), R.xml.pie_segment_formatter);
+
+        sf1.getFillPaint().setMaskFilter(emf);
+        System.out.println(sf1.getOuterEdgePaint());
+        
+        red = new Paint();
+        red.setColor(0);
+        clear = new Paint();
+        clear.setColor(0);
+        sf1.setOuterEdgePaint(clear);
+        sf1.setInnerEdgePaint(clear);
+
+        SegmentFormatter sf2 = new SegmentFormatter();
+        sf2.setFillPaint(clear);
+        sf2.setOuterEdgePaint(clear);
+        sf2.setInnerEdgePaint(clear);
+        
+        s1 = new Segment("s1", 10);
+        s2 = new Segment("s2", 1);
+        belowPie.addSeries(s1, sf1);
+        belowPie.addSeries(s2, sf2);
+        
+        belowPie.getBorderPaint().setColor(Color.TRANSPARENT);
+        belowPie.getBackgroundPaint().setColor(Color.TRANSPARENT);
+        belowPie.redraw();
 	}
 }

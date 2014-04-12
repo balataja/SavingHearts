@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/background_temp"
     android:orientation="vertical" >
 
@@ -17,7 +20,7 @@
     <RelativeLayout
         android:id="@+id/results_layout"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -126,7 +129,61 @@
             android:text="Average HR:"
             android:textSize="20dp"
             android:textStyle="bold" />
-
+        
+        <com.androidplot.pie.PieChart
+            android:id="@+id/belowPieChart"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_below="@+id/textView3"
+            androidPlot.title="Below"
+            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+        
+<!--         <com.androidplot.pie.PieChart
+            android:id="@+id/averagePieChart"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_left="belowPieChart"
+            android:layout_below="@+id/textView3"
+            androidPlot.title="average"
+            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+                
+        <com.androidplot.pie.PieChart
+            android:id="@+id/abovePieChart"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_left="averagePieChart"
+            android:layout_below="@+id/textView3"
+            androidPlot.title="above"
+            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+                        
+        <com.androidplot.pie.PieChart
+            android:id="@+id/hardPieChart"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_below="@+id/belowPieChart"
+            androidPlot.title="hard"
+            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+                                
+        <com.androidplot.pie.PieChart
+            android:id="@+id/insanePieChart"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="-10dp"
+            android:layout_below="@+id/belowPieChart"
+            android:layout_left="hardPieChart"
+            androidPlot.title="insane"
+            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+ -->
     </RelativeLayout>
 
 </LinearLayout>
+</ScrollView>
