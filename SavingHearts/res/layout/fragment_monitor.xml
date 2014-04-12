@@ -7,6 +7,7 @@
     
     
     <Button
+        android:id="@+id/searchMonitor"
         android:layout_width="fill_parent"
    		android:layout_height="wrap_content"
    		android:text="@string/connect_to_device"

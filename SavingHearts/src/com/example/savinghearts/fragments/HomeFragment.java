@@ -21,6 +21,7 @@ import com.example.savinghearts.sql.SavingHeartsDataSource;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,6 +51,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		View view = inflater.inflate(R.layout.fragment_home, container, false);
 		//database
 		database = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
 		if(DEV_resetDatabase)
@@ -62,14 +66,33 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		if(database.getAgeDataCount() < 1){
 			database.insertAgeData(ageData);
 		}
+		int monitorOn=0;
+		
+		monitorOn = getArguments().getInt("monitor"); 
+		if(monitorOn == 1){
+			ImageView img = (ImageView) view.findViewById(R.id.imageView1);
+			img.setBackgroundResource(R.drawable.heart_animation);
+
+			 // Get the background, which has been compiled to an AnimationDrawable object.
+			 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+
+			 // Start the animation (looped playback by default).
+			 frameAnimation.start();
+		}
+		else{
+			ImageView img = (ImageView) view.findViewById(R.id.imageView1);
+			img.setImageResource(R.drawable.heart_shape);
+		}
+		
 	
-		return inflater.inflate(R.layout.fragment_home, container, false);
+		return view;
 		
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 	}
 
 	@Override

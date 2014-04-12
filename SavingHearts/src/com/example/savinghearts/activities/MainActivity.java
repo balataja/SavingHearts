@@ -184,23 +184,37 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 */
 	public void startButton (View view)
 	{
+		if(SearchMonitor_Base.hrPcc != null)
+        {
+			SearchMonitor_Base.hrPcc.releaseAccess();
+			SearchMonitor_Base.hrPcc = null;
+        }
+		Bundle args = new Bundle();
+		Bundle fromMonitor = getIntent().getExtras();
+		int monitor=0;
+		if (fromMonitor != null) 
+		   {
+		     monitor = fromMonitor.getInt("monitor");
+		   }
+		args.putInt("monitor", monitor);
 		System.out.println("trying to press start button..");
 		Intent intent = new Intent(this, METSListActivity.class);
+		intent.putExtras(args);
 		startActivity(intent);
 	}
 	
 	/**
 	 * Method for Connect To Device button on Monitor Fragment
-	 */
+	 
 	public void sendMessage (View view)
-	{
-        /*Intent i = new Intent(this, Activity_SearchUiHeartRateSampler.class);
+	{	/*
+        Intent i = new Intent(this, Activity_SearchUiHeartRateSampler.class);
         startActivity(i);
-        
+        /*
 		Intent intent = new Intent(this, Activity_Dashboard.class);
-		startActivity(intent);*/
+		startActivity(intent);
 	}
-	
+*/
 	/**
 	 * Starts selected activity when user selects options menu item
 	 * @return boolean returns true if valid menu option selected
@@ -255,6 +269,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		public Fragment getItem(int position) {
 			Fragment fragment;
 			Bundle args = new Bundle();
+			Bundle fromMonitor = getIntent().getExtras();
+			int monitor=0;
+			if (fromMonitor != null) 
+			   {
+			     monitor = fromMonitor.getInt("monitor");
+			   }
+			args.putInt("monitor", monitor);
 			
 			switch (position) {
 			case 0:

@@ -131,8 +131,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
             hrPcc.releaseAccess();
             hrPcc = null;
         }
-
-        requestAccessToPcc();
+      
+			requestAccessToPcc();       
     }
 
     protected void showDataDisplay(String status)

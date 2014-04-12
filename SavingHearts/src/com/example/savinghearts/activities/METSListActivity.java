@@ -48,10 +48,18 @@ public class METSListActivity extends Activity implements OnItemClickListener{
 		name = metActivity.getName();
 		mets = metActivity.getMetsvalue();
 		
+		
+		Bundle fromMonitor = getIntent().getExtras();
+		int monitor=0;
+		if (fromMonitor != null) 
+		   {
+		     monitor = fromMonitor.getInt("monitor");
+		   }
 		Intent intent = new Intent(this, WorkoutScreen.class);
 		Bundle b = new Bundle();
 		b.putString("activity", name);
 		b.putDouble("mets", mets);
+		b.putInt("monitor", monitor);
 		intent.putExtras(b);
 		startActivity(intent);
 	}

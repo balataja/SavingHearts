@@ -44,6 +44,8 @@
         <activity android:name=".heartrate.WorkoutScreen"></activity>
         <activity android:name=".heartrate.Activity_SearchUiHeartRateSampler"></activity>
         <activity android:name=".activities.WorkoutResultsActivity"></activity>
+        <activity android:name="com.example.savinghearts.SearchMonitor_Base"></activity>
+        <activity android:name="com.example.savinghearts.SearchMonitor"></activity>
     </application>
 
 </manifest>
