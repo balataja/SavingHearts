@@ -109,7 +109,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     {
         super.onCreate(savedInstanceState);
 
-        handleReset();
+        
         Bundle b = getIntent().getExtras();
         activityName = b.getString("activity");
         mets = b.getDouble("mets");
@@ -119,6 +119,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         kilos = pounds/2.20462;
         cals1 = kilos*3.5*mets/200;
         oneDigit = new DecimalFormat("#,##0.0");
+        handleReset();
     }
 
     /**
