@@ -9,7 +9,9 @@ import com.example.savinghearts.model.AgeData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +20,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
@@ -47,7 +50,7 @@ public class SplashScreen extends Activity {
 					// do nothing
 				} finally {
 					finish();
-					startActivity(new Intent(
+						startActivity(new Intent(
 							"com.example.savinghearts.activities.MainActivity"));
 				}
 			}
@@ -62,4 +65,6 @@ public class SplashScreen extends Activity {
 		}
 		return true;
 	}
+	
+	
 }

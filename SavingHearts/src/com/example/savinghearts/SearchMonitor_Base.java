@@ -117,7 +117,7 @@ public abstract class SearchMonitor_Base extends Activity
                 	hrPcc = result;
                 	bundle = new Bundle();
              		bundle.putInt("monitor", 1);
-             		intent.putExtras(bundle);            		            		
+             		intent.putExtras(bundle);  
              		startActivity(intent);
                         
                     break;

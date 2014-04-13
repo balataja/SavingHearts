@@ -64,6 +64,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		super.onCreate(savedInstanceState);
 		
         //showSplashScreen();
+		if (isInitalRun()) {
+  		  setInitialRun(false);
+  		  
+  		  // user will be redirected to the settings activity in order to
+  		  // save their weight and birthday
+  		  Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+  		  startActivity(intent);
+			
+			}
 	  	
         setContentView(R.layout.activity_main);
         
