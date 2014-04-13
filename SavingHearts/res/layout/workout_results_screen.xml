@@ -184,6 +184,18 @@
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
  -->
     </RelativeLayout>
+    
+    <Button
+        android:id="@+id/btn_go_to_log"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="#a93434"
+        android:textColor="#fcfafa"
+        android:textSize="20sp"
+        style="?android:attr/buttonStyleSmall"
+        android:text="Go To Log" />
 
 </LinearLayout>
 </ScrollView>

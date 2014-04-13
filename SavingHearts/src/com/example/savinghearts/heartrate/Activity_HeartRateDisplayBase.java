@@ -103,6 +103,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private double cals1;
 	private int secs;
 	private DecimalFormat oneDigit;
+	boolean isStart=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -191,17 +192,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
  
 		timerValue = (TextView) findViewById(R.id.timerValue);
 
-		startButton = (Button) findViewById(R.id.startButton);
-
-		startButton.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View view) {
-				startTime = SystemClock.uptimeMillis();
-				customHandler.postDelayed(updateTimerThread, 0);
-
-			}
-		});
-
 		pauseButton = (Button) findViewById(R.id.pauseButton);
 
 		pauseButton.setOnClickListener(new View.OnClickListener() {
@@ -215,12 +205,20 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 		});
 
 		finishButton = (Button) findViewById(R.id.finishButton);
+		finishButton.setText("Start");
 
 		finishButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-
-				saveWorkoutButton();
+				if(isStart == false){
+					finishButton.setText("Finish Workout");
+					isStart = true;
+					startTime = SystemClock.uptimeMillis();
+					customHandler.postDelayed(updateTimerThread, 0);
+				}
+				else{
+					saveWorkoutButton();
+				}
 			}
 		});
     }

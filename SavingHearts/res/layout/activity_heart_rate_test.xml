@@ -80,12 +80,6 @@
              android:textStyle="bold"
              android:textSize="25dp"
              android:text="0.0" />
-        
-		<Button
-		    android:id="@+id/startButton"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="Start" />
 
 		<Button
 		    android:id="@+id/pauseButton"
@@ -122,6 +116,11 @@
 		    android:layout_marginLeft="20dp"
 		    android:layout_marginRight="20dp"
 		    android:layout_gravity="center"
+		    android:background="#a93434"
+       		android:textColor="#fcfafa"
+        	android:textSize="20sp"
+        	style="?android:attr/buttonStyleSmall"
 		    android:text="Finish Workout" />
+			
 
 </LinearLayout>
