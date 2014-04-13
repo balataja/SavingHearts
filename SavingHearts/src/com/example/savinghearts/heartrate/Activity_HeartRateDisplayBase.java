@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -291,24 +293,42 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                     public void run()
                     {   
                     	heartRateStatus();
+                    	ImageView img = (ImageView) findViewById(R.id.imageView1);
+            			img.setBackgroundResource(R.drawable.heart_workout_animation1);
+
                         tv_computedHeartRate.setText(String.valueOf(computedHeartRate));
                         HeartRatePoint = Integer.parseInt(String.valueOf(computedHeartRate));
                         tv_computedCalories.setText(oneDigit.format(calories));
                         String heartRateStatusText="Raise Your Heart Level";
+                        int color = Color.parseColor("#020EBA");
                         if(computedHeartRate >= bpm60 && computedHeartRate < bpm70){
                         	heartRateStatusText="Fatburn";
+                        	color = Color.parseColor("#FF5500");
+                        	img.setBackgroundResource(R.drawable.heart_workout_animation2);
                         }
                         else if(computedHeartRate >= bpm70 && computedHeartRate < bpm80){
                         	heartRateStatusText="Aerobic";
+                        	color = Color.parseColor("#F52ABF");
+                        	img.setBackgroundResource(R.drawable.heart_workout_animation3);
                         }
                         else if(computedHeartRate >= bpm80 && computedHeartRate < bpm90){
                         	heartRateStatusText="Anaerobic";
+                        	color = Color.parseColor("#F52A63");
+                        	img.setBackgroundResource(R.drawable.heart_workout_animation4);
                         }
-                        else if(computedHeartRate >= bpm90 && computedHeartRate <= bpm100){
+                        else if(computedHeartRate >= bpm90){
                         	heartRateStatusText="Maximal";
+                        	color = Color.parseColor("#F52A2A");
+                        	img.setBackgroundResource(R.drawable.heart_workout_animation5);
                         }
                         
                         heartRateStatus.setText(heartRateStatusText);
+                        heartRateStatus.setTextColor(color);
+                        // Get the background, which has been compiled to an AnimationDrawable object.
+                        AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+
+           			 	// Start the animation (looped playback by default).
+           			 	frameAnimation.start();
                     }
                 });
             }
