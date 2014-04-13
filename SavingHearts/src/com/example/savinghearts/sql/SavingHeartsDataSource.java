@@ -59,7 +59,10 @@ public class SavingHeartsDataSource {
 			MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP};
 	
 	//fields for the birthofdate table
-		private String[] ageColumns = {MySQLiteHelper.AGE_COLUMN_ID, MySQLiteHelper.AGE_COLUMN_AGE};
+	private String[] ageColumns = {MySQLiteHelper.AGE_COLUMN_ID, MySQLiteHelper.AGE_COLUMN_AGE};
+	
+	//fields for the birthofdate table
+	private String[] weightColumns = {MySQLiteHelper.WEIGHT_COLUMN_ID, MySQLiteHelper.WEIGHT_COLUMN_WEIGHT};
 	
 	
 	
@@ -108,7 +111,7 @@ public class SavingHeartsDataSource {
 		activity.setYear(getCurrentTimestamp());
 	}
 	
-	//insert activity
+	//insert AGE
 	public void insertAgeData(AgeData ageData){
 		ContentValues values = new ContentValues();
 		values.put(MySQLiteHelper.AGE_COLUMN_AGE, ageData.getAge());
@@ -117,6 +120,17 @@ public class SavingHeartsDataSource {
 		long insertId = database.insert(MySQLiteHelper.TABLE_AGE,  null,  values);
 		ageData.setId(insertId);
 		
+	}
+	
+	//insert WEIGHT
+	public void insertWeightData(WeightData weightData){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.WEIGHT_COLUMN_WEIGHT, weightData.getWeight());
+			
+		//insert it into the table and set the insert id
+		long insertId = database.insert(MySQLiteHelper.TABLE_WEIGHT,  null,  values);
+		weightData.setId(insertId);
+			
 	}
 	
 	//update activity
@@ -151,6 +165,15 @@ public class SavingHeartsDataSource {
 		database.update(MySQLiteHelper.TABLE_AGE, values,  MySQLiteHelper.AGE_COLUMN_ID + " = " + id, null);
 	}
 	
+	//update weight
+	public void updateWeightData(WeightData weightData){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.	WEIGHT_COLUMN_WEIGHT, weightData.getWeight());
+				
+		long id = weightData.getId();
+		database.update(MySQLiteHelper.TABLE_WEIGHT, values,  MySQLiteHelper.WEIGHT_COLUMN_ID + " = " + id, null);
+	}
+	
 	 public int getAgeDataCount() {
 		 	int count = 0;
 	        String countQuery = "SELECT  * FROM " + MySQLiteHelper.TABLE_AGE;
@@ -162,21 +185,49 @@ public class SavingHeartsDataSource {
 	        // return count
 	        return count;
 	    }
+	 
+	 public int getWeightDataCount() {
+		 	int count = 0;
+	        String countQuery = "SELECT  * FROM " + MySQLiteHelper.TABLE_WEIGHT;
+	        Cursor cursor = database.rawQuery(countQuery, null);
+	        if(cursor != null && !cursor.isClosed()){
+	            count = cursor.getCount();
+	            cursor.close();
+	        } 
+	        // return count
+	        return count;
+	    }
+	
+	//get weight
+	public WeightData getWeightFromDB(long Id){
+		String where = MySQLiteHelper.WEIGHT_COLUMN_ID + " = " + Id;
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_WEIGHT, weightColumns, where, null, null, null,null);
+		WeightData weightData = new WeightData();
+		if(cursor.getCount() == 0 || cursor == null){
+			weightData = null;
+		} else {
+			cursor.moveToFirst();
+			weightData.setWeight(Integer.parseInt(cursor.getString(1)));
+				
+		}
+		cursor.close();
+		return weightData;
+	}
 	
 	//get birthofdate
 	public AgeData getAgeFromDB(long Id){
 		String where = MySQLiteHelper.AGE_COLUMN_ID + " = " + Id;
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_AGE, ageColumns, where, null, null, null,null);
 		AgeData ageData = new AgeData();
-		if(cursor.getCount() == 0){
+		if(cursor.getCount() == 0|| cursor ==null){
 			ageData = null;
 		} else {
 			cursor.moveToFirst();
 			ageData.setAge(Integer.parseInt(cursor.getString(1)));
-				
+					
 		}
-		cursor.close();
-		return ageData;
+			cursor.close();
+			return ageData;
 	}
 	//get activity according to activity's id
 	public ActivityData getActivity(long Id){

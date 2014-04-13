@@ -60,17 +60,9 @@ public class WorkoutResultsActivity extends Activity{
 
         //Reset the text display
         oneDigit = new DecimalFormat("#,##0.0");
-        temp_time.setText(oneDigit.format(calories) + " min");
+        temp_time.setText(minutes + " min");
         temp_maxHR.setText(Integer.toString(maxHeartRate) + " bpm");
-        temp_calories.setText(Double.toString(calories)+ " cal" );
-        temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
-        temp_mets.setText(Double.toString(mets));
-        
-        //Reset the text display
-        oneDigit = new DecimalFormat("#,##0.0");
-        temp_time.setText(oneDigit.format(calories) + " min");
-        temp_maxHR.setText(Integer.toString(maxHeartRate) + " bpm");
-        temp_calories.setText(Double.toString(calories)+ " cal" );
+        temp_calories.setText(oneDigit.format(calories)+ " cal" );
         temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
         temp_mets.setText(Double.toString(mets));
         

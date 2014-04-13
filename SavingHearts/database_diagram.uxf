@@ -36,7 +36,7 @@ timestamp 	TEXT NOT NULL
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>450</x>
-      <y>30</y>
+      <y>40</y>
       <w>320</w>
       <h>100</h>
     </coordinates>
@@ -44,6 +44,20 @@ timestamp 	TEXT NOT NULL
 --
 id 	INTEGER PRIMARY KEY AUTOINCREMENT
 age 	INTEGER NOT NULL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>450</x>
+      <y>160</y>
+      <w>320</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>WeightData
+--
+id 	INTEGER PRIMARY KEY AUTOINCREMENT
+weight 	INTEGER NOT NULL</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

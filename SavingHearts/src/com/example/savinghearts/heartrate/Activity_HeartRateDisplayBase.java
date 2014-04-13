@@ -104,19 +104,20 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int secs;
 	private DecimalFormat oneDigit;
 	boolean isStart=false;
+	SavingHeartsDataSource db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        db = SavingHeartsDataSource.getInstance(getApplicationContext());
         
         Bundle b = getIntent().getExtras();
         activityName = b.getString("activity");
         mets = b.getDouble("mets");
         System.out.println(activityName + "........." + mets);
         
-        pounds = SettingsHelper.weights;
+        pounds = db.getWeightFromDB(1).getWeight();
         kilos = pounds/2.20462;
         cals1 = kilos*3.5*mets/200;
         oneDigit = new DecimalFormat("#,##0.0");

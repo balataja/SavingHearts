@@ -13,6 +13,7 @@ import java.util.Locale;
 import com.example.savinghearts.helpers.SettingsHelper;
 import com.example.savinghearts.model.ActivityData;
 import com.example.savinghearts.model.AgeData;
+import com.example.savinghearts.model.WeightData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class SettingsActivity extends Activity implements OnClickListener,
 	
 	public SavingHeartsDataSource database;
 	public AgeData ageData;
+	public WeightData weightData;
 	
 	private TextView mBirthDateTextView;
 	private TextView mWeightTextView;
@@ -68,10 +70,12 @@ public class SettingsActivity extends Activity implements OnClickListener,
 			database.open();
 		}
 		ageData = new AgeData();
-		ageData.setAge(20);
-		ageData.setId(1);
 		if(database.getAgeDataCount() < 1){
 			database.insertAgeData(ageData);
+		}
+		weightData = new WeightData();
+		if(database.getWeightDataCount() < 1){
+			database.insertWeightData(weightData);
 		}
 
 		
@@ -235,6 +239,8 @@ public class SettingsActivity extends Activity implements OnClickListener,
 		// weight
 		this.mWeight = SettingsHelper.getWeight(this);
 		mWeightTextView.setText(mWeight + " lbs");
+		weightData.setWeight(this.mWeight);
+		database.updateWeightData(weightData);
 		
 	}
 

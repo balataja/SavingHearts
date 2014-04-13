@@ -33,6 +33,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 	public static final String AGE_COLUMN_ID = "_id";
 	public static final String AGE_COLUMN_AGE = "age";
 	
+	//birth of date columns
+	public static final String TABLE_WEIGHT = "weightdata";
+	public static final String WEIGHT_COLUMN_ID = "_id";
+	public static final String WEIGHT_COLUMN_WEIGHT = "weight";
+	
 	//Statement to create activity table
 	public static final String ACTIVITY_CREATE = "create table " 
 			+ TABLE_ACTIVITY + " (" 
@@ -60,10 +65,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 				+ AGE_COLUMN_ID + " integer primary key autoincrement,"
 				+ AGE_COLUMN_AGE + " integer not null" 
 				+");";
+		//Statement to create birthofdate table
+		public static final String WEIGHT_CREATE = "create table " 
+				+ TABLE_WEIGHT + " (" 
+				+ WEIGHT_COLUMN_ID + " integer primary key autoincrement,"
+				+ WEIGHT_COLUMN_WEIGHT + " integer not null" 
+				+");";
 	
 	
 	public static final String DATABASE_NAME = "SavingHearts.db";
-	public static final int DATABASE_VERSION = 3;
+	public static final int DATABASE_VERSION = 4;
 	
 	//SQLiteOpenHelper helps to create or open a database
 	public MySQLiteHelper(Context context) {
@@ -75,6 +86,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 		Log.i("SQLSetup", "Creating databases");
 		db.execSQL(ACTIVITY_CREATE);
 		db.execSQL(AGE_CREATE);
+		db.execSQL(WEIGHT_CREATE);
 		
 	}
 	
@@ -86,8 +98,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 		Log.i("SQLUpgrade", "Upgrading databases");
 		String DROP_ACTIVITY= "DROP TABLE IF EXISTS " + TABLE_ACTIVITY;
 		String DROP_BIRTHDATE= "DROP TABLE IF EXISTS " + TABLE_AGE;
+		String DROP_WEIGHT= "DROP TABLE IF EXISTS " + TABLE_WEIGHT;
 		db.execSQL(DROP_ACTIVITY);
 		db.execSQL(DROP_BIRTHDATE);
+		db.execSQL(DROP_WEIGHT);
 		
 		onCreate(db);
 		
