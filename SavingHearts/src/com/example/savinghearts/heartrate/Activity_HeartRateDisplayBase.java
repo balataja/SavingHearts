@@ -46,6 +46,7 @@ import com.example.savinghearts.R;
 import com.example.savinghearts.SearchMonitor_Base;
 import com.example.savinghearts.activities.WorkoutResultsActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
+import com.example.savinghearts.helpers.CalculationsHelper;
 import com.example.savinghearts.helpers.SettingsHelper;
 import com.example.savinghearts.model.ActivityData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
@@ -65,6 +66,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     TextView tv_status;
     TextView tv_computedHeartRate;
     TextView tv_computedCalories;
+    TextView heartRateStatus;
 
     private static final int HISTORY_SIZE = 300;            // number of points to plot in history
     private SensorManager sensorMgr = null;
@@ -76,7 +78,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     private int HeartRatePoint = 50;
 
 	//Timer variables
-	private Button startButton;
 	private Button pauseButton;
 	private TextView timerValue;	
 	private long startTime = 0L;	
@@ -106,12 +107,21 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	boolean isStart=false;
 	SavingHeartsDataSource db;
 
+	//for heart rate status
+	private int bpm60;
+	private int bpm70;
+	private int bpm80;
+	private int bpm90;
+	private int bpm100;
+	
+	//calculating
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        db = SavingHeartsDataSource.getInstance(getApplicationContext());
         
+        db = SavingHeartsDataSource.getInstance(getApplicationContext());
         Bundle b = getIntent().getExtras();
         activityName = b.getString("activity");
         mets = b.getDouble("mets");
@@ -121,6 +131,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         kilos = pounds/2.20462;
         cals1 = kilos*3.5*mets/200;
         oneDigit = new DecimalFormat("#,##0.0");
+        
         handleReset();
     }
 
@@ -160,6 +171,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         tv_status = (TextView)findViewById(R.id.textView_Status);
         tv_computedHeartRate = (TextView)findViewById(R.id.textView_ComputedHeartRate);
         tv_computedCalories = (TextView)findViewById(R.id.caloriesValue);
+        heartRateStatus = (TextView)findViewById(R.id.heartRateStatus);
         //Reset the text display
         tv_status.setText(status);
 
@@ -277,11 +289,26 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                 {                                            
                     @Override
                     public void run()
-                    {
-
+                    {   
+                    	heartRateStatus();
                         tv_computedHeartRate.setText(String.valueOf(computedHeartRate));
                         HeartRatePoint = Integer.parseInt(String.valueOf(computedHeartRate));
                         tv_computedCalories.setText(oneDigit.format(calories));
+                        String heartRateStatusText="Raise Your Heart Level";
+                        if(computedHeartRate >= bpm60 && computedHeartRate < bpm70){
+                        	heartRateStatusText="Fatburn";
+                        }
+                        else if(computedHeartRate >= bpm70 && computedHeartRate < bpm80){
+                        	heartRateStatusText="Aerobic";
+                        }
+                        else if(computedHeartRate >= bpm80 && computedHeartRate < bpm90){
+                        	heartRateStatusText="Anaerobic";
+                        }
+                        else if(computedHeartRate >= bpm90 && computedHeartRate <= bpm100){
+                        	heartRateStatusText="Maximal";
+                        }
+                        
+                        heartRateStatus.setText(heartRateStatusText);
                     }
                 });
             }
@@ -306,14 +333,14 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                     break;
                 case CHANNEL_NOT_AVAILABLE:
                     Toast.makeText(Activity_HeartRateDisplayBase.this, "Channel Not Available", Toast.LENGTH_SHORT).show();
-                    tv_status.setText("Error. Do Menu->Reset.");
+                    tv_status.setText("Error. Do Menu->Reset");
                     break;
                 case OTHER_FAILURE:
                     Toast.makeText(Activity_HeartRateDisplayBase.this, "RequestAccess failed. See logcat for details.", Toast.LENGTH_SHORT).show();
-                    tv_status.setText("Error. Do Menu->Reset.");
+                    tv_status.setText("Error. Do Menu->Reset");
                     break;
                 case DEPENDENCY_NOT_INSTALLED:
-                    tv_status.setText("Error. Do Menu->Reset.");
+                    tv_status.setText("Error. Do Menu->Reset");
                     AlertDialog.Builder adlgBldr = new AlertDialog.Builder(Activity_HeartRateDisplayBase.this);
                     adlgBldr.setTitle("Missing Dependency");
                     adlgBldr.setMessage("The required service\n\"" + AntPlusHeartRatePcc.getMissingDependencyName() + "\"\n was not found. You need to install the ANT+ Plugins service or you may need to update your existing version if you already have it. Do you want to launch the Play Store to get it?");
@@ -343,16 +370,16 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                     waitDialog.show();
                     break;
                 case USER_CANCELLED:
-                    tv_status.setText("Cancelled. Do Menu->Reset.");
+                    tv_status.setText("Cancelled. Do Menu->Reset");
                     break;
                 case UNRECOGNIZED:
                     //TODO This flag indicates that an unrecognized value was sent by the service, an upgrade of your PCC may be required to handle this new value.
                     Toast.makeText(Activity_HeartRateDisplayBase.this, "Failed: UNRECOGNIZED. Upgrade Required?", Toast.LENGTH_SHORT).show();
-                    tv_status.setText("Error. Do Menu->Reset.");
+                    tv_status.setText("Error. Do Menu->Reset");
                     break;
                 default:
                     Toast.makeText(Activity_HeartRateDisplayBase.this, "Unrecognized result: " + resultCode, Toast.LENGTH_SHORT).show();
-                    tv_status.setText("Error. Do Menu->Reset.");
+                    tv_status.setText("Error. Do Menu->Reset");
                     break;
             } 
         }
@@ -433,12 +460,24 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 
     	};
     	
+    	public void heartRateStatus(){
+    		int age = db.getAgeFromDB(1).getAge();
+    		bpm60 = com.example.savinghearts.helpers.CalculationsHelper.getTargetHeartRateFromAge(age,
+    				com.example.savinghearts.helpers.CalculationsHelper.TARGET_60_PERCENT);
+    		bpm70 = CalculationsHelper.getTargetHeartRateFromAge(age,
+    				CalculationsHelper.TARGET_70_PERCENT);
+    		bpm80 = CalculationsHelper.getTargetHeartRateFromAge(age,
+    				CalculationsHelper.TARGET_80_PERCENT);
+    		bpm90 = CalculationsHelper.getTargetHeartRateFromAge(age,
+    				CalculationsHelper.TARGET_90_PERCENT);
+    		bpm100 = CalculationsHelper.getTargetHeartRateFromAge(age,
+    				CalculationsHelper.TARGET_MAX);
+    	}
+    	
     	public void saveWorkoutButton()
     	{
     		cleanup();
     		onDestroy();
-    		
-    		SavingHeartsDataSource db = SavingHeartsDataSource.getInstance(getApplicationContext());
 
     		ActivityData activity = new ActivityData();
     		activity.setActivityName(activityName);

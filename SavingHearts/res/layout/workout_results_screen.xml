@@ -195,7 +195,8 @@
         android:textColor="#fcfafa"
         android:textSize="20sp"
         style="?android:attr/buttonStyleSmall"
-        android:text="Go To Log" />
+        android:text="Go To Log"
+        android:onClick="goToLog" />
 
 </LinearLayout>
 </ScrollView>

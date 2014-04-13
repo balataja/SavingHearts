@@ -9,13 +9,17 @@ import com.example.savinghearts.R;
 import com.example.savinghearts.activities.*;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class WorkoutResultsActivity extends Activity{
+public class WorkoutResultsActivity extends Activity implements OnClickListener{
 
 	private int maxHeartRate = 0;
 	private String activityName = null;
@@ -37,6 +41,7 @@ public class WorkoutResultsActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+   
 		System.out.println("starting workoutresults page");
         Bundle b = getIntent().getExtras();
 		activityName = b.getString("activity");
@@ -51,11 +56,16 @@ public class WorkoutResultsActivity extends Activity{
 		moderateZones = (int) b.getDouble("moderateZone");
 
 		setContentView(R.layout.workout_results_screen);
+		
 		TextView temp_time = (TextView)findViewById(R.id.results_duration);
         TextView temp_maxHR= (TextView)findViewById(R.id.results_maxHR);
         TextView temp_aveHR= (TextView)findViewById(R.id.results_aveHR);
         TextView temp_mets= (TextView)findViewById(R.id.results_mets);
         TextView temp_calories= (TextView)findViewById(R.id.results_calories);
+        
+        //set up button
+        Button goToLogBtn = (Button) findViewById(R.id.btn_go_to_log);
+        goToLogBtn.setOnClickListener(this);
         
 
         //Reset the text display
@@ -97,5 +107,16 @@ public class WorkoutResultsActivity extends Activity{
         belowPie.getBorderPaint().setColor(Color.TRANSPARENT);
         belowPie.getBackgroundPaint().setColor(Color.TRANSPARENT);
         belowPie.redraw();
+	}
+    
+    public void goToLog(){
+    	Intent intent = new Intent(this, MainActivity.class);
+    	startActivity(intent);
+    }
+
+	@Override
+	public void onClick(View arg0) {
+		goToLog();
+		
 	}
 }

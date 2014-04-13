@@ -70,10 +70,14 @@ public class SettingsActivity extends Activity implements OnClickListener,
 			database.open();
 		}
 		ageData = new AgeData();
+		ageData.setAge(20);
+		ageData.setId(1);
 		if(database.getAgeDataCount() < 1){
 			database.insertAgeData(ageData);
 		}
 		weightData = new WeightData();
+		weightData.setWeight(150);
+		weightData.setId(1);
 		if(database.getWeightDataCount() < 1){
 			database.insertWeightData(weightData);
 		}
