@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_temp"
+    android:background="@drawable/backer"
     android:orientation="vertical" >
 
     <TextView
@@ -130,59 +130,159 @@
             android:textSize="20dp"
             android:textStyle="bold" />
         
+        <TextView
+            android:id="@+id/belowTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/textView3"
+            android:text="Below"
+            android:layout_marginLeft="28dp"
+            android:textSize="18dp"
+            android:textStyle="bold" />
         <com.androidplot.pie.PieChart
             android:id="@+id/belowPieChart"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginLeft="-10dp"
-            android:layout_below="@+id/textView3"
-            androidPlot.title="Below"
+            android:layout_below="@+id/belowTitle"
+            
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+        <TextView
+            android:id="@+id/belowTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/belowPieChart"
+			android:layout_marginLeft="37dp"
+			android:layout_marginTop="-20dp"
+            android:text="72 s"
+            android:textSize="15dp"
+            android:textStyle="bold" />
         
-<!--         <com.androidplot.pie.PieChart
-            android:id="@+id/averagePieChart"
+        <TextView
+            android:id="@+id/fatburnTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/textView3"
+            android:text="Fat Burn"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/belowTitle"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+         <com.androidplot.pie.PieChart
+            android:id="@+id/fatburnPieChart"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="-10dp"
-            android:layout_left="belowPieChart"
-            android:layout_below="@+id/textView3"
-            androidPlot.title="average"
+            android:layout_marginTop="-20dp"
+            android:layout_below="@+id/belowTitle"
+            android:layout_toRightOf="@+id/textView3"
+            androidPlot.title="Average"
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-                
+         <TextView
+            android:id="@+id/fatburnTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/belowPieChart"
+			android:layout_toRightOf="@+id/textView3"
+			android:layout_marginLeft="50dp"
+			android:layout_marginTop="-20dp"
+            android:text="69 s"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+               
+         <TextView
+            android:id="@+id/aerobicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/textView3"
+            android:text="Aerobic"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/fatburnTitle"
+            android:textSize="18dp"
+            android:textStyle="bold" />
         <com.androidplot.pie.PieChart
             android:id="@+id/abovePieChart"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="-10dp"
-            android:layout_left="averagePieChart"
-            android:layout_below="@+id/textView3"
+            android:layout_marginTop="-20dp"
+            android:layout_marginLeft="-40dp"
+            android:layout_toRightOf="@+id/fatburnPieChart"
+            android:layout_below="@+id/belowTitle"
             androidPlot.title="above"
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+        <TextView
+            android:id="@+id/aboveTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/belowPieChart"
+			android:layout_toRightOf="@+id/fatburnPieChart"
+			android:layout_marginLeft="15dp"
+			android:layout_marginTop="-20dp"
+            android:text="54 s"
+            android:textSize="15dp"
+            android:textStyle="bold" />
                         
+        <TextView
+            android:id="@+id/anaerobicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/belowTimer"
+            android:text="Anaerobic"
+            android:layout_marginLeft="35dp"
+            android:textSize="18dp"
+            android:textStyle="bold" />
         <com.androidplot.pie.PieChart
             android:id="@+id/hardPieChart"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="-10dp"
-            android:layout_below="@+id/belowPieChart"
-            androidPlot.title="hard"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="-20dp"
+            android:layout_below="@+id/anaerobicTitle"
+            androidPlot.title="Anaerobic"
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+        <TextView
+            android:id="@+id/hardTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/hardPieChart"
+			android:layout_marginLeft="55dp"
+			android:layout_marginTop="-20dp"
+            android:text="16 s"
+            android:textSize="15dp"
+            android:textStyle="bold" />
                                 
+        <TextView
+            android:id="@+id/insaneTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/belowTimer"
+            android:text="Insane"
+            android:layout_marginLeft="60dp"
+            android:layout_toRightOf="@+id/anaerobicTitle"
+            android:textSize="18dp"
+            android:textStyle="bold" />
         <com.androidplot.pie.PieChart
             android:id="@+id/insanePieChart"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="-10dp"
-            android:layout_below="@+id/belowPieChart"
-            android:layout_left="hardPieChart"
-            androidPlot.title="insane"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="-20dp"
+            android:layout_below="@+id/anaerobicTitle"
+            android:layout_toRightOf="@+id/hardPieChart"
+            androidPlot.title="Maximal"
             androidPlot.titleWidget.labelPaint.textSize="20dp"/>
- -->
+        <TextView
+            android:id="@+id/insaneTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_below="@+id/insanePieChart"
+			android:layout_toRightOf="@+id/hardPieChart"
+			android:layout_marginLeft="37dp"
+			android:layout_marginTop="-20dp"
+            android:text="10 s"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+ 
     </RelativeLayout>
     
     <Button

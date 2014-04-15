@@ -94,10 +94,11 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private double mets = 0.0;
 	private double aveHeartRate;
 	private double calories;
-	private int maxZones = 0;
-	private int hardZones = 0;
-	private int moderateZones = 0;
-	private int lightZones = 0;
+	private int below = 0;
+	private int fatburn = 0;
+	private int aerobic = 0;
+	private int anaerobic = 0;
+	private int maximal = 0;
 	private double totalUpdates = 0.0;
 	private double pounds = 0.0;
 	private double kilos = 0.0;
@@ -180,14 +181,15 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         tv_computedHeartRate.setText("---");
         // setup the APR History plot:
         aprHistoryPlot = (XYPlot) findViewById(R.id.aprHistoryPlot);
-        azimuthHistorySeries = new SimpleXYSeries("Heart Rate");
+        azimuthHistorySeries = new SimpleXYSeries("");
         azimuthHistorySeries.useImplicitXVals();
         aprHistoryPlot.setRangeBoundaries(50, 150, BoundaryMode.FIXED);
         aprHistoryPlot.setDomainBoundaries(0, 300, BoundaryMode.FIXED);
         aprHistoryPlot.addSeries(azimuthHistorySeries, new LineAndPointFormatter(Color.rgb(200, 100, 100), Color.RED, null, null));
         aprHistoryPlot.setDomainStepValue(5);
         aprHistoryPlot.setTicksPerRangeLabel(3);
-        aprHistoryPlot.setRangeLabel("Heart Rate (BPM)");
+        aprHistoryPlot.removeMarkers();
+        //aprHistoryPlot.setRangeLabel("Heart Rate (BPM)");
  
         // register for orientation sensor events:
         sensorMgr = (SensorManager) getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
@@ -305,22 +307,26 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                         	heartRateStatusText="Fatburn";
                         	color = Color.parseColor("#FF5500");
                         	img.setBackgroundResource(R.drawable.heart_workout_animation2);
+                        	fatburn++;
                         }
                         else if(computedHeartRate >= bpm70 && computedHeartRate < bpm80){
                         	heartRateStatusText="Aerobic";
                         	color = Color.parseColor("#F52ABF");
                         	img.setBackgroundResource(R.drawable.heart_workout_animation3);
+                        	aerobic++;
                         }
                         else if(computedHeartRate >= bpm80 && computedHeartRate < bpm90){
                         	heartRateStatusText="Anaerobic";
                         	color = Color.parseColor("#F52A63");
                         	img.setBackgroundResource(R.drawable.heart_workout_animation4);
+                        	anaerobic++;
                         }
                         else if(computedHeartRate >= bpm90){
                         	heartRateStatusText="Maximal";
                         	color = Color.parseColor("#F52A2A");
                         	img.setBackgroundResource(R.drawable.heart_workout_animation5);
-                        }
+                        	maximal++;
+                        } else {below++;}
                         
                         heartRateStatus.setText(heartRateStatusText);
                         heartRateStatus.setTextColor(color);
@@ -509,10 +515,10 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		activity.setTimestamp(db.getCurrentTimestamp());
     		activity.setYear(db.getCurrentYear());
     		activity.setMonth(db.getCurrentMonth());
-    		activity.setHardZones(hardZones);
-    		activity.setLightZones(lightZones);
-    		activity.setMaxZones(maxZones);
-    		activity.setModerateZones(moderateZones);
+    		activity.setHardZones(fatburn);
+    		activity.setLightZones(below);
+    		activity.setMaxZones(aerobic);
+    		activity.setModerateZones(anaerobic);
     		activity.setMinHR(0);
     		activity.setId(0);
     		
@@ -525,10 +531,11 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		b.putDouble("calories", calories);
     		b.putLong("minutes", (long) minutes);
     		b.putInt("maxHR", maxHeartRate);
-    		b.putDouble("lightZone", lightZones);
-    		b.putDouble("hardZone", hardZones);
-    		b.putDouble("maxZone", maxZones);
-    		b.putDouble("moderateZone", moderateZones);
+    		b.putDouble("lightZone", below);
+    		b.putDouble("hardZone", fatburn);
+    		b.putDouble("maxZone", aerobic);
+    		b.putDouble("moderateZone", anaerobic);
+    		b.putDouble("maximal", maximal);
     		i.putExtras(b);
     		startActivity(i);
     	}
