@@ -117,6 +117,8 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int bpm90;
 	private int bpm100;
 	
+	
+	
 	//calculating
 
     @Override
@@ -143,14 +145,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
      */    
     protected void handleReset()
     {
-    	Bundle b = getIntent().getExtras();
-    	int monitor=0;
-		if (b != null) 
-		{
-		   monitor = b.getInt("monitor");
-		}
-		if(monitor == 0){
-        //Release the old access if it exists
+    	
 			if(hrPcc != null)
 			{
 				hrPcc.releaseAccess();
@@ -158,13 +153,6 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 			}
       
 			requestAccessToPcc();   
-		}
-		else{
-			showDataDisplay("Connecting..."); 
-			hrPcc = SearchMonitor_Base.hrPcc;
-			tv_status.setText(SearchMonitor_Base.hrPcc.getDeviceName() + ": " + "TRACKING");
-			subscribeToHrEvents();
-		}
     }
 
     protected void showDataDisplay(String status)
