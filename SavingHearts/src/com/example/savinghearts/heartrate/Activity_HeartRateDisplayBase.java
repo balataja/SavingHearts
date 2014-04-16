@@ -493,6 +493,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		cleanup();
     		onDestroy();
 
+    		System.out.println("below: "+below+" fatburn: "+fatburn+" aerobic: "+aerobic+" anaerobic: "+anaerobic+" maximal: "+maximal);
     		ActivityData activity = new ActivityData();
     		activity.setActivityName(activityName);
     		activity.setAveHR((int) aveHeartRate);

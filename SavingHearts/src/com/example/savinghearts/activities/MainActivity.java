@@ -18,8 +18,10 @@ import com.example.savinghearts.helpers.SettingsHelper;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -200,32 +202,37 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			SearchMonitor_Base.hrPcc = null;
         }
        */
-		Bundle args = new Bundle();
-		Bundle fromMonitor = getIntent().getExtras();
-		int monitor=0;
-		if (fromMonitor != null) 
-		   {
-		     monitor = fromMonitor.getInt("monitor");
-		   }
-		args.putInt("monitor", monitor);
-		System.out.println("trying to press start button..");
-		Intent intent = new Intent(this, METSListActivity.class);
-		intent.putExtras(args);
-		startActivity(intent);
+		if(SettingsHelper.getWeight(getApplicationContext()) > 0)
+		{
+			Bundle args = new Bundle();
+			Bundle fromMonitor = getIntent().getExtras();
+			int monitor=0;
+			if (fromMonitor != null) 
+			   {
+			     monitor = fromMonitor.getInt("monitor");
+			   }
+			args.putInt("monitor", monitor);
+			System.out.println("trying to press start button..");
+			Intent intent = new Intent(this, METSListActivity.class);
+			intent.putExtras(args);
+			startActivity(intent);
+		}
+		else
+    	{
+    		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Settings weight and age must be filled out located under menus");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+    	}
 	}
 	
-	/**
-	 * Method for Connect To Device button on Monitor Fragment
-	 
-	public void sendMessage (View view)
-	{	/*
-        Intent i = new Intent(this, Activity_SearchUiHeartRateSampler.class);
-        startActivity(i);
-        /*
-		Intent intent = new Intent(this, Activity_Dashboard.class);
-		startActivity(intent);
-	}
-*/
 	/**
 	 * Starts selected activity when user selects options menu item
 	 * @return boolean returns true if valid menu option selected

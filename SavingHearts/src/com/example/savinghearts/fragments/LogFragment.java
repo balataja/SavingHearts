@@ -61,10 +61,14 @@ public class LogFragment extends Fragment{
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		sv.addView(ll);
+		System.out.println("about to get data base");
 		db = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
-		List <ActivityData> activities = db.getAllActivities();
+		System.out.println("just got database");
+		List <ActivityData> activities = db.getAllActivities();//InOneDate("16", "04", "2014");
+		System.out.println("just got activities");
 		//ListIterator <ActivityData> li = activities.listIterator();
 		//while(li.hasNext())
+		
 		if(activities.size()>0)
 		{
 			ActivityData activityData = activities.remove(0);
@@ -83,8 +87,12 @@ public class LogFragment extends Fragment{
 			
 			addWorkoutToView(activityData2, workout2);
 		}
-        ll.addView(view);
-        ll.addView(view2);
+		System.out.println("about to add views");
+		if(activities.size() > 0)
+			ll.addView(view);
+		if(activities.size() > 1)
+			ll.addView(view2);
+        System.out.println("just added views");
 		
 		return sv;
 	}
@@ -110,12 +118,14 @@ public class LogFragment extends Fragment{
 		anaerobic = (int) activityData.getMaxZones();
 		maximal = (int) activityData.getHardZones();
 		total = below + fatburn + aerobic + anaerobic + maximal;
+		System.out.println(below +" "+ fatburn +" "+ aerobic +" "+ anaerobic +" "+ maximal);
 		
 		TextView temp_time = (TextView)workout.findViewById(R.id.results_duration);
         TextView temp_maxHR= (TextView)workout.findViewById(R.id.results_maxHR);
         TextView temp_aveHR= (TextView)workout.findViewById(R.id.results_aveHR);
         TextView temp_mets= (TextView)workout.findViewById(R.id.results_mets);
         TextView temp_calories= (TextView)workout.findViewById(R.id.results_calories);
+        TextView activity_name = (TextView)workout.findViewById(R.id.typeOfActivity);
                 
         //Reset the text display
         oneDigit = new DecimalFormat("#,##0.0");
@@ -124,6 +134,7 @@ public class LogFragment extends Fragment{
         temp_calories.setText(oneDigit.format(calories)+ " cal" );
         temp_aveHR.setText(Integer.toString(aveHeartRate)+ " bpm");
         temp_mets.setText(Double.toString(mets));
+        activity_name.setText(activityName);
         
         belowPie = (PieChart) workout.findViewById(R.id.belowPieChart);
         fatburnPie = (PieChart) workout.findViewById(R.id.fatburnPieChart);
@@ -131,15 +142,17 @@ public class LogFragment extends Fragment{
         anaerobicPie = (PieChart) workout.findViewById(R.id.hardPieChart);
         maximalPie = (PieChart) workout.findViewById(R.id.insanePieChart);
         
-        percent = 35;//(below / total)*100;
+        if(total == 0)
+        	total = 1;
+        percent = (below / total)*100;
         formatPieChart(belowPie, percent);
-        percent = 10;//(fatburn / total)*100;
+        percent = (fatburn / total)*100;
         formatPieChart(fatburnPie, percent);
-        percent = 17;//(aerobic / total)*100;
+        percent = (aerobic / total)*100;
         formatPieChart(aerobicPie, percent);
-        percent = 42;//(anaerobic / total)*100;
+        percent = (anaerobic / total)*100;
         formatPieChart(anaerobicPie, percent);
-        percent = 60;//(maximal / total)*100;
+        percent = (maximal / total)*100;
         formatPieChart(maximalPie, percent);
 	}
     private void formatPieChart(PieChart pie, int percentage) {

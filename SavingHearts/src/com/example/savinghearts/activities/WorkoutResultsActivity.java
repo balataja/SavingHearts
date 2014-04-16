@@ -94,7 +94,8 @@ public class WorkoutResultsActivity extends Activity implements OnClickListener{
         anaerobicPie = (PieChart) findViewById(R.id.hardPieChart);
         maximalPie = (PieChart) findViewById(R.id.insanePieChart);
         
-
+        if(total == 0)
+        	total = 1;
         percent = (below / total)*100;
         formatPieChart(belowPie, percent);
         percent = (fatburn / total)*100;

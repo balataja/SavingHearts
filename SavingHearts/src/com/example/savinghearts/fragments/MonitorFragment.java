@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MonitorFragment extends Fragment implements OnClickListener{
+public class MonitorFragment extends Fragment{
 	
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	
@@ -20,8 +20,8 @@ public class MonitorFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	View view =	inflater.inflate(R.layout.fragment_monitor, container, false);
-	Button searchBeat = (Button) view.findViewById(R.id.searchMonitor);
-	searchBeat.setOnClickListener(this);
+	//Button searchBeat = (Button) view.findViewById(R.id.searchMonitor);
+	//searchBeat.setOnClickListener(this);
 		return view;
 	}
 
@@ -35,7 +35,7 @@ public class MonitorFragment extends Fragment implements OnClickListener{
 		super.onStart();
 	}
 
-	@Override
+	/*@Override
 	public void onClick(View v) {
 		switch(v.getId()){
 			case R.id.searchMonitor:
@@ -49,5 +49,5 @@ public class MonitorFragment extends Fragment implements OnClickListener{
 			}
 		}
 		
-	}
+	}*/
 }
