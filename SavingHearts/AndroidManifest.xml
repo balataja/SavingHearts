@@ -41,6 +41,7 @@
         <activity android:name="com.example.savinghearts.activities.METSListActivity"></activity>
         <activity android:name="com.example.savinghearts.activities.AllMetsPrintedActivity"></activity>
         <activity android:name="com.example.savinghearts.activities.MetsInformationActivity"></activity>
+        <activity android:name="com.example.savinghearts.activities.BarPlot"></activity>
         <activity android:name=".heartrate.WorkoutScreen"></activity>
         <activity android:name=".heartrate.Activity_SearchUiHeartRateSampler"></activity>
         <activity android:name=".activities.WorkoutResultsActivity"></activity>

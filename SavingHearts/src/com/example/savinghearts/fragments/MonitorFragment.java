@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class MonitorFragment extends Fragment{
-	
+
 	public static final String ARG_SECTION_NUMBER = "section_number";
-	
+
 	public MonitorFragment(){}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

@@ -108,7 +108,30 @@ public class SavingHeartsDataSource {
 		activity.setDate(getCurrentDate());
 		activity.setMonth(getCurrentMonth());
 		activity.setYear(getCurrentYear());
-		activity.setYear(getCurrentTimestamp());
+		activity.setTimestamp(getCurrentTimestamp());
+	}
+	
+	public void insertActivityTest(ActivityData activity){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_ACTIVITY_NAME, activity.getActivityName());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DURATION, activity.getDuration());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_HEART_RATE, activity.getMaxHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MIN_HEART_RATE, activity.getMinHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_AVE_HEART_RATE, activity.getAveHR());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_METS, activity.getMets());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_CALORIES, activity.getCalories());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MAX_ZONES, activity.getMaxZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_HARD_ZONES, activity.getHardZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MODERATE_ZONES, activity.getModerateZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_LIGHT_ZONES, activity.getLightZones());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONITOR, activity.getMonitor());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_DATE, activity.getDate());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_MONTH, activity.getMonth());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_YEAR, activity.getYear());
+		values.put(MySQLiteHelper.ACTIVITY_COLUMN_TIMESTAMP, activity.getTimestamp());
+		//insert it into the table and set the insert id
+		long insertId = database.insert(MySQLiteHelper.TABLE_ACTIVITY,  null,  values);
+		activity.setId(insertId);
 	}
 	
 	//insert AGE
@@ -189,6 +212,18 @@ public class SavingHeartsDataSource {
 	 public int getWeightDataCount() {
 		 	int count = 0;
 	        String countQuery = "SELECT  * FROM " + MySQLiteHelper.TABLE_WEIGHT;
+	        Cursor cursor = database.rawQuery(countQuery, null);
+	        if(cursor != null && !cursor.isClosed()){
+	            count = cursor.getCount();
+	            cursor.close();
+	        } 
+	        // return count
+	        return count;
+	    }
+	 
+	 public int getActivityDataCount() {
+		 	int count = 0;
+	        String countQuery = "SELECT  * FROM " + MySQLiteHelper.TABLE_ACTIVITY;
 	        Cursor cursor = database.rawQuery(countQuery, null);
 	        if(cursor != null && !cursor.isClosed()){
 	            count = cursor.getCount();

@@ -116,9 +116,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
 	private int bpm80;
 	private int bpm90;
 	private int bpm100;
-	
-	
-	
+
+
+
 	//calculating
 
     @Override
