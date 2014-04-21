@@ -46,6 +46,7 @@ import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiv
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
 import com.example.savinghearts.R;
 import com.example.savinghearts.SearchMonitor_Base;
+import com.example.savinghearts.activities.BarPlot;
 import com.example.savinghearts.activities.WorkoutResultsActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
 import com.example.savinghearts.helpers.CalculationsHelper;
@@ -492,7 +493,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     	{
     		cleanup();
     		onDestroy();
-
+    		
     		System.out.println("below: "+below+" fatburn: "+fatburn+" aerobic: "+aerobic+" anaerobic: "+anaerobic+" maximal: "+maximal);
     		ActivityData activity = new ActivityData();
     		activity.setActivityName(activityName);
@@ -512,7 +513,9 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		activity.setId(0);
     		
     		db.insertActivity(activity);
+    	
     		Intent i = new Intent(this, WorkoutResultsActivity.class);
+    		
     		Bundle b = new Bundle();
     		b.putString("activity", activityName);
     		b.putDouble("mets", mets);
@@ -526,6 +529,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
     		b.putDouble("moderateZone", anaerobic);
     		b.putDouble("maximal", maximal);
     		i.putExtras(b);
+    		
     		startActivity(i);
     	}
 }

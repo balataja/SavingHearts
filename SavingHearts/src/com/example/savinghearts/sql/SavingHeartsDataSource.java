@@ -132,6 +132,10 @@ public class SavingHeartsDataSource {
 		//insert it into the table and set the insert id
 		long insertId = database.insert(MySQLiteHelper.TABLE_ACTIVITY,  null,  values);
 		activity.setId(insertId);
+		activity.setDate(activity.getDate());
+		activity.setMonth(activity.getMonth());
+		activity.setYear(activity.getYear());
+		activity.setTimestamp(activity.getTimestamp());
 	}
 	
 	//insert AGE
@@ -422,11 +426,11 @@ public class SavingHeartsDataSource {
 		String current = getCurrentTimestamp();
 		//get timestamp 7 days ago
 		Calendar theStart = Calendar.getInstance();
-		theStart.add(Calendar.DAY_OF_MONTH, -7);
+		theStart.add(Calendar.DAY_OF_MONTH, -6);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 		String start = dateFormat.format(theStart.getTime());
 
-		Cursor cursor = database.rawQuery("SELECT * FROM activity WHERE timestamp BETWEEN "+start+" AND "+current, null);
+		Cursor cursor = database.rawQuery("SELECT * FROM activity WHERE timestamp BETWEEN '"+start+"' AND '"+current+"'", null);
 		//looping through all rows and adding to list
 		if(cursor.moveToFirst()){
 			do{

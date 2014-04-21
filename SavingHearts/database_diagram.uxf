@@ -5,7 +5,7 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>0</x>
-      <y>10</y>
+      <y>20</y>
       <w>420</w>
       <h>320</h>
     </coordinates>
@@ -36,7 +36,7 @@ timestamp 	TEXT NOT NULL
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>450</x>
-      <y>40</y>
+      <y>50</y>
       <w>320</w>
       <h>100</h>
     </coordinates>
@@ -50,7 +50,7 @@ age 	INTEGER NOT NULL</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>450</x>
-      <y>160</y>
+      <y>170</y>
       <w>320</w>
       <h>100</h>
     </coordinates>

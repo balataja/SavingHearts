@@ -52,6 +52,7 @@ public class WorkoutResultsActivity extends Activity implements OnClickListener{
          * anaerobic
          * maximal
          */
+        
 		System.out.println("starting workoutresults page");
         Bundle b = getIntent().getExtras();
 		activityName = b.getString("activity");
@@ -106,6 +107,7 @@ public class WorkoutResultsActivity extends Activity implements OnClickListener{
         formatPieChart(anaerobicPie, percent);
         percent = (maximal / total)*100;
         formatPieChart(maximalPie, percent);
+       
 	}
     
     private void formatPieChart(PieChart pie, int percentage) {
@@ -146,8 +148,10 @@ public class WorkoutResultsActivity extends Activity implements OnClickListener{
 	}
 
 	public void goToLog(){
+		
     	Intent intent = new Intent(this, MainActivity.class);
     	startActivity(intent);
+    	
     }
 
 	@Override
