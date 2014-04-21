@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/backer"
     android:orientation="vertical" 
     android:id="@+id/workout_result">
-
-    <RelativeLayout
+ -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/results_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/back" >
         <TextView
             android:id="@+id/typeOfActivity"
@@ -25,7 +23,7 @@
             android:textStyle="bold" />
         
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -33,61 +31,6 @@
             android:text="Duration:"
             android:textSize="20dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/typeOfActivity"
-            android:text="Max HR:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/results_maxHR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/typeOfActivity"
-            android:text="0.00"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="130dp"
-            android:text="METs:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/results_mets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="130dp"
-            android:text="0.00"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/results_aveHR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="95dp"
-            android:text="0.00"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
         <TextView
             android:id="@+id/results_duration"
             android:layout_width="wrap_content"
@@ -100,140 +43,191 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/results_calories"
+            android:id="@+id/maxHR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView3"
-            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/duration"
+            android:text="Max HR:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/results_maxHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
+            android:layout_below="@+id/duration"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/averageHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/maxHR"
+            android:text="Average HR:"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/results_aveHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/maxHR"
+            android:text="0.00"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/mets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/averageHR"
+            android:text="METs:"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/results_mets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/averageHR"
             android:text="0.00"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView4"
+            android:layout_below="@+id/mets"
             android:layout_marginTop="10dp"
             android:text="Calories:"
             android:textSize="20dp"
             android:textStyle="bold" />
-
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/results_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/results_aveHR"
-            android:layout_alignBottom="@+id/results_aveHR"
-            android:layout_alignParentLeft="true"
-            android:text="Average HR:"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_below="@+id/mets"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
+            android:text="0.00"
             android:textSize="20dp"
             android:textStyle="bold" />
         
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/calories"
             android:id="@+id/belowLayout">
-        <TextView
-            android:id="@+id/belowTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Below"
-            android:textSize="18dp"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold" />
-        <com.androidplot.pie.PieChart
-            android:id="@+id/belowPieChart"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="-20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/belowTitle"   
-            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-        <TextView
-            android:id="@+id/belowTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_below="@+id/belowPieChart"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="-20dp"
-            android:text="72 s"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/belowTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Below"
+	            android:textSize="18dp"
+	            android:layout_centerHorizontal="true"
+	            android:textStyle="bold" />
+	        <com.androidplot.pie.PieChart
+	            android:id="@+id/belowPieChart"
+	            android:layout_width="125dp"
+	            android:layout_height="125dp"
+	            android:layout_marginTop="-20dp"
+	            android:layout_centerHorizontal="true"
+	            android:layout_below="@+id/belowTitle"   
+	            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+	        <TextView
+	            android:id="@+id/belowTimer"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_below="@+id/belowPieChart"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="-20dp"
+	            android:text="72 s"
+	            android:textSize="15dp"
+	            android:textStyle="bold" />
         </RelativeLayout>
         
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/calories"
             android:layout_centerHorizontal="true"
             android:id="@+id/fatburnLayout">
-        <TextView
-            android:id="@+id/fatburnTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fat Burn"
-            android:layout_centerHorizontal="true"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-         <com.androidplot.pie.PieChart
-            android:id="@+id/fatburnPieChart"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="-20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/fatburnTitle"
-            androidPlot.title="Average"
-            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-         <TextView
-            android:id="@+id/fatburnTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_centerHorizontal="true"
-			android:layout_below="@+id/fatburnPieChart"
-			android:layout_marginTop="-20dp"
-            android:text="69 s"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/fatburnTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Fat Burn"
+	            android:layout_centerHorizontal="true"
+	            android:textSize="18dp"
+	            android:textStyle="bold" />
+	         <com.androidplot.pie.PieChart
+	            android:id="@+id/fatburnPieChart"
+	            android:layout_width="125dp"
+	            android:layout_height="125dp"
+	            android:layout_marginTop="-20dp"
+	            android:layout_centerHorizontal="true"
+	            android:layout_below="@+id/fatburnTitle"
+	            androidPlot.title="Average"
+	            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+	         <TextView
+	            android:id="@+id/fatburnTimer"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_below="@+id/fatburnPieChart"
+				android:layout_marginTop="-20dp"
+	            android:text="69 s"
+	            android:textSize="15dp"
+	            android:textStyle="bold" />
          </RelativeLayout>
                
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/calories"
             android:layout_alignParentRight="true"
             android:id="@+id/aerobicLayout">
-         <TextView
-            android:id="@+id/aerobicTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aerobic"
-            android:layout_centerHorizontal="true"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-        <com.androidplot.pie.PieChart
-            android:id="@+id/abovePieChart"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="-20dp"
-            android:layout_below="@+id/aerobicTitle"
-            androidPlot.title="above"
-            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-        <TextView
-            android:id="@+id/aboveTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_below="@+id/abovePieChart"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="-20dp"
-            android:text="54 s"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+	         <TextView
+	            android:id="@+id/aerobicTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Aerobic"
+	            android:layout_centerHorizontal="true"
+	            android:textSize="18dp"
+	            android:textStyle="bold" />
+	        <com.androidplot.pie.PieChart
+	            android:id="@+id/abovePieChart"
+	            android:layout_width="125dp"
+	            android:layout_height="125dp"
+	            android:layout_marginTop="-20dp"
+	            android:layout_below="@+id/aerobicTitle"
+	            androidPlot.title="above"
+	            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+	        <TextView
+	            android:id="@+id/aboveTimer"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_below="@+id/abovePieChart"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="-20dp"
+	            android:text="54 s"
+	            android:textSize="15dp"
+	            android:textStyle="bold" />
         </RelativeLayout>
                        
         <RelativeLayout
@@ -242,32 +236,32 @@
             android:layout_below="@+id/belowLayout"
             android:id="@+id/anaerobicLayout"
             android:layout_marginLeft="15dp">
-        <TextView
-            android:id="@+id/anaerobicTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Anaerobic"
-            android:layout_centerHorizontal="true"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-        <com.androidplot.pie.PieChart
-            android:id="@+id/hardPieChart"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="-20dp"
-            android:layout_below="@+id/anaerobicTitle"
-            androidPlot.title="Anaerobic"
-            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-        <TextView
-            android:id="@+id/hardTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_below="@+id/hardPieChart"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="-20dp"
-            android:text="16 s"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/anaerobicTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Anaerobic"
+	            android:layout_centerHorizontal="true"
+	            android:textSize="18dp"
+	            android:textStyle="bold" />
+	        <com.androidplot.pie.PieChart
+	            android:id="@+id/hardPieChart"
+	            android:layout_width="125dp"
+	            android:layout_height="125dp"
+	            android:layout_marginTop="-20dp"
+	            android:layout_below="@+id/anaerobicTitle"
+	            androidPlot.title="Anaerobic"
+	            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+	        <TextView
+	            android:id="@+id/hardTimer"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_below="@+id/hardPieChart"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="-20dp"
+	            android:text="16 s"
+	            android:textSize="15dp"
+	            android:textStyle="bold" />
         </RelativeLayout>
                                
         <RelativeLayout
@@ -276,34 +270,33 @@
             android:layout_below="@+id/belowLayout"
             android:layout_toRightOf="@+id/anaerobicLayout"
             android:id="@+id/insaneLayout">
-        <TextView
-            android:id="@+id/insaneTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insane"
-            android:layout_centerHorizontal="true"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-        <com.androidplot.pie.PieChart
-            android:id="@+id/insanePieChart"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="-20dp"
-            android:layout_below="@+id/insaneTitle"
-            androidPlot.title="Maximal"
-            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
-        <TextView
-            android:id="@+id/insaneTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_below="@+id/insanePieChart"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="-20dp"
-            android:text="10 s"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/insaneTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Insane"
+	            android:layout_centerHorizontal="true"
+	            android:textSize="18dp"
+	            android:textStyle="bold" />
+	        <com.androidplot.pie.PieChart
+	            android:id="@+id/insanePieChart"
+	            android:layout_width="125dp"
+	            android:layout_height="125dp"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="-20dp"
+	            android:layout_below="@+id/insaneTitle"
+	            androidPlot.title="Maximal"
+	            androidPlot.titleWidget.labelPaint.textSize="20dp"/>
+	        <TextView
+	            android:id="@+id/insaneTimer"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+				android:layout_below="@+id/insanePieChart"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="-20dp"
+	            android:text="10 s"
+	            android:textSize="15dp"
+	            android:textStyle="bold" />
         </RelativeLayout>
  
     </RelativeLayout>
-</LinearLayout>

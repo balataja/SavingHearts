@@ -10,6 +10,7 @@ import com.example.savinghearts.R;
 import com.example.savinghearts.model.ActivityData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -46,7 +48,7 @@ public class LogFragment extends Fragment{
     private Segment s1, s2;
     private Paint clear, red;
     
-    View view, view2;
+    View view1, view2;
     
 	SavingHeartsDataSource db;
     
@@ -55,12 +57,8 @@ public class LogFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		ScrollView sv = new ScrollView(getActivity().getApplicationContext());
-		sv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		LinearLayout ll = new LinearLayout(getActivity().getApplicationContext());
-		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		sv.addView(ll);
+		View view = inflater.inflate(R.layout.fragment_log, container, false);
+		LinearLayout ll = (LinearLayout) view.findViewById(R.id.charrtholder);
 		System.out.println("about to get data base");
 		db = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
 		System.out.println("just got database");
@@ -73,8 +71,8 @@ public class LogFragment extends Fragment{
 		{
 			ActivityData activityData = activities.remove(0);
 			
-			view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.log_workout_layout, null);
-			LinearLayout workout = (LinearLayout) view.findViewById(R.id.workout_result);
+			view1 = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.log_workout_layout, null);
+			RelativeLayout workout = (RelativeLayout) view1.findViewById(R.id.results_layout);
 			
 			addWorkoutToView(activityData, workout);
 		}
@@ -83,21 +81,41 @@ public class LogFragment extends Fragment{
 			ActivityData activityData2 = activities.remove(1);
 			
 			view2 = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.log_workout_layout, null);
-			LinearLayout workout2 = (LinearLayout) view2.findViewById(R.id.workout_result);
+			RelativeLayout workout2 = (RelativeLayout) view2.findViewById(R.id.results_layout);
 			
 			addWorkoutToView(activityData2, workout2);
 		}
 		System.out.println("about to add views");
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+			     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+			layoutParams.setMargins(0, 0, 0, 20);
+		
 		if(activities.size() > 0)
-			ll.addView(view);
+		{
+			ll.addView(view1, layoutParams);
+			System.out.println("adding first layout");
+		}
 		if(activities.size() > 1)
-			ll.addView(view2);
+			ll.addView(view2, layoutParams);
         System.out.println("just added views");
 		
-		return sv;
+		System.out.println("trying to add button..");
+		Button button= (Button) view.findViewById(R.id.addManually);
+		System.out.println("found button");
+	    button.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	            //Intent i = new Intent(getActivity(), AddActivityManually.class);
+	            //getActivity().startActivity(i);
+	        }
+	    });
+	    System.out.println("now listening to button");
+        
+		return view;
 	}
 	
-	private void addWorkoutToView(ActivityData activityData, LinearLayout workout)
+	private void addWorkoutToView(ActivityData activityData, RelativeLayout workout2)
 	{
 		/*
          * below
@@ -120,12 +138,12 @@ public class LogFragment extends Fragment{
 		total = below + fatburn + aerobic + anaerobic + maximal;
 		System.out.println(below +" "+ fatburn +" "+ aerobic +" "+ anaerobic +" "+ maximal);
 		
-		TextView temp_time = (TextView)workout.findViewById(R.id.results_duration);
-        TextView temp_maxHR= (TextView)workout.findViewById(R.id.results_maxHR);
-        TextView temp_aveHR= (TextView)workout.findViewById(R.id.results_aveHR);
-        TextView temp_mets= (TextView)workout.findViewById(R.id.results_mets);
-        TextView temp_calories= (TextView)workout.findViewById(R.id.results_calories);
-        TextView activity_name = (TextView)workout.findViewById(R.id.typeOfActivity);
+		TextView temp_time = (TextView)workout2.findViewById(R.id.results_duration);
+        TextView temp_maxHR= (TextView)workout2.findViewById(R.id.results_maxHR);
+        TextView temp_aveHR= (TextView)workout2.findViewById(R.id.results_aveHR);
+        TextView temp_mets= (TextView)workout2.findViewById(R.id.results_mets);
+        TextView temp_calories= (TextView)workout2.findViewById(R.id.results_calories);
+        TextView activity_name = (TextView)workout2.findViewById(R.id.typeOfActivity);
                 
         //Reset the text display
         oneDigit = new DecimalFormat("#,##0.0");
@@ -136,11 +154,11 @@ public class LogFragment extends Fragment{
         temp_mets.setText(Double.toString(mets));
         activity_name.setText(activityName);
         
-        belowPie = (PieChart) workout.findViewById(R.id.belowPieChart);
-        fatburnPie = (PieChart) workout.findViewById(R.id.fatburnPieChart);
-        aerobicPie = (PieChart) workout.findViewById(R.id.abovePieChart);
-        anaerobicPie = (PieChart) workout.findViewById(R.id.hardPieChart);
-        maximalPie = (PieChart) workout.findViewById(R.id.insanePieChart);
+        belowPie = (PieChart) workout2.findViewById(R.id.belowPieChart);
+        fatburnPie = (PieChart) workout2.findViewById(R.id.fatburnPieChart);
+        aerobicPie = (PieChart) workout2.findViewById(R.id.abovePieChart);
+        anaerobicPie = (PieChart) workout2.findViewById(R.id.hardPieChart);
+        maximalPie = (PieChart) workout2.findViewById(R.id.insanePieChart);
         
         if(total == 0)
         	total = 1;
@@ -195,5 +213,6 @@ public class LogFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 	}
 }

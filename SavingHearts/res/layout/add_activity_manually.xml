@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@+drawable/backer">
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="20dp"
+	    android:orientation="vertical">
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+	    
+		    <TextView
+		        android:id="@+id/title"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:layout_gravity="center"
+		    	android:textSize="25dp"
+		    	android:text="Add Activity Entry">
+		    </TextView>
+		    
+		    <TextView
+		        android:id="@+id/day"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="Day:">
+		    </TextView>
+		    <Button
+		        android:id="@+id/btnChangeDate"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="20dp"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+		        android:text="Change Date" />
+		    
+		    <TextView
+		        android:id="@+id/activity"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="Activity:">
+		    </TextView>
+		    <Button
+		        android:id="@+id/btnSelectActivity"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:text="Select Activity"
+		        android:layout_marginBottom="20dp"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"/>	
+		    
+		    <TextView
+		        android:id="@+id/workout_duration"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="Workout Duration:">
+		    </TextView>
+		    <Button
+		        android:id="@+id/btnSelectDuration"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:text="Duration"
+		        android:layout_marginBottom="20dp"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"/>	
+		    
+		    <TextView
+		        android:id="@+id/estimated_hr_reached"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="Estimated Heart Rate Reached:">
+		    </TextView>
+		    <Button
+		        android:id="@+id/btnSelectMaxHR"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:text="Max Heart Rate"
+		        android:layout_marginBottom="20dp"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"/>	
+		</LinearLayout>
+		
+		<Button
+		        android:id="@+id/btnManualButton"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="Add New Entry"/>
+	</LinearLayout>
+</ScrollView>
