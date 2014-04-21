@@ -227,6 +227,9 @@ public class ChartFragment extends Fragment{
 			        		maxHR.add(dateHR.get(dates.get(m)));
 			        		m++;
 			        	}
+			        	else{
+			        		maxHR.add(0);
+			        	}
 		        	}else{
 		        		maxHR.add(0);
 		        	}
@@ -245,6 +248,9 @@ public class ChartFragment extends Fragment{
 			        		maxMETs.add(Double.parseDouble(formatter.format(dateMETs.get(datesMETs.get(m2)))));
 			        		m2++;
 			        	}
+			        	else{
+			        		maxMETs.add(0.0);
+			        	}
 		        	}else{
 		        		maxMETs.add(0.0);
 		        	}
@@ -262,6 +268,9 @@ public class ChartFragment extends Fragment{
 			        	if(Integer.parseInt(xDates.get(l3)) == datesCalories.get(m3)){
 			        		maxCalories.add(Double.parseDouble(formatter.format(dateCalories.get(datesCalories.get(m3)))));
 			        		m3++;
+			        	}
+			        	else{
+			        		maxCalories.add(0.0);
 			        	}
 		        	}else{
 		        		maxCalories.add(0.0);
