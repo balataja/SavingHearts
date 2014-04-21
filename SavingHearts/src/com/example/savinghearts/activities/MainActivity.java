@@ -307,9 +307,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				args.putInt(LogFragment.ARG_SECTION_NUMBER, position + 1);
 				return fragment;
 			case 2:
-				fragment = new MonitorFragment();
+				fragment = new ChartFragment();
 				fragment.setArguments(args);
-				args.putInt(MonitorFragment.ARG_SECTION_NUMBER, position + 1);
+				args.putInt(ChartFragment.ARG_SECTION_NUMBER, position + 1);
 				return fragment;
 			}
 			return null;

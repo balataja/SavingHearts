@@ -23,7 +23,7 @@
     <string name="action_about">About</string>
     <string name="title_section1">Home</string>
     <string name="title_section2">Log</string>
-    <string name="title_section3">Monitor</string>
+    <string name="title_section3">Charts</string>
     <string name="version">Version: 0.1</string>
     <string name="desc">Splash Screen</string>
     <string name="about_fragment_image_description">About fragment image</string>
