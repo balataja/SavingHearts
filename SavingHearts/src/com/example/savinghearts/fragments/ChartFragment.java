@@ -82,7 +82,7 @@ public class ChartFragment extends Fragment{
 	
 	public void drawChart(){
 		 db = SavingHeartsDataSource.getInstance(this.getActivity().getApplicationContext());
-	   //    insertActivity();
+	    //   insertActivity();
 	        
 	        if(db.getActivityDataCount() !=0){
 	        	List<ActivityData> activities = db.getAllActivitiesInPast7Days();
