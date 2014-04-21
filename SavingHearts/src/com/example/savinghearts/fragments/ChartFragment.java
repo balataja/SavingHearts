@@ -82,7 +82,7 @@ public class ChartFragment extends Fragment{
 	
 	public void drawChart(){
 		 db = SavingHeartsDataSource.getInstance(this.getActivity().getApplicationContext());
-	    //   insertActivity();
+	     //  insertActivity();
 	        
 	        if(db.getActivityDataCount() !=0){
 	        	List<ActivityData> activities = db.getAllActivitiesInPast7Days();
@@ -376,7 +376,8 @@ public class ChartFragment extends Fragment{
 		        mRenderer.setChartTitleTextSize(50);
 		        mRenderer.setLabelsTextSize(50);
 		        mRenderer.setLegendTextSize(30);
-		        mRenderer.setMargins(new int[]{70,70,70,70});       
+		        mRenderer.setMargins(new int[]{70,70,70,70});  
+		        mRenderer.setInScroll(true);
 		//    
 		        /*
 		         * get date size
@@ -422,7 +423,8 @@ public class ChartFragment extends Fragment{
 		        mRenderer2.setChartTitleTextSize(50);
 		        mRenderer2.setLabelsTextSize(50);
 		        mRenderer2.setLegendTextSize(30);
-		        mRenderer2.setMargins(new int[]{70,70,70,70});       
+		        mRenderer2.setMargins(new int[]{70,70,70,70}); 
+		        mRenderer2.setInScroll(true);
 		//    
 		        /*
 		         * get date size
@@ -468,7 +470,8 @@ public class ChartFragment extends Fragment{
 		        mRenderer3.setChartTitleTextSize(50);
 		        mRenderer3.setLabelsTextSize(50);
 		        mRenderer3.setLegendTextSize(30);
-		        mRenderer3.setMargins(new int[]{70,70,70,70});       
+		        mRenderer3.setMargins(new int[]{70,70,70,70}); 
+		        mRenderer3.setInScroll(true);
 		//    
 		        /*
 		         * get date size
