@@ -240,7 +240,7 @@ public class ChartFragment extends Fragment{
 		        int l2=0;
 		        int m2=0;
 		        while(datesize2!=0){
-		        	if(datesMETs.size() != m){
+		        	if(datesMETs.size() != m2){
 			        	if(Integer.parseInt(xDates.get(l2)) == datesMETs.get(m2)){
 			        		maxMETs.add(Double.parseDouble(formatter.format(dateMETs.get(datesMETs.get(m2)))));
 			        		m2++;
