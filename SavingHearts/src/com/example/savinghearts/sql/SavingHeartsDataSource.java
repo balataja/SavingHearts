@@ -109,6 +109,7 @@ public class SavingHeartsDataSource {
 		activity.setMonth(getCurrentMonth());
 		activity.setYear(getCurrentYear());
 		activity.setTimestamp(getCurrentTimestamp());
+		System.out.println(getCurrentDate()+ "  "+getCurrentMonth()+"  "+getCurrentYear());
 	}
 	
 	public void insertActivityTest(ActivityData activity){

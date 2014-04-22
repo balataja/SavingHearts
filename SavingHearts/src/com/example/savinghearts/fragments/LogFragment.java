@@ -1,5 +1,6 @@
 package com.example.savinghearts.fragments;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -48,6 +49,11 @@ public class LogFragment extends Fragment{
     private Segment s1, s2;
     private Paint clear, red;
     
+	private int year;
+	private int month;
+	private int day;
+	private TextView tvDisplayDate;
+    
     View view1, view2;
     
 	SavingHeartsDataSource db;
@@ -61,11 +67,13 @@ public class LogFragment extends Fragment{
 		LinearLayout ll = (LinearLayout) view.findViewById(R.id.charrtholder);
 		System.out.println("about to get data base");
 		db = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
-		System.out.println("just got database");
-		List <ActivityData> activities = db.getAllActivities();//InOneDate("16", "04", "2014");
-		System.out.println("just got activities");
-		//ListIterator <ActivityData> li = activities.listIterator();
-		//while(li.hasNext())
+		
+	    final Calendar c = Calendar.getInstance();
+		year = c.get(Calendar.YEAR);
+		month = c.get(Calendar.MONTH);
+		day = c.get(Calendar.DAY_OF_MONTH);
+		
+		List <ActivityData> activities = db.getAllActivitiesInOneDate(String.valueOf(day), String.valueOf(month), String.valueOf(year));
 		
 		if(activities.size()>0)
 		{
@@ -85,7 +93,6 @@ public class LogFragment extends Fragment{
 			
 			addWorkoutToView(activityData2, workout2);
 		}
-		System.out.println("about to add views");
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 			     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -98,11 +105,8 @@ public class LogFragment extends Fragment{
 		}
 		if(activities.size() > 1)
 			ll.addView(view2, layoutParams);
-        System.out.println("just added views");
 		
-		System.out.println("trying to add button..");
 		Button button= (Button) view.findViewById(R.id.addManually);
-		System.out.println("found button");
 	    button.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
@@ -110,11 +114,119 @@ public class LogFragment extends Fragment{
 	            //getActivity().startActivity(i);
 	        }
 	    });
-	    System.out.println("now listening to button");
+	    
+	    tvDisplayDate = (TextView) view.findViewById(R.id.date);
+		
+		tvDisplayDate.setText(new StringBuilder()
+		// Month is 0 based, just add 1
+		.append(month + 1).append("-").append(day).append("-")
+		.append(year).append(" "));
+		Button left = (Button) view.findViewById(R.id.left);
+	    left.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	            if(day == 1)
+	            {
+	            	day = 30;
+	            	month--;
+	            	if (month < 1)
+	            	{
+	            		month = 12;
+	            		year--;
+	            	}
+	            } else {
+		        	day--;
+	            }
+	            tvDisplayDate.setText(new StringBuilder()
+	    		// Month is 0 based, just add 1
+	    		.append(month + 1).append("-").append(day).append("-")
+	    		.append(year).append(" "));
+	            refresh();
+	        }
+	    });
+	    Button right = (Button) view.findViewById(R.id.right);
+	    right.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	            if(day < c.get(Calendar.DAY_OF_MONTH))
+	            {	
+	            	if(day == 30)
+	            	{
+	            		day = 1;
+	            		month++;
+	            		if(month > 12)
+	            		{
+	            			month = 1;
+	            			year++;
+	            		}
+	            	} else {
+	            		day++;
+	            	}
+	            }
+	            tvDisplayDate.setText(new StringBuilder()
+	    		// Month is 0 based, just add 1
+	    		.append(month + 1).append("-").append(day).append("-")
+	    		.append(year).append(" "));
+	            refresh();
+	        }
+	    });
         
 		return view;
 	}
 	
+	protected void refresh() {
+		View view = getView();
+		ViewGroup viewGroup = (ViewGroup) view.findViewById(R.id.charrtholder);
+		viewGroup.removeAllViews();
+		
+		LinearLayout ll = (LinearLayout) viewGroup;
+		String strDay = null, strMonth = null;
+		if(day < 10)
+		{
+			strDay = String.valueOf("0"+day);
+		} else
+			strDay = String.valueOf(day);
+		if(month < 10)
+		{
+			strMonth = String.valueOf("0"+(month+1));
+		} else
+			strMonth = String.valueOf(month+1);
+		System.out.println(strDay+ "  "+strMonth+"  "+year);
+
+		List <ActivityData> activities = db.getAllActivitiesInOneDate(strDay, strMonth, String.valueOf(year));
+		System.out.println("activities: "+activities.size());
+		if(activities.size()>0)
+		{
+			ActivityData activityData = activities.remove(0);
+			
+			view1 = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.log_workout_layout, null);
+			RelativeLayout workout = (RelativeLayout) view1.findViewById(R.id.results_layout);
+			
+			addWorkoutToView(activityData, workout);
+		}
+		if(activities.size() > 1)
+		{
+			ActivityData activityData2 = activities.remove(1);
+			
+			view2 = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.log_workout_layout, null);
+			RelativeLayout workout2 = (RelativeLayout) view2.findViewById(R.id.results_layout);
+			
+			addWorkoutToView(activityData2, workout2);
+		}
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+			     LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+			layoutParams.setMargins(0, 0, 0, 20);
+		
+		if(activities.size() > 0)
+		{
+			ll.addView(view1, layoutParams);
+			System.out.println("adding first layout");
+		}
+		if(activities.size() > 1)
+			ll.addView(view2, layoutParams);
+	}
+
 	private void addWorkoutToView(ActivityData activityData, RelativeLayout workout2)
 	{
 		/*

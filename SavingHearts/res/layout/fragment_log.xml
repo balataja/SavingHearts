@@ -23,6 +23,39 @@
 		    android:layout_height="wrap_content"
 		    android:background="@drawable/connect_button"
 	        android:text="Add Activity Manually"/>
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+		    android:layout_height="wrap_content">
+	        <Button
+	        android:id="@+id/left"
+	        style="@style/button_text"
+	        android:textSize="20dp"
+		    android:layout_width="50dp"
+		    android:layout_height="wrap_content"
+	        android:text="L"/>
+	        
+	        <TextView
+	            android:id="@+id/date"
+	            android:layout_width="150dp"
+		    	android:layout_height="wrap_content"
+		    	android:text="Today"
+		    	android:textSize="20dp"
+		    	android:gravity="center"
+		    	android:layout_centerVertical="true"
+		    	android:layout_centerHorizontal="true"
+		    	android:background="@drawable/back">
+	            
+	        </TextView>
+	        
+	        <Button
+	        android:id="@+id/right"
+	        style="@style/button_text"
+	        android:textSize="20dp"
+		    android:layout_width="50dp"
+		    android:layout_alignParentRight="true"
+		    android:layout_height="wrap_content"
+	        android:text="R"/>
+	    </RelativeLayout>
 	    
     	<LinearLayout 
 		    android:id="@+id/charrtholder"
