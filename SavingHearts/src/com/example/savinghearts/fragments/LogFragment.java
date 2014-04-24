@@ -52,9 +52,9 @@ public class LogFragment extends Fragment{
     private Segment s1, s2;
     private Paint clear, red;
     
-	private int year;
-	private int month;
-	private int day;
+	private String year;
+	private String month;
+	private String day;
 	private TextView tvDisplayDate;
 	private String today, currentDate;
 	Calendar theStart;
@@ -74,9 +74,9 @@ public class LogFragment extends Fragment{
 		db = SavingHeartsDataSource.getInstance(this.getActivity());
 		
 	    final Calendar c = Calendar.getInstance();
-		year = c.get(Calendar.YEAR);
-		month = c.get(Calendar.MONTH);
-		day = c.get(Calendar.DAY_OF_MONTH);
+	//	year = c.get(Calendar.YEAR);
+	//	month = c.get(Calendar.MONTH);
+	//	day = c.get(Calendar.DAY_OF_MONTH);
 		
 		 SimpleDateFormat dateFormat = new SimpleDateFormat(
                  "MM-dd-yyyy", Locale.getDefault());
@@ -141,8 +141,14 @@ public class LogFragment extends Fragment{
 	        @Override
 	        public void onClick(View v) {
 	  	  		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+	  	  		SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+	  	  		SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+	  	  		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
 				theStart.add(Calendar.DAY_OF_MONTH, -1);			
 				currentDate = dateFormat.format(theStart.getTime());
+				day = dayFormat.format(theStart.getTime());
+				month = monthFormat.format(theStart.getTime());
+				year = yearFormat.format(theStart.getTime());
 				tvDisplayDate.setText(currentDate);
 	        }
 	        
@@ -155,8 +161,14 @@ public class LogFragment extends Fragment{
 	        public void onClick(View v) {       
 	            if(!(currentDate.equals(today))){
 		        	SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+		        	SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+		  	  		SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+		  	  		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
 					theStart.add(Calendar.DAY_OF_MONTH, 1);			
 					currentDate = dateFormat.format(theStart.getTime());
+					day = dayFormat.format(theStart.getTime());
+					month = monthFormat.format(theStart.getTime());
+					year = yearFormat.format(theStart.getTime());
 					tvDisplayDate.setText(currentDate);
 	            }
 	        }
@@ -172,6 +184,7 @@ public class LogFragment extends Fragment{
 		
 		LinearLayout ll = (LinearLayout) viewGroup;
 		String strDay = null, strMonth = null;
+		/*
 		if(day < 10)
 		{
 			strDay = String.valueOf("0"+day);
@@ -182,9 +195,11 @@ public class LogFragment extends Fragment{
 			strMonth = String.valueOf("0"+(month+1));
 		} else
 			strMonth = String.valueOf(month+1);
+		
 		System.out.println(strDay+ "  "+strMonth+"  "+year);
-
-		List <ActivityData> activities = db.getAllActivitiesInOneDate(strDay, strMonth, String.valueOf(year));
+		*/
+		System.out.println(day+ "  "+month+"  "+year);
+		List <ActivityData> activities = db.getAllActivitiesInOneDate(day, month, year);
 		System.out.println("activities: "+activities.size());
 		if(activities.size()>0)
 		{
