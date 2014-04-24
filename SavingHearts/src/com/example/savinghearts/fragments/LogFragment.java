@@ -1,8 +1,11 @@
 package com.example.savinghearts.fragments;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
@@ -53,6 +56,8 @@ public class LogFragment extends Fragment{
 	private int month;
 	private int day;
 	private TextView tvDisplayDate;
+	private String today, currentDate;
+	Calendar theStart;
     
     View view1, view2;
     
@@ -72,6 +77,13 @@ public class LogFragment extends Fragment{
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
+		
+		 SimpleDateFormat dateFormat = new SimpleDateFormat(
+                 "MM-dd-yyyy", Locale.getDefault());
+         Date date = new Date();
+         currentDate = dateFormat.format(date);
+         today = currentDate;
+         theStart = Calendar.getInstance();
 		
 		List <ActivityData> activities = db.getAllActivitiesInOneDate(String.valueOf(day), String.valueOf(month), String.valueOf(year));
 		
@@ -116,58 +128,37 @@ public class LogFragment extends Fragment{
 	    });
 	    
 	    tvDisplayDate = (TextView) view.findViewById(R.id.date);
-		
+	    tvDisplayDate.setText(today);
+		/*
 		tvDisplayDate.setText(new StringBuilder()
 		// Month is 0 based, just add 1
 		.append(month + 1).append("-").append(day).append("-")
 		.append(year).append(" "));
+		*/
 		Button left = (Button) view.findViewById(R.id.left);
+		
 	    left.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-	            if(day == 1)
-	            {
-	            	day = 30;
-	            	month--;
-	            	if (month < 1)
-	            	{
-	            		month = 12;
-	            		year--;
-	            	}
-	            } else {
-		        	day--;
-	            }
-	            tvDisplayDate.setText(new StringBuilder()
-	    		// Month is 0 based, just add 1
-	    		.append(month + 1).append("-").append(day).append("-")
-	    		.append(year).append(" "));
-	            refresh();
+	  	  		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+				theStart.add(Calendar.DAY_OF_MONTH, -1);			
+				currentDate = dateFormat.format(theStart.getTime());
+				tvDisplayDate.setText(currentDate);
 	        }
-	    });
+	        
+	    }
+	    
+	    );
 	    Button right = (Button) view.findViewById(R.id.right);
 	    right.setOnClickListener(new View.OnClickListener() {
 	        @Override
-	        public void onClick(View v) {
-	            if(day < c.get(Calendar.DAY_OF_MONTH))
-	            {	
-	            	if(day == 30)
-	            	{
-	            		day = 1;
-	            		month++;
-	            		if(month > 12)
-	            		{
-	            			month = 1;
-	            			year++;
-	            		}
-	            	} else {
-	            		day++;
-	            	}
+	        public void onClick(View v) {       
+	            if(!(currentDate.equals(today))){
+		        	SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+					theStart.add(Calendar.DAY_OF_MONTH, 1);			
+					currentDate = dateFormat.format(theStart.getTime());
+					tvDisplayDate.setText(currentDate);
 	            }
-	            tvDisplayDate.setText(new StringBuilder()
-	    		// Month is 0 based, just add 1
-	    		.append(month + 1).append("-").append(day).append("-")
-	    		.append(year).append(" "));
-	            refresh();
 	        }
 	    });
         
