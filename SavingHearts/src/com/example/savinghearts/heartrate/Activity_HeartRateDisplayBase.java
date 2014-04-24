@@ -46,7 +46,6 @@ import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IDeviceStateChangeReceiv
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc.IPluginAccessResultReceiver;
 import com.example.savinghearts.R;
 import com.example.savinghearts.SearchMonitor_Base;
-import com.example.savinghearts.activities.BarPlot;
 import com.example.savinghearts.activities.WorkoutResultsActivity;
 import com.example.savinghearts.heartrate.Activity_HeartRateDisplayBase;
 import com.example.savinghearts.helpers.CalculationsHelper;
