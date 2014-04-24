@@ -66,7 +66,7 @@ public class LogFragment extends Fragment{
 		View view = inflater.inflate(R.layout.fragment_log, container, false);
 		LinearLayout ll = (LinearLayout) view.findViewById(R.id.charrtholder);
 		System.out.println("about to get data base");
-		db = SavingHeartsDataSource.getInstance(getActivity().getApplicationContext());
+		db = SavingHeartsDataSource.getInstance(this.getActivity());
 		
 	    final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
