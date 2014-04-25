@@ -73,17 +73,23 @@ public class LogFragment extends Fragment{
 		System.out.println("about to get data base");
 		db = SavingHeartsDataSource.getInstance(this.getActivity());
 		
-	    final Calendar c = Calendar.getInstance();
-	//	year = c.get(Calendar.YEAR);
-	//	month = c.get(Calendar.MONTH);
-	//	day = c.get(Calendar.DAY_OF_MONTH);
 		
+	    final Calendar c = Calendar.getInstance();
+	     theStart = Calendar.getInstance();
 		 SimpleDateFormat dateFormat = new SimpleDateFormat(
-                 "MM-dd-yyyy", Locale.getDefault());
+                 "MM-dd-yyyy", Locale.getDefault());							
          Date date = new Date();
-         currentDate = dateFormat.format(date);
-         today = currentDate;
-         theStart = Calendar.getInstance();
+         today = dateFormat.format(date);     
+         currentDate = today;
+         
+         SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+	  	 SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+	  	 SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+		 theStart.add(Calendar.DAY_OF_MONTH, 0);			
+			
+		 day = dayFormat.format(theStart.getTime());
+		 month = monthFormat.format(theStart.getTime());
+		 year = yearFormat.format(theStart.getTime());
 		
 		List <ActivityData> activities = db.getAllActivitiesInOneDate(String.valueOf(day), String.valueOf(month), String.valueOf(year));
 		
@@ -150,6 +156,7 @@ public class LogFragment extends Fragment{
 				month = monthFormat.format(theStart.getTime());
 				year = yearFormat.format(theStart.getTime());
 				tvDisplayDate.setText(currentDate);
+				refresh();
 	        }
 	        
 	    }
@@ -170,11 +177,19 @@ public class LogFragment extends Fragment{
 					month = monthFormat.format(theStart.getTime());
 					year = yearFormat.format(theStart.getTime());
 					tvDisplayDate.setText(currentDate);
+					refresh();
 	            }
 	        }
 	    });
         
 		return view;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		refresh();
 	}
 	
 	protected void refresh() {
@@ -183,21 +198,6 @@ public class LogFragment extends Fragment{
 		viewGroup.removeAllViews();
 		
 		LinearLayout ll = (LinearLayout) viewGroup;
-		String strDay = null, strMonth = null;
-		/*
-		if(day < 10)
-		{
-			strDay = String.valueOf("0"+day);
-		} else
-			strDay = String.valueOf(day);
-		if(month < 10)
-		{
-			strMonth = String.valueOf("0"+(month+1));
-		} else
-			strMonth = String.valueOf(month+1);
-		
-		System.out.println(strDay+ "  "+strMonth+"  "+year);
-		*/
 		System.out.println(day+ "  "+month+"  "+year);
 		List <ActivityData> activities = db.getAllActivitiesInOneDate(day, month, year);
 		System.out.println("activities: "+activities.size());
