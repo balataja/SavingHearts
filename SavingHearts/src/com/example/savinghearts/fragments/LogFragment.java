@@ -128,7 +128,7 @@ public class LogFragment extends Fragment{
 		Button button= (Button) view.findViewById(R.id.addManually);
 	    button.setOnClickListener(new View.OnClickListener() {
 	        @Override
-	        public void onClick(View v) {
+	        public void onClick(View v) {	    		
 	            Intent i = new Intent(getActivity(), METListActivityForLog.class);
 	            getActivity().startActivity(i);
 	        }

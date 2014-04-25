@@ -307,6 +307,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
                         	heartRateStatusText="Anaerobic";
                         	color = Color.parseColor("#F52A63");
                         	img.setBackgroundResource(R.drawable.heart_workout_animation4);
+                        	
                         	anaerobic++;
                         }
                         else if(computedHeartRate >= bpm90){

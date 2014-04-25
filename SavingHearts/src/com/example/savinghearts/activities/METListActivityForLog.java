@@ -32,13 +32,12 @@ public class METListActivityForLog extends Activity implements OnItemClickListen
 	private ArrayAdapter<GeneralMetActivity> loadedMetsListAdapter;
 	public static String name = null;
 	public static double mets = 0.0;
-	public static boolean yes = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mSQLDbHelper = new SQLDatabaseHelper(this);
-		setContentView(R.layout.activity_metlist);		
+		setContentView(R.layout.activity_metlist);	
 	}
 
 	@Override
@@ -87,7 +86,7 @@ public class METListActivityForLog extends Activity implements OnItemClickListen
 						activity.setMets(mets);
 						activity.setMinHR(0);
 						activity.setModerateZones(0);
-						activity.setMonitor(0);
+						activity.setMonitor(0);			
 						db.insertActivity(activity);
 						
 						Intent i = new Intent(METListActivityForLog.this, MainActivity.class);
