@@ -256,7 +256,7 @@ public abstract class Activity_HeartRateDisplayBase extends Activity implements 
         }
         totalUpdates++;
         aveHeartRate = aveHeartRate*(totalUpdates-1)/totalUpdates + HeartRatePoint/totalUpdates;
-		minutes = (double)secs/60;
+		minutes = (double)updatedTime/6000;
 		calories = cals1*minutes;
     }
 
