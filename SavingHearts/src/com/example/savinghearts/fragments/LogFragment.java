@@ -11,6 +11,7 @@ import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 import com.example.savinghearts.R;
+import com.example.savinghearts.activities.METListActivityForLog;
 import com.example.savinghearts.model.ActivityData;
 import com.example.savinghearts.sql.SavingHeartsDataSource;
 
@@ -128,8 +129,8 @@ public class LogFragment extends Fragment{
 	    button.setOnClickListener(new View.OnClickListener() {
 	        @Override
 	        public void onClick(View v) {
-	            //Intent i = new Intent(getActivity(), AddActivityManually.class);
-	            //getActivity().startActivity(i);
+	            Intent i = new Intent(getActivity(), METListActivityForLog.class);
+	            getActivity().startActivity(i);
 	        }
 	    });
 	    
