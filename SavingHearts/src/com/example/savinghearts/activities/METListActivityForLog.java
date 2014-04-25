@@ -86,7 +86,8 @@ public class METListActivityForLog extends Activity implements OnItemClickListen
 						activity.setMets(mets);
 						activity.setMinHR(0);
 						activity.setModerateZones(0);
-						activity.setMonitor(0);			
+						activity.setMonitor(0);	
+					
 						db.insertActivity(activity);
 						
 						Intent i = new Intent(METListActivityForLog.this, MainActivity.class);
